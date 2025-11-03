@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Resources: Rhetoric, Composition, and AI">
+    <title>Rhetoric & AI | Student Resources</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Rhetoric, Composition & AI</h1>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">About the Course</a></li>
+                <li><a href="curriculum.html" class="nav-link">Curriculum</a></li>
+                <li><a href="resources.html" class="nav-link active">Student Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="fade-in">
+        <section class="hero">
+            <div class="container">
+                <h2 class="hero-title">Student Resources</h2>
+                <p class="hero-subtitle">Tools, guides, and materials to support your learning</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Downloadable Worksheets</h2>
+                <p>Click "View & Print" to open each worksheet in a printer-friendly format.</p>
+
+                <div class="resource-cards">
+                    <div class="resource-card">
+                        <h3>Rhetorical Analysis Framework for AI-Generated Text</h3>
+                        <p>A structured worksheet to guide your analysis of AI-generated content, including questions about ethos, pathos, logos, and algorithmic influences.</p>
+                        <button class="btn-primary" onclick="openWorksheet('worksheet1')">View & Print</button>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>Effective Prompting Guide for Rhetorical Analysis</h3>
+                        <p>Learn to craft prompts that elicit insightful rhetorical analysis from AI tools. Includes examples, templates, and best practices.</p>
+                        <button class="btn-primary" onclick="openWorksheet('worksheet2')">View & Print</button>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>Checklist: Evaluating AI Writing Assistance</h3>
+                        <p>A practical checklist for critically evaluating AI-generated content and determining when and how to use AI suggestions.</p>
+                        <button class="btn-primary" onclick="openWorksheet('worksheet3')">View & Print</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Reading Lists</h2>
+
+                <div class="reading-section">
+                    <h3>Foundational Rhetoric</h3>
+                    <ul class="reading-list">
+                        <li><strong>Aristotle - "Rhetoric"</strong> - Classical foundation of rhetorical theory, introducing ethos, pathos, and logos</li>
+                        <li><strong>Kenneth Burke - "A Rhetoric of Motives"</strong> - Modern rhetorical theory emphasizing identification and persuasion</li>
+                        <li><strong>Lloyd Bitzer - "The Rhetorical Situation"</strong> - Defining the context and constraints of rhetorical acts</li>
+                        <li><strong>Chaïm Perelman - "The New Rhetoric"</strong> - Contemporary approaches to argumentation and audience</li>
+                    </ul>
+                </div>
+
+                <div class="reading-section">
+                    <h3>Digital Rhetoric & Composition</h3>
+                    <ul class="reading-list">
+                        <li><strong>Kathleen Blake Yancey - "Writing in the 21st Century"</strong> - Evolution of writing practices in digital contexts</li>
+                        <li><strong>Douglas Eyman - "Digital Rhetoric: Theory, Method, Practice"</strong> - Comprehensive overview of digital rhetorical studies</li>
+                        <li><strong>James Paul Gee - "The Anti-Education Era"</strong> - Digital literacies and learning in networked environments</li>
+                        <li><strong>Danielle DeVoss et al. - "Technological Ecologies and Sustainability"</strong> - Writing in digital ecosystems</li>
+                    </ul>
+                </div>
+
+                <div class="reading-section">
+                    <h3>AI, Writing, and Composition</h3>
+                    <ul class="reading-list">
+                        <li><strong>Annette Vee - "Coding Literacy"</strong> - Understanding computational literacy and writing</li>
+                        <li><strong>Ian Bogost - "Procedural Rhetoric"</strong> - How computational systems make arguments through processes</li>
+                        <li><strong>Emily Bender et al. - "On the Dangers of Stochastic Parrots"</strong> - Critical examination of large language models</li>
+                        <li><strong>Sarah Perrault et al. - "Writing with AI: Implications for the Composition Classroom"</strong> - Pedagogical considerations for AI writing tools</li>
+                    </ul>
+                </div>
+
+                <div class="reading-section">
+                    <h3>Ethics and Critical AI Studies</h3>
+                    <ul class="reading-list">
+                        <li><strong>Safiya Noble - "Algorithms of Oppression"</strong> - How search engines reinforce racism and bias</li>
+                        <li><strong>Ruha Benjamin - "Race After Technology"</strong> - The intersection of race, technology, and justice</li>
+                        <li><strong>Kate Crawford - "Atlas of AI"</strong> - The social and environmental costs of artificial intelligence</li>
+                        <li><strong>Shannon Vallor - "Technology and the Virtues"</strong> - Ethical frameworks for emerging technologies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Quick Reference Guides</h2>
+
+                <div class="guide-section">
+                    <h3>Rhetorical Devices Glossary</h3>
+                    <div class="glossary">
+                        <div class="glossary-item">
+                            <strong>Anaphora:</strong> Repetition of words at the beginning of successive clauses (e.g., "We shall fight on the beaches, we shall fight on the landing grounds...")
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Antithesis:</strong> Juxtaposition of contrasting ideas in parallel structure (e.g., "Ask not what your country can do for you—ask what you can do for your country")
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Ethos:</strong> Appeal to credibility, character, or authority of the speaker/writer
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Kairos:</strong> Rhetorical timing; the opportune moment for persuasion
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Logos:</strong> Appeal to logic, reason, and evidence
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Metaphor:</strong> Implicit comparison between unlike things (e.g., "Time is money")
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Pathos:</strong> Appeal to emotion, values, and beliefs of the audience
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Rhetorical Question:</strong> Question asked for effect, not expecting an answer
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>AI Tools Comparison</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Strengths</th>
+                                <th>Best Use Cases</th>
+                                <th>Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ChatGPT</strong></td>
+                                <td>Versatile, conversational, iterative refinement</td>
+                                <td>Brainstorming, drafting, dialogue-based exploration</td>
+                                <td>Can be overconfident; verify factual claims</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude</strong></td>
+                                <td>Nuanced analysis, strong context handling, thoughtful responses</td>
+                                <td>Complex analysis, detailed explanations, ethical reasoning</td>
+                                <td>May be overly cautious; less creative in some contexts</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grammarly</strong></td>
+                                <td>Writing mechanics, style suggestions, tone detection</td>
+                                <td>Editing, proofreading, clarity improvements</td>
+                                <td>Focus on surface-level corrections; limited rhetorical depth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>QuillBot</strong></td>
+                                <td>Paraphrasing, summarization, citation generation</td>
+                                <td>Rewording, condensing texts, avoiding repetition</td>
+                                <td>Paraphrasing can obscure original meaning; use critically</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="guide-section">
+                    <h3>Best Practices for AI-Assisted Writing</h3>
+                    <ol class="best-practices-list">
+                        <li><strong>Start with your own thinking:</strong> Draft initial ideas before consulting AI to maintain your voice and critical perspective</li>
+                        <li><strong>Use specific, detailed prompts:</strong> Generic prompts yield generic results; provide context, constraints, and clear objectives</li>
+                        <li><strong>Verify all factual claims:</strong> AI can generate plausible but incorrect information; always check facts and citations</li>
+                        <li><strong>Maintain critical distance:</strong> Evaluate AI suggestions rather than accepting them uncritically; you are the author</li>
+                        <li><strong>Iterate and refine:</strong> Treat AI interaction as dialogue; ask follow-up questions and request revisions</li>
+                        <li><strong>Document your process:</strong> Keep records of how you use AI for transparency and future reference</li>
+                        <li><strong>Attribute appropriately:</strong> Follow your institution's guidelines for citing AI assistance</li>
+                        <li><strong>Reflect on impact:</strong> Consider how AI use affects your learning, thinking, and development as a writer</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Interactive Tool: AI Prompt Comparison</h2>
+                <p>See how different prompts yield different results when asking AI to perform rhetorical analysis.</p>
+
+                <div class="prompt-comparison">
+                    <div class="prompt-example">
+                        <h4>Weak Prompt</h4>
+                        <div class="prompt-box weak">
+                            <p>"Analyze this speech."</p>
+                        </div>
+                        <p class="prompt-note"><strong>Problem:</strong> Too vague, no specific framework, unclear expectations</p>
+                    </div>
+
+                    <div class="prompt-example">
+                        <h4>Better Prompt</h4>
+                        <div class="prompt-box better">
+                            <p>"Identify the rhetorical appeals (ethos, pathos, logos) in this speech and explain how they work."</p>
+                        </div>
+                        <p class="prompt-note"><strong>Improvement:</strong> Specifies framework, clear task</p>
+                    </div>
+
+                    <div class="prompt-example">
+                        <h4>Strong Prompt</h4>
+                        <div class="prompt-box strong">
+                            <p>"Analyze the attached speech using Aristotelian rhetorical appeals. For each appeal (ethos, pathos, logos), identify specific passages, explain the rhetorical strategy, and evaluate its effectiveness for the intended audience (young voters). Also note the kairos—why is this message timely or appropriate for this moment?"</p>
+                        </div>
+                        <p class="prompt-note"><strong>Excellence:</strong> Specific framework, clear structure, audience consideration, contextual awareness</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rhetoric, Composition & AI Course | Built for GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

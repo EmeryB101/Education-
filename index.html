@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exploring Rhetoric, Composition, and AI in Higher Education">
+    <title>Rhetoric & AI | About the Course</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Rhetoric, Composition & AI</h1>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">About the Course</a></li>
+                <li><a href="curriculum.html" class="nav-link">Curriculum</a></li>
+                <li><a href="resources.html" class="nav-link">Student Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="fade-in">
+        <section class="hero">
+            <div class="container">
+                <h2 class="hero-title">Exploring the Intersection of Rhetoric, Composition, and Artificial Intelligence</h2>
+                <p class="hero-subtitle">A course designed for higher education students to critically engage with AI as a rhetorical tool</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Course Overview</h2>
+                <p>This course examines the evolving relationship between classical rhetorical principles and modern AI technologies. Students will develop critical frameworks for understanding AI-generated text, learn to leverage AI tools ethically in their writing processes, and explore the broader implications of algorithmic rhetoric in digital spaces.</p>
+
+                <div class="objectives">
+                    <h3>Learning Objectives</h3>
+                    <ul>
+                        <li>Analyze rhetorical strategies in both human and AI-generated texts</li>
+                        <li>Apply rhetorical frameworks (ethos, pathos, logos) to evaluate AI-assisted writing</li>
+                        <li>Develop ethical practices for using AI in composition and research</li>
+                        <li>Critically examine ongoing debates about AI authorship and authenticity</li>
+                        <li>Create effective prompts that leverage AI for rhetorical analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section interactive-demo-section">
+            <div class="container">
+                <h2>Interactive Demo: AI Rhetorical Appeals Analyzer</h2>
+                <p>Enter a text sample below to analyze its rhetorical appeals. This tool demonstrates how we can use computational methods to identify ethos, pathos, and logos in writing.</p>
+
+                <div class="demo-container">
+                    <div class="demo-input">
+                        <label for="text-input">Text to Analyze:</label>
+                        <textarea id="text-input" rows="8" placeholder="Paste your text here or use the sample text...">As we face the unprecedented challenges of climate change, we must act now. Leading scientists from around the world agree that the next decade is critical. Our children's future depends on the choices we make today. The data is clear: global temperatures have risen 1.1°C since pre-industrial times, and without immediate action, we risk crossing irreversible tipping points.</textarea>
+                    </div>
+
+                    <button id="analyze-btn" class="btn-primary">Analyze Text</button>
+
+                    <div id="analysis-results" class="analysis-results hidden">
+                        <h3>Analysis Results</h3>
+                        <div class="appeal-result">
+                            <div class="appeal-header">
+                                <h4>Ethos (Credibility & Authority)</h4>
+                                <span class="appeal-score" id="ethos-score">0%</span>
+                            </div>
+                            <div class="appeal-bar">
+                                <div class="appeal-fill ethos-fill" id="ethos-bar"></div>
+                            </div>
+                            <p class="appeal-explanation" id="ethos-explanation"></p>
+                        </div>
+
+                        <div class="appeal-result">
+                            <div class="appeal-header">
+                                <h4>Pathos (Emotional Appeal)</h4>
+                                <span class="appeal-score" id="pathos-score">0%</span>
+                            </div>
+                            <div class="appeal-bar">
+                                <div class="appeal-fill pathos-fill" id="pathos-bar"></div>
+                            </div>
+                            <p class="appeal-explanation" id="pathos-explanation"></p>
+                        </div>
+
+                        <div class="appeal-result">
+                            <div class="appeal-header">
+                                <h4>Logos (Logic & Evidence)</h4>
+                                <span class="appeal-score" id="logos-score">0%</span>
+                            </div>
+                            <div class="appeal-bar">
+                                <div class="appeal-fill logos-fill" id="logos-bar"></div>
+                            </div>
+                            <p class="appeal-explanation" id="logos-explanation"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section debates-section">
+            <div class="container">
+                <h2>Rhetoric and AI: Current Debates</h2>
+
+                <div class="debate-cards">
+                    <div class="debate-card">
+                        <h3>AI Authorship & Authenticity</h3>
+                        <p>Who is the "author" of AI-generated text? How do we understand concepts of voice, originality, and authenticity when AI systems contribute to the writing process? This debate challenges traditional notions of authorship and raises questions about citation, intellectual property, and the nature of creative work.</p>
+                    </div>
+
+                    <div class="debate-card">
+                        <h3>Algorithmic Rhetoric</h3>
+                        <p>AI systems make rhetorical choices through their training data, algorithms, and design. What are the implications when persuasion is automated? How do recommendation algorithms, content moderation systems, and AI writing tools embody rhetorical strategies? Understanding algorithmic rhetoric is crucial for digital literacy.</p>
+                    </div>
+
+                    <div class="debate-card">
+                        <h3>Human-AI Collaboration</h3>
+                        <p>Rather than viewing AI as replacement or threat, how can we conceptualize productive human-AI partnerships in composition? What does it mean to write "with" AI versus being replaced "by" AI? This debate explores new models of distributed cognition and collaborative authorship.</p>
+                    </div>
+
+                    <div class="debate-card">
+                        <h3>Ethical Considerations</h3>
+                        <p>What are our obligations when using AI in academic and professional writing? Questions of transparency, proper attribution, bias in AI systems, and the potential for misuse require careful ethical frameworks. How do we balance innovation with integrity?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rhetoric, Composition & AI Course | Built for GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/interactions.js"></script>
+</body>
+</html>
