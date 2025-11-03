@@ -4,10 +4,9 @@
 
 .game-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
 }
 
-.game-section .container h2 {
+.game-section .container > h2 {
     color: white;
 }
 
@@ -17,6 +16,7 @@
     text-align: center;
     font-size: var(--font-size-lg);
     line-height: 1.8;
+    color: white;
 }
 
 .game-container {
@@ -475,6 +475,15 @@
 
 #game-content {
     opacity: 1;
+    color: var(--text-primary);
+}
+
+#game-content h3,
+#game-content h4,
+#game-content h5,
+#game-content p,
+#game-content li {
+    color: var(--text-primary);
 }
 
 /* Poem styling */
@@ -818,6 +827,122 @@
     margin-bottom: var(--spacing-sm);
 }
 
+/* Selection Panel */
+.selection-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
+    min-width: 350px;
+    animation: scaleUp 0.3s ease-out;
+}
+
+.selection-panel h4 {
+    color: var(--primary-color);
+    margin: 0 0 var(--spacing-md) 0;
+    text-align: center;
+    font-size: var(--font-size-xl);
+}
+
+.selected-word-display {
+    background: var(--surface);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: Georgia, serif;
+}
+
+.selection-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+}
+
+.selection-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.selection-btn:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-md);
+}
+
+.selection-btn.ethos-btn {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.3) 100%);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.selection-btn.ethos-btn:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.4) 100%);
+}
+
+.selection-btn.pathos-btn {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.3) 100%);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.selection-btn.pathos-btn:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0.4) 100%);
+}
+
+.selection-btn.logos-btn {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.3) 100%);
+    border: 2px solid var(--success);
+    color: var(--success);
+}
+
+.selection-btn.logos-btn:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.4) 100%);
+}
+
+.selection-btn.clear-btn {
+    background: var(--surface);
+    border: 2px solid var(--text-secondary);
+    color: var(--text-secondary);
+}
+
+.selection-btn.clear-btn:hover {
+    background: #e5e7eb;
+}
+
+.selection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2999;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.poem-word.selected-for-marking {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .comparison-container,
@@ -835,5 +960,10 @@
     .analysis-stats {
         flex-direction: column;
         gap: var(--spacing-sm);
+    }
+
+    .selection-panel {
+        min-width: 90%;
+        max-width: 400px;
     }
 }

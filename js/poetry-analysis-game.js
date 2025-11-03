@@ -342,7 +342,7 @@ function generatePoemHTML(poem, showAI, showUser = false) {
 
                 if (!showAI && !showUser) {
                     // Make clickable for user analysis
-                    html += `<span class="poem-word ${classes.join(' ')}" data-index="${wordIndex}" onclick="toggleAppeal(${wordIndex})">${token}</span>`;
+                    html += `<span class="poem-word ${classes.join(' ')}" data-index="${wordIndex}" data-word="${token}" onclick="showSelectionPanel(${wordIndex}, '${token.replace(/'/g, "\\'")}')">${token}</span>`;
                 } else {
                     html += `<span class="poem-word ${classes.join(' ')}">${token}</span>`;
                 }
@@ -360,29 +360,117 @@ function generatePoemHTML(poem, showAI, showUser = false) {
 }
 
 /**
- * Toggle rhetorical appeal on a word (click cycling)
+ * Show selection panel for choosing appeal
  */
-function toggleAppeal(wordIndex) {
+let currentSelectedWordIndex = null;
+
+function showSelectionPanel(wordIndex, wordText) {
+    currentSelectedWordIndex = wordIndex;
+
+    // Remove any existing panel
+    hideSelectionPanel();
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'selection-overlay';
+    overlay.onclick = hideSelectionPanel;
+
+    // Create panel
+    const panel = document.createElement('div');
+    panel.className = 'selection-panel';
+    panel.onclick = (e) => e.stopPropagation(); // Prevent closing when clicking panel
+
+    const currentAppeals = userAnalysis[wordIndex] || [];
+    const hasEthos = currentAppeals.includes('ethos');
+    const hasPathos = currentAppeals.includes('pathos');
+    const hasLogos = currentAppeals.includes('logos');
+
+    panel.innerHTML = `
+        <h4>Choose Rhetorical Appeal</h4>
+        <div class="selected-word-display">"${wordText}"</div>
+        <div class="selection-buttons">
+            <button class="selection-btn ethos-btn" onclick="selectAppeal(${wordIndex}, 'ethos')">
+                ${hasEthos ? '✓ ' : ''}Ethos - Credibility & Authority
+            </button>
+            <button class="selection-btn pathos-btn" onclick="selectAppeal(${wordIndex}, 'pathos')">
+                ${hasPathos ? '✓ ' : ''}Pathos - Emotion & Values
+            </button>
+            <button class="selection-btn logos-btn" onclick="selectAppeal(${wordIndex}, 'logos')">
+                ${hasLogos ? '✓ ' : ''}Logos - Logic & Evidence
+            </button>
+            <button class="selection-btn clear-btn" onclick="clearAppeal(${wordIndex})">
+                Clear All Appeals
+            </button>
+        </div>
+    `;
+
+    // Add to document
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    // Highlight the selected word
+    const wordElements = document.querySelectorAll(`[data-index="${wordIndex}"]`);
+    wordElements.forEach(el => el.classList.add('selected-for-marking'));
+}
+
+/**
+ * Hide selection panel
+ */
+function hideSelectionPanel() {
+    const overlay = document.querySelector('.selection-overlay');
+    const panel = document.querySelector('.selection-panel');
+
+    if (overlay) overlay.remove();
+    if (panel) panel.remove();
+
+    // Remove highlight from all words
+    document.querySelectorAll('.selected-for-marking').forEach(el => {
+        el.classList.remove('selected-for-marking');
+    });
+
+    currentSelectedWordIndex = null;
+}
+
+/**
+ * Select an appeal for a word (can select multiple)
+ */
+function selectAppeal(wordIndex, appeal) {
     if (!userAnalysis[wordIndex]) {
         userAnalysis[wordIndex] = [];
     }
 
     const appeals = userAnalysis[wordIndex];
 
-    // Cycle: unmarked → ethos → pathos → logos → ethos+pathos → ethos+logos → pathos+logos → all → unmarked
-    if (appeals.length === 0) {
-        appeals.push('ethos');
-    } else if (appeals.length === 1 && appeals[0] === 'ethos') {
-        appeals[0] = 'pathos';
-    } else if (appeals.length === 1 && appeals[0] === 'pathos') {
-        appeals[0] = 'logos';
-    } else if (appeals.length === 1 && appeals[0] === 'logos') {
-        userAnalysis[wordIndex] = [];
+    // Toggle the appeal
+    if (appeals.includes(appeal)) {
+        // Remove it
+        const index = appeals.indexOf(appeal);
+        appeals.splice(index, 1);
+    } else {
+        // Add it
+        appeals.push(appeal);
     }
 
     // Update visual
     updatePoemDisplay();
     updateStats();
+
+    // Close panel after selection
+    hideSelectionPanel();
+}
+
+/**
+ * Clear all appeals from a word
+ */
+function clearAppeal(wordIndex) {
+    userAnalysis[wordIndex] = [];
+
+    // Update visual
+    updatePoemDisplay();
+    updateStats();
+
+    // Close panel
+    hideSelectionPanel();
 }
 
 /**
