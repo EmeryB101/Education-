@@ -463,3 +463,377 @@
         width: 100%;
     }
 }
+
+/* ========================================
+   Poetry Analysis Game Styles
+   ======================================== */
+
+#poetry-game {
+    min-height: 500px;
+    padding: var(--spacing-lg);
+}
+
+#game-content {
+    opacity: 1;
+}
+
+/* Poem styling */
+.poem-text {
+    background: var(--surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-lg) 0;
+    font-size: var(--font-size-lg);
+    line-height: 2;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.poem-line {
+    margin-bottom: var(--spacing-sm);
+}
+
+.poem-word {
+    display: inline-block;
+    padding: 2px 4px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.poem-word:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+/* User markings */
+.poem-word.user-ethos {
+    background-color: rgba(59, 130, 246, 0.3);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.poem-word.user-pathos {
+    background-color: rgba(245, 158, 11, 0.3);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.poem-word.user-logos {
+    background-color: rgba(16, 185, 129, 0.3);
+    border-bottom: 2px solid var(--success);
+}
+
+/* AI markings */
+.poem-word.ai-ethos {
+    background-color: rgba(59, 130, 246, 0.2);
+    border-top: 2px solid var(--primary-color);
+}
+
+.poem-word.ai-pathos {
+    background-color: rgba(245, 158, 11, 0.2);
+    border-top: 2px solid var(--accent-color);
+}
+
+.poem-word.ai-logos {
+    background-color: rgba(16, 185, 129, 0.2);
+    border-top: 2px solid var(--success);
+}
+
+/* Appeal badges */
+.appeal-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: 0 4px;
+}
+
+.ethos-badge {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.pathos-badge {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.logos-badge {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border: 2px solid var(--success);
+}
+
+/* Game steps */
+.game-step-intro,
+.game-step-analysis,
+.game-step-reveal,
+.game-step-lesson {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.poem-author {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: var(--spacing-sm);
+}
+
+.poem-context {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-color);
+}
+
+.instructions-box {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-lg) 0;
+    border: 2px solid var(--primary-color);
+}
+
+.instructions-box h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.instructions-box ul {
+    margin-left: var(--spacing-lg);
+}
+
+.analysis-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.hint {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.analysis-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-md);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-lg);
+}
+
+/* Comparison view */
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.comparison-side h4 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.comparison-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.stat-box {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-box h5 {
+    color: var(--primary-color);
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-base);
+}
+
+.stat-number {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: var(--spacing-sm) 0;
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Lesson box */
+.lesson-box {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-lg) 0;
+    border-left: 4px solid var(--primary-color);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+}
+
+/* Summary screen */
+.game-summary {
+    animation: fadeIn 0.6s ease-in;
+}
+
+.summary-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.summary-stat {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.summary-stat .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.summary-stat .stat-label {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* Agentic comparison */
+.agentic-comparison {
+    margin: var(--spacing-2xl) 0;
+}
+
+.agentic-comparison h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-3xl);
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+}
+
+.comparison-column {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-column.bad {
+    background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+    border: 2px solid var(--error);
+}
+
+.comparison-column.good {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 2px solid var(--success);
+}
+
+.comparison-column h4 {
+    text-align: center;
+    margin-top: 0;
+    font-size: var(--font-size-xl);
+}
+
+.comparison-column.bad h4 {
+    color: var(--error);
+}
+
+.comparison-column.good h4 {
+    color: var(--success);
+}
+
+.comparison-content {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+}
+
+.comparison-content p {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.comparison-prompt {
+    font-family: var(--font-mono);
+    background: var(--surface);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+}
+
+.key-takeaway {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--accent-color);
+    margin: var(--spacing-xl) 0;
+}
+
+.key-takeaway h4 {
+    color: var(--accent-color);
+    margin-top: 0;
+    font-size: var(--font-size-2xl);
+}
+
+.key-takeaway p {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .comparison-container,
+    .comparison-grid,
+    .summary-stats-grid,
+    .comparison-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .poem-text {
+        padding: var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+
+    .analysis-stats {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
