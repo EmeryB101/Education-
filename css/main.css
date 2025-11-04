@@ -348,21 +348,12 @@ main {
 }
 
 .animated-gradient-text {
-    background: linear-gradient(
-        90deg,
-        #ffffff 0%,
-        #fde68a 20%,
-        #fbbf24 40%,
-        #fde68a 60%,
-        #ffffff 80%,
-        #fde68a 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 5s ease-in-out infinite;
+    color: #ffffff;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(168, 85, 247, 0.6);
     display: inline-block;
+    font-weight: 900;
 }
 
 @keyframes gradientShift {
@@ -448,15 +439,11 @@ main {
     position: relative;
     display: inline-block;
     padding-bottom: var(--spacing-xs);
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: sectionTitleGradient 6s ease-in-out infinite;
+    color: var(--neon-purple);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 2rem;
 }
 
 @keyframes sectionTitleGradient {
