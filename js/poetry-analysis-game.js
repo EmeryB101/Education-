@@ -12,11 +12,48 @@ let totalPossible = 0;
 let userUniqueInterpretations = 0;
 
 // Poem data - Public domain persuasive poems by female authors
+// Featuring diverse voices including African American poets
 const poems = [
+    {
+        title: "Bury Me in a Free Land",
+        author: "Frances Ellen Watkins Harper (1864)",
+        context: "African American poet persuading against slavery and for human dignity",
+        lines: [
+            "Make me a grave where'er you will,",
+            "In a lowly plain, or a lofty hill;",
+            "Make it among earth's humblest graves,",
+            "But not in a land where men are slaves.",
+            "I could not rest if around my grave",
+            "I heard the steps of a trembling slave;"
+        ],
+        aiAnalysis: {
+            0: ['ethos'], // Make
+            1: ['pathos'], // me
+            3: ['pathos'], // grave
+            6: ['ethos'], // will
+            10: ['logos'], // plain
+            14: ['logos'], // lofty
+            15: ['logos'], // hill
+            17: ['ethos'], // Make
+            20: ['logos'], // earth's
+            21: ['pathos'], // humblest
+            22: ['pathos'], // graves
+            28: ['logos'], // land
+            30: ['pathos'], // men
+            32: ['pathos', 'logos'], // slaves
+            36: ['pathos'], // rest
+            40: ['pathos'], // grave
+            43: ['pathos'], // heard
+            45: ['pathos'], // steps
+            48: ['pathos'], // trembling
+            49: ['pathos'] // slave
+        },
+        lesson: "Frances Ellen Watkins Harper was a leading African American abolitionist poet. Notice how her ethos comes from moral authority and pathos from the human dignity of enslaved people. <strong>Your analysis captured what AI cannot: historical and cultural context.</strong>"
+    },
     {
         title: "The New Colossus",
         author: "Emma Lazarus (1883)",
-        context: "Written for the Statue of Liberty, persuading America to welcome immigrants",
+        context: "Jewish American poet persuading America to welcome immigrants",
         lines: [
             "Give me your tired, your poor,",
             "Your huddled masses yearning to breathe free,",
