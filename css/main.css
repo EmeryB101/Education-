@@ -158,10 +158,7 @@ li {
 
 .nav-brand h1 {
     font-size: var(--font-size-xl);
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--neon-purple);
     margin: 0;
     font-weight: 800;
     letter-spacing: 0.5px;
@@ -414,16 +411,12 @@ main {
 }
 
 .content-section h2 {
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--neon-purple);
     margin-bottom: var(--spacing-lg);
     font-weight: 800;
     font-size: 2.5rem;
     position: relative;
     display: inline-block;
-    animation: headerGlow 4s ease-in-out infinite;
 }
 
 @keyframes headerGlow {
@@ -1077,10 +1070,7 @@ footer p {
    ======================================== */
 
 .tech-card h3 {
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--neon-purple);
     font-weight: 800;
 }
 
