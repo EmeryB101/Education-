@@ -30,24 +30,30 @@
     <main class="fade-in">
         <section class="hero">
             <div class="container">
-                <h2 class="hero-title">Exploring the Intersection of Rhetoric, Composition, and Artificial Intelligence</h2>
-                <p class="hero-subtitle">A course designed for higher education students to critically engage with AI as a rhetorical tool</p>
+                <div class="hero-banner">
+                    <img src="assets/images/rhetoricsandai.png" alt="Rhetoric and AI" class="banner-image">
+                </div>
+                <h2 class="hero-title animated-gradient-text">Poetry, Feminist Rhetoric, and Artificial Intelligence</h2>
+                <p class="hero-subtitle">Exploring how AI interprets poetic language, gendered discourse, and feminist rhetorical traditions</p>
             </div>
         </section>
 
         <section class="content-section">
             <div class="container">
-                <h2>Course Overview</h2>
-                <p>This course examines the evolving relationship between classical rhetorical principles and modern AI technologies. Students will develop critical frameworks for understanding AI-generated text, learn to leverage AI tools ethically in their writing processes, and explore the broader implications of algorithmic rhetoric in digital spaces.</p>
+                <h2 class="section-title">Course Overview</h2>
+                <p>This course centers poetry and feminist rhetorical theory in the study of artificial intelligence. Through analysis of poems by women and marginalized voices, students examine how AI systems interpret gendered language, activist poetry, and feminist rhetorical strategies. We explore the intersection of poetic craft, feminist criticism, and computational analysis to understand both the possibilities and limitations of AI in rhetorical study.</p>
 
-                <div class="objectives">
+                <div class="objectives card-hover">
                     <h3>Learning Objectives</h3>
                     <ul>
-                        <li>Analyze rhetorical strategies in both human and AI-generated texts</li>
-                        <li>Apply rhetorical frameworks (ethos, pathos, logos) to evaluate AI-assisted writing</li>
-                        <li>Develop ethical practices for using AI in composition and research</li>
-                        <li>Critically examine ongoing debates about AI authorship and authenticity</li>
-                        <li>Create effective prompts that leverage AI for rhetorical analysis</li>
+                        <li>Analyze rhetorical strategies in poetry through feminist theoretical frameworks</li>
+                        <li>Examine how AI systems interpret gendered language and feminist discourse</li>
+                        <li>Apply intersectional feminist rhetoric to evaluate AI-generated analysis</li>
+                        <li>Understand poetic devices (metaphor, imagery, sound) and their rhetorical functions</li>
+                        <li>Explore women poets and feminist rhetorical traditions across cultures and eras</li>
+                        <li>Critically assess AI's capacity to analyze embodied, affective, and activist language</li>
+                        <li>Develop agentic AI practices that preserve student authorship and feminist values</li>
+                        <li>Create prompts that engage AI with poetry while maintaining critical feminist perspective</li>
                     </ul>
                 </div>
             </div>
@@ -55,13 +61,22 @@
 
         <section class="content-section interactive-demo-section">
             <div class="container">
-                <h2>Interactive Demo: AI Rhetorical Appeals Analyzer</h2>
-                <p>Enter a text sample below to analyze its rhetorical appeals. This tool demonstrates how we can use computational methods to identify ethos, pathos, and logos in writing.</p>
+                <h2 class="section-title">Interactive Demo: AI Rhetorical Appeals Analyzer</h2>
+                <p>Analyze poetry for rhetorical appeals. This tool demonstrates how AI interprets ethos, pathos, and logos in poetic and activist language.</p>
 
-                <div class="demo-container">
+                <div class="demo-container card-hover">
                     <div class="demo-input">
-                        <label for="text-input">Text to Analyze:</label>
-                        <textarea id="text-input" rows="8" placeholder="Paste your text here or use the sample text...">As we face the unprecedented challenges of climate change, we must act now. Leading scientists from around the world agree that the next decade is critical. Our children's future depends on the choices we make today. The data is clear: global temperatures have risen 1.1°C since pre-industrial times, and without immediate action, we risk crossing irreversible tipping points.</textarea>
+                        <label for="text-input">Poetry to Analyze:</label>
+                        <textarea id="text-input" rows="8" placeholder="Paste poetry here or use the sample...">Do ye hear the children weeping, O my brothers,
+Ere the sorrow comes with years?
+They are leaning their young heads against their mothers,
+And that cannot stop their tears.
+The young lambs are bleating in the meadows,
+The young birds are chirping in the nest,
+The young fawns are playing with the shadows,
+The young children, O my brothers,
+They are weeping bitterly!
+— Elizabeth Barrett Browning, "The Cry of the Children" (1843)</textarea>
                     </div>
 
                     <button id="analyze-btn" class="btn-primary">Analyze Text</button>
@@ -143,5 +158,6 @@
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/interactions.js"></script>
+    <script src="js/scroll-animations.js"></script>
 </body>
 </html>
