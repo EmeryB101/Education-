@@ -22,14 +22,30 @@ const designerState = {
 
 // Visual Appearances - Pick one that looks like you
 const appearances = [
-    { id: 'appearance-1', visual: '👩🏽‍🎓', description: 'Woman with medium skin tone' },
-    { id: 'appearance-2', visual: '👨🏾‍🎨', description: 'Man with dark skin tone' },
-    { id: 'appearance-3', visual: '👩🏻‍💻', description: 'Woman with light skin tone' },
-    { id: 'appearance-4', visual: '🧑🏿‍🏫', description: 'Person with dark skin tone' },
-    { id: 'appearance-5', visual: '👨🏼‍🏫', description: 'Man with light skin tone' },
-    { id: 'appearance-6', visual: '👩🏻‍🦰', description: 'Woman with light skin tone and red hair' },
-    { id: 'appearance-7', visual: '🧑🏽‍🔬', description: 'Person with medium skin tone' },
-    { id: 'appearance-8', visual: '👨🏿‍🎤', description: 'Man with dark skin tone' }
+    { id: 'appearance-1', visual: '👩🏽‍🎓' },
+    { id: 'appearance-2', visual: '👨🏾‍🎨' },
+    { id: 'appearance-3', visual: '👩🏻‍💻' },
+    { id: 'appearance-4', visual: '🧑🏿‍🏫' },
+    { id: 'appearance-5', visual: '👨🏼‍🏫' },
+    { id: 'appearance-6', visual: '👩🏻‍🦰' },
+    { id: 'appearance-7', visual: '🧑🏽‍🔬' },
+    { id: 'appearance-8', visual: '👨🏿‍🎤' },
+    { id: 'appearance-9', visual: '👩🏾‍💼' },
+    { id: 'appearance-10', visual: '👨🏽‍🎓' },
+    { id: 'appearance-11', visual: '🧑🏻‍🎨' },
+    { id: 'appearance-12', visual: '👩🏿‍🔬' },
+    { id: 'appearance-13', visual: '👨🏻‍💻' },
+    { id: 'appearance-14', visual: '🧑🏾‍💼' },
+    { id: 'appearance-15', visual: '👩🏼‍🏫' },
+    { id: 'appearance-16', visual: '👨🏿‍🏫' },
+    { id: 'appearance-17', visual: '🧑🏻‍🦰' },
+    { id: 'appearance-18', visual: '👩🏽‍🎤' },
+    { id: 'appearance-19', visual: '👨🏾‍🔬' },
+    { id: 'appearance-20', visual: '🧑🏼‍💻' },
+    { id: 'appearance-21', visual: '👩🏿‍🎨' },
+    { id: 'appearance-22', visual: '👨🏻‍🎤' },
+    { id: 'appearance-23', visual: '🧑🏿‍🎓' },
+    { id: 'appearance-24', visual: '👩🏼‍💼' }
 ];
 
 // Learning Styles - Separate from appearance
@@ -273,12 +289,11 @@ function renderAppearanceScreen() {
         <h2 class="designer-title">Choose Your Appearance</h2>
         <p class="designer-subtitle">Pick the avatar that looks most like you</p>
 
-        <div class="avatar-grid">
+        <div class="appearance-grid">
             ${appearances.map(appearance => `
-                <div class="avatar-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
+                <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
                      onclick="selectAppearance('${appearance.id}')">
                     <div class="avatar-visual">${appearance.visual}</div>
-                    <div class="avatar-description">${appearance.description}</div>
                 </div>
             `).join('')}
         </div>
@@ -736,8 +751,8 @@ function renderResultsScreen() {
 
             <div class="results-summary">
                 <div class="results-item">
-                    <span class="results-label">Your Appearance:</span>
-                    <span class="results-value">${selectedAppearance.description}</span>
+                    <span class="results-label">Your Avatar:</span>
+                    <span class="results-value">${selectedAppearance.visual}</span>
                 </div>
 
                 <div class="results-item">

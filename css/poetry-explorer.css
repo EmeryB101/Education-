@@ -1,0 +1,344 @@
+/**
+ * Poetry Explorer Styles
+ * Interactive content-focused experience with polling
+ */
+
+/* Overlay */
+.poetry-explorer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity var(--transition-base);
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+}
+
+.poetry-explorer-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Container */
+.poetry-explorer-container {
+    background: white;
+    border-radius: var(--radius-xl);
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--spacing-2xl);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideInExplorer 0.4s ease-out;
+}
+
+@keyframes slideInExplorer {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.explorer-close-btn {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-base);
+    z-index: 10;
+}
+
+.explorer-close-btn:hover {
+    background: rgba(236, 72, 153, 0.1);
+    color: var(--neon-pink);
+    transform: rotate(90deg);
+}
+
+/* Progress Indicator */
+.explorer-progress {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-2xl);
+    padding-top: var(--spacing-md);
+}
+
+/* Typography */
+.explorer-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--neon-purple);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.explorer-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    font-weight: 500;
+}
+
+/* Intro Content */
+.intro-content {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.intro-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.intro-box {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+    border: 3px solid var(--neon-purple);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.intro-box h3 {
+    color: var(--neon-purple);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.intro-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.intro-box li {
+    padding: var(--spacing-sm) 0;
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.intro-note {
+    text-align: center;
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Poem Display */
+.poem-display {
+    max-width: 700px;
+    margin: 0 auto var(--spacing-2xl);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 4px solid var(--neon-purple);
+    border-left: 10px solid var(--neon-pink);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+}
+
+.poem-stanza {
+    margin-bottom: var(--spacing-xl);
+    line-height: 2;
+}
+
+.poem-stanza:last-child {
+    margin-bottom: 0;
+}
+
+.poem-stanza p {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin: 0;
+    padding: var(--spacing-xs) 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+}
+
+/* Text Input */
+.explorer-textarea {
+    width: 100%;
+    padding: var(--spacing-lg);
+    border: 3px solid var(--neon-purple);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    line-height: 1.8;
+    resize: vertical;
+    transition: all var(--transition-base);
+    min-height: 150px;
+}
+
+.explorer-textarea:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    transform: scale(1.01);
+}
+
+/* Choice Cards */
+.explorer-choice-card {
+    background: white;
+    border: 4px solid var(--neon-purple);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.explorer-choice-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(168, 85, 247, 0.3);
+    border-color: var(--neon-pink);
+}
+
+.explorer-choice-card.selected {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
+    border-color: var(--neon-pink);
+    border-width: 5px;
+    box-shadow: 0 8px 30px rgba(236, 72, 153, 0.5);
+}
+
+.explorer-choice-card .choice-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.explorer-choice-card .choice-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--neon-purple);
+    margin-bottom: var(--spacing-sm);
+}
+
+.explorer-choice-card .choice-desc {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+/* Actions */
+.explorer-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-2xl);
+    flex-wrap: wrap;
+}
+
+.explorer-btn {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-transform: none;
+}
+
+.explorer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary-explorer {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    color: white;
+}
+
+.btn-primary-explorer:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+}
+
+.btn-secondary-explorer {
+    background: white;
+    color: var(--neon-purple);
+    border: 3px solid var(--neon-purple);
+}
+
+.btn-secondary-explorer:hover {
+    background: var(--neon-purple);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .poetry-explorer-container {
+        padding: var(--spacing-xl) var(--spacing-md);
+        max-height: 95vh;
+    }
+
+    .explorer-title {
+        font-size: 1.8rem;
+    }
+
+    .explorer-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .poem-display {
+        padding: var(--spacing-lg);
+    }
+
+    .poem-stanza p {
+        font-size: var(--font-size-base);
+    }
+
+    .explorer-choice-card {
+        padding: var(--spacing-lg);
+    }
+
+    .explorer-choice-card .choice-icon {
+        font-size: 2.5rem;
+    }
+
+    .explorer-choice-card .choice-title {
+        font-size: 1.1rem;
+    }
+
+    .explorer-btn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-size-base);
+    }
+
+    .explorer-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .explorer-btn {
+        width: 100%;
+    }
+}

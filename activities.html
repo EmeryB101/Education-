@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/poetry-explorer.css">
 </head>
 <body>
     <nav class="navbar">
@@ -79,6 +80,42 @@
             </div>
         </section>
 
+        <!-- New Activity: Poetry Explorer with Polling -->
+        <section class="content-section" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
+            <div class="container">
+                <h2 class="activity-title-solid">🌟 Interactive Experience: Exploring "Still I Rise"</h2>
+                <p style="text-align: center; max-width: 900px; margin: 0 auto var(--spacing-lg); font-size: var(--font-size-lg); line-height: 1.8;">
+                    Engage deeply with Maya Angelou's iconic poem "Still I Rise" through an interactive journey that centers <strong>YOUR voice and interpretation</strong>. Analyze rhetorical choices, connect to feminist themes, reflect on your own experiences, and see how your classmates responded.
+                </p>
+
+                <div class="tech-card" style="max-width: 700px; margin: var(--spacing-xl) auto; text-align: center; padding: var(--spacing-2xl);">
+                    <div style="font-size: 4rem; margin-bottom: var(--spacing-lg);">📖✊💭</div>
+                    <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md); font-size: 1.8rem;">
+                        Your Voice, Your Interpretation
+                    </h3>
+                    <p style="line-height: 1.8; margin-bottom: var(--spacing-lg); color: var(--text-primary);">
+                        This interactive experience asks you to bring your own ideas, perspectives, and lived experiences to Maya Angelou's poetry. There are no "right" answers—just authentic engagement. At the end, see class polling data showing how your peers interpreted and understood the poem.
+                    </p>
+                    <button id="launch-poetry-explorer" class="btn-primary" style="font-size: var(--font-size-lg); padding: var(--spacing-md) var(--spacing-2xl);">
+                        🚀 Begin Poetry Journey
+                    </button>
+                </div>
+
+                <div class="game-info tech-card">
+                    <h3>What You'll Explore</h3>
+                    <ul>
+                        <li>📖 <strong>Read & React:</strong> Encounter "Still I Rise" and share your immediate response in your own words</li>
+                        <li>🎯 <strong>Analyze Rhetoric:</strong> Identify what makes this poem so powerful—repetition, metaphor, tone, or questions?</li>
+                        <li>💭 <strong>Interpret Meaning:</strong> What does "rising" mean? Explore personal resilience, collective resistance, and liberation</li>
+                        <li>✊ <strong>Feminist Connections:</strong> See how Angelou embodies feminist rhetoric—voice, body, intersectionality, resistance</li>
+                        <li>🤍 <strong>Personal Reflection:</strong> Connect the poem to your own life, identity, and experiences</li>
+                        <li>🤖 <strong>AI & Poetry:</strong> Reflect on what role AI should play in analyzing lived experience and resistance poetry</li>
+                        <li>📊 <strong>Class Poll Results:</strong> See aggregate data showing how your classmates answered each question</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <!-- Activity 3: Maya Angelou Theme Matcher -->
         <section class="content-section" style="background: #ffffff;">
             <div class="container">
@@ -114,6 +151,7 @@
     <script src="js/navigation.js"></script>
     <script src="js/poetry-analysis-game.js"></script>
     <script src="js/poetry-prompt-quiz.js"></script>
+    <script src="js/poetry-explorer.js"></script>
     <script src="js/angelou-game.js"></script>
     <script src="js/scroll-animations.js"></script>
 </body>
