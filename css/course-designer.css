@@ -504,3 +504,284 @@
         width: 100%;
     }
 }
+
+/* ========================================
+   Enhanced Avatar Styles
+   ======================================== */
+
+.avatar-visual {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-md);
+    animation: float 3s ease-in-out infinite;
+}
+
+.avatar-style {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--neon-pink);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ========================================
+   Text Input Styles
+   ======================================== */
+
+.input-container {
+    max-width: 700px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.input-label {
+    display: block;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--neon-purple);
+    margin-bottom: var(--spacing-md);
+}
+
+.designer-textarea {
+    width: 100%;
+    padding: var(--spacing-lg);
+    border: 3px solid var(--neon-purple);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    line-height: 1.6;
+    resize: vertical;
+    transition: all var(--transition-base);
+}
+
+.designer-textarea:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    transform: scale(1.02);
+}
+
+.input-hint {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ========================================
+   Choice Grid (Rhetoric Focus)
+   ======================================== */
+
+.choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.choice-card {
+    background: white;
+    border: 4px solid var(--neon-purple);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.choice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+    border-color: var(--neon-pink);
+}
+
+.choice-card.selected {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
+    border-color: var(--neon-pink);
+    box-shadow: 0 8px 30px rgba(236, 72, 153, 0.5);
+}
+
+.choice-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.choice-title {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--neon-purple);
+    margin-bottom: var(--spacing-md);
+}
+
+.choice-desc {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Pace Grid
+   ======================================== */
+
+.pace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.pace-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 4px solid var(--neon-cyan);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.pace-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+}
+
+.pace-card.selected {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15));
+    border-color: var(--neon-green);
+    box-shadow: 0 10px 35px rgba(16, 185, 129, 0.5);
+}
+
+.pace-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.pace-title {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--neon-cyan);
+    margin-bottom: var(--spacing-md);
+}
+
+.pace-desc {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Era Grid
+   ======================================== */
+
+.era-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.era-card {
+    background: white;
+    border: 4px solid var(--neon-pink);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.era-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(236, 72, 153, 0.4);
+}
+
+.era-card.selected {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15));
+    box-shadow: 0 10px 35px rgba(236, 72, 153, 0.5);
+}
+
+.era-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.era-title {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--neon-pink);
+    margin-bottom: var(--spacing-xs);
+}
+
+.era-period {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--neon-purple);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.era-desc {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Type Option Icon
+   ======================================== */
+
+.type-icon {
+    font-size: 2rem;
+    margin-right: var(--spacing-sm);
+}
+
+/* ========================================
+   Enhanced Results Display
+   ======================================== */
+
+.results-avatar-large {
+    font-size: 10rem;
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    animation: bounce 1s ease-out, pulse 3s ease-in-out infinite 1s;
+}
+
+/* ========================================
+   Responsive Adjustments
+   ======================================== */
+
+@media (max-width: 768px) {
+    .choice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pace-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .era-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .avatar-visual {
+        font-size: 4rem;
+    }
+
+    .results-avatar-large {
+        font-size: 7rem;
+    }
+
+    .designer-textarea {
+        font-size: var(--font-size-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .era-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .avatar-grid {
+        grid-template-columns: 1fr;
+    }
+}
