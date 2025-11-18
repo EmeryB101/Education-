@@ -785,3 +785,57 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Poll Statistics Styles */
+.poll-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.poll-stat-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--neon-cyan);
+    text-align: center;
+    transition: transform var(--transition-base);
+}
+
+.poll-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+}
+
+.poll-stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.poll-stat-value {
+    font-size: var(--font-size-lg);
+    color: var(--neon-purple);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+}
+
+.poll-stat-percent {
+    font-size: 2rem;
+    color: var(--neon-cyan);
+    font-weight: 900;
+}
+
+@media (max-width: 768px) {
+    .poll-stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .poll-stat-percent {
+        font-size: 1.5rem;
+    }
+}

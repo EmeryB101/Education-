@@ -6,9 +6,10 @@
 
 // Enhanced Game State with more data points
 const designerState = {
-    currentScreen: 'avatar',
+    currentScreen: 'appearance',
     selections: {
-        avatar: null,
+        appearance: null,      // visual representation
+        learningStyle: null,   // separated characteristic/aspiration
         favoritePoem: '',
         rhetoricFocus: null, // 'setting', 'author', 'devices'
         preference: null, // 'games', 'quizzes', or 'both'
@@ -16,73 +17,69 @@ const designerState = {
         learningPace: null, // 'fast', 'steady', 'deep'
         poetryEra: null // 'classic', 'modern', 'contemporary', 'all'
     },
-    screens: ['avatar', 'poem', 'rhetoric', 'preference', 'types', 'pace', 'era', 'results']
+    screens: ['appearance', 'style', 'poem', 'rhetoric', 'preference', 'types', 'pace', 'era', 'results']
 };
 
-// Diverse Avatar Data - Characters students can relate to
-const avatars = [
+// Visual Appearances - Pick one that looks like you
+const appearances = [
+    { id: 'appearance-1', visual: '👩🏽‍🎓', description: 'Woman with medium skin tone' },
+    { id: 'appearance-2', visual: '👨🏾‍🎨', description: 'Man with dark skin tone' },
+    { id: 'appearance-3', visual: '👩🏻‍💻', description: 'Woman with light skin tone' },
+    { id: 'appearance-4', visual: '🧑🏿‍🏫', description: 'Person with dark skin tone' },
+    { id: 'appearance-5', visual: '👨🏼‍🏫', description: 'Man with light skin tone' },
+    { id: 'appearance-6', visual: '👩🏻‍🦰', description: 'Woman with light skin tone and red hair' },
+    { id: 'appearance-7', visual: '🧑🏽‍🔬', description: 'Person with medium skin tone' },
+    { id: 'appearance-8', visual: '👨🏿‍🎤', description: 'Man with dark skin tone' }
+];
+
+// Learning Styles - Separate from appearance
+const learningStyles = [
     {
-        id: 'scholar-1',
-        visual: '👩🏽‍🎓',
-        name: 'Maya',
-        style: 'The Thoughtful Scholar',
-        skinTone: 'medium',
+        id: 'scholar',
+        title: 'The Thoughtful Scholar',
+        icon: '📚',
         description: 'Deep thinker who loves analyzing every word and cultural context'
     },
     {
-        id: 'artist-1',
-        visual: '👨🏾‍🎨',
-        name: 'James',
-        style: 'The Creative Artist',
-        skinTone: 'dark',
+        id: 'artist',
+        title: 'The Creative Artist',
+        icon: '🎨',
         description: 'Visual learner who connects poetry to art, music, and expression'
     },
     {
-        id: 'explorer-1',
-        visual: '👩🏻‍💻',
-        name: 'Alex',
-        style: 'The Digital Explorer',
-        skinTone: 'light',
+        id: 'explorer',
+        title: 'The Digital Explorer',
+        icon: '💻',
         description: 'Tech-savvy learner who experiments with AI tools hands-on'
     },
     {
-        id: 'activist-1',
-        visual: '🧑🏿‍🏫',
-        name: 'Jordan',
-        style: 'The Social Activist',
-        skinTone: 'dark',
+        id: 'activist',
+        title: 'The Social Activist',
+        icon: '✊',
         description: 'Passionate about justice, connects poetry to social change'
     },
     {
-        id: 'teacher-1',
-        visual: '👨🏼‍🏫',
-        name: 'Sam',
-        style: 'The Collaborative Teacher',
-        skinTone: 'light',
+        id: 'teacher',
+        title: 'The Collaborative Teacher',
+        icon: '👥',
         description: 'Learns best through discussion, teaching others, and group work'
     },
     {
-        id: 'poet-1',
-        visual: '👩🏻‍🦰',
-        name: 'Riley',
-        style: 'The Aspiring Poet',
-        skinTone: 'light',
+        id: 'poet',
+        title: 'The Aspiring Poet',
+        icon: '✍️',
         description: 'Writer who analyzes poetry to improve their own craft'
     },
     {
-        id: 'scientist-1',
-        visual: '🧑🏽‍🔬',
-        name: 'Casey',
-        style: 'The Systematic Analyst',
-        skinTone: 'medium',
+        id: 'analyst',
+        title: 'The Systematic Analyst',
+        icon: '📊',
         description: 'Methodical learner who loves data, patterns, and structure'
     },
     {
-        id: 'performer-1',
-        visual: '👨🏿‍🎤',
-        name: 'Malik',
-        style: 'The Spoken Word Performer',
-        skinTone: 'dark',
+        id: 'performer',
+        title: 'The Spoken Word Performer',
+        icon: '🎤',
         description: 'Learns poetry through performance, rhythm, and spoken word'
     }
 ];
@@ -163,9 +160,10 @@ function openCourseDesigner() {
     }
 
     // Reset state
-    designerState.currentScreen = 'avatar';
+    designerState.currentScreen = 'appearance';
     designerState.selections = {
-        avatar: null,
+        appearance: null,
+        learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
         preference: null,
@@ -233,8 +231,11 @@ function renderCurrentScreen() {
     const content = document.getElementById('designer-content');
 
     switch (designerState.currentScreen) {
-        case 'avatar':
-            content.innerHTML = renderAvatarScreen();
+        case 'appearance':
+            content.innerHTML = renderAppearanceScreen();
+            break;
+        case 'style':
+            content.innerHTML = renderStyleScreen();
             break;
         case 'poem':
             content.innerHTML = renderPoemScreen();
@@ -265,21 +266,19 @@ function renderCurrentScreen() {
 }
 
 /**
- * Enhanced Avatar Selection Screen - Diverse Characters
+ * Appearance Selection Screen - Pick someone who looks like you
  */
-function renderAvatarScreen() {
+function renderAppearanceScreen() {
     return `
-        <h2 class="designer-title">Who Are You?</h2>
-        <p class="designer-subtitle">Choose the character that feels most like you</p>
+        <h2 class="designer-title">Choose Your Appearance</h2>
+        <p class="designer-subtitle">Pick the avatar that looks most like you</p>
 
         <div class="avatar-grid">
-            ${avatars.map(avatar => `
-                <div class="avatar-card ${designerState.selections.avatar === avatar.id ? 'selected' : ''}"
-                     onclick="selectAvatar('${avatar.id}')">
-                    <div class="avatar-visual">${avatar.visual}</div>
-                    <div class="avatar-name">${avatar.name}</div>
-                    <div class="avatar-style">${avatar.style}</div>
-                    <div class="avatar-description">${avatar.description}</div>
+            ${appearances.map(appearance => `
+                <div class="avatar-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
+                     onclick="selectAppearance('${appearance.id}')">
+                    <div class="avatar-visual">${appearance.visual}</div>
+                    <div class="avatar-description">${appearance.description}</div>
                 </div>
             `).join('')}
         </div>
@@ -287,7 +286,39 @@ function renderAvatarScreen() {
         <div class="designer-actions">
             <button class="designer-btn btn-primary-designer"
                     onclick="nextScreen()"
-                    ${!designerState.selections.avatar ? 'disabled' : ''}>
+                    ${!designerState.selections.appearance ? 'disabled' : ''}>
+                Continue → Choose your learning style
+            </button>
+        </div>
+    `;
+}
+
+/**
+ * Learning Style Screen - Separate from appearance
+ */
+function renderStyleScreen() {
+    return `
+        <h2 class="designer-title">What's Your Learning Style?</h2>
+        <p class="designer-subtitle">Choose the characteristics and aspirations that fit you best</p>
+
+        <div class="avatar-grid">
+            ${learningStyles.map(style => `
+                <div class="avatar-card ${designerState.selections.learningStyle === style.id ? 'selected' : ''}"
+                     onclick="selectLearningStyle('${style.id}')">
+                    <div class="choice-icon" style="font-size: 3rem; margin-bottom: var(--spacing-md);">${style.icon}</div>
+                    <div class="avatar-style">${style.title}</div>
+                    <div class="avatar-description">${style.description}</div>
+                </div>
+            `).join('')}
+        </div>
+
+        <div class="designer-actions">
+            <button class="designer-btn btn-secondary-designer" onclick="previousScreen()">
+                ← Back
+            </button>
+            <button class="designer-btn btn-primary-designer"
+                    onclick="nextScreen()"
+                    ${!designerState.selections.learningStyle ? 'disabled' : ''}>
                 Continue → Let's talk about poetry
             </button>
         </div>
@@ -601,10 +632,75 @@ function renderEraScreen() {
 }
 
 /**
- * Enhanced Results Screen
+ * Save response data and retrieve aggregate statistics
+ */
+function saveResponse() {
+    // Get existing responses from localStorage
+    let responses = JSON.parse(localStorage.getItem('courseDesignerResponses') || '[]');
+
+    // Add current response with timestamp
+    responses.push({
+        timestamp: new Date().toISOString(),
+        ...designerState.selections
+    });
+
+    // Save back to localStorage
+    localStorage.setItem('courseDesignerResponses', JSON.stringify(responses));
+
+    return calculateStatistics(responses);
+}
+
+/**
+ * Calculate aggregate statistics from all responses
+ */
+function calculateStatistics(responses) {
+    const total = responses.length;
+
+    const stats = {
+        total,
+        appearance: {},
+        learningStyle: {},
+        rhetoricFocus: {},
+        preference: {},
+        learningPace: {},
+        poetryEra: {}
+    };
+
+    // Count occurrences for each field
+    responses.forEach(response => {
+        if (response.appearance) {
+            stats.appearance[response.appearance] = (stats.appearance[response.appearance] || 0) + 1;
+        }
+        if (response.learningStyle) {
+            stats.learningStyle[response.learningStyle] = (stats.learningStyle[response.learningStyle] || 0) + 1;
+        }
+        if (response.rhetoricFocus) {
+            stats.rhetoricFocus[response.rhetoricFocus] = (stats.rhetoricFocus[response.rhetoricFocus] || 0) + 1;
+        }
+        if (response.preference) {
+            stats.preference[response.preference] = (stats.preference[response.preference] || 0) + 1;
+        }
+        if (response.learningPace) {
+            stats.learningPace[response.learningPace] = (stats.learningPace[response.learningPace] || 0) + 1;
+        }
+        if (response.poetryEra) {
+            stats.poetryEra[response.poetryEra] = (stats.poetryEra[response.poetryEra] || 0) + 1;
+        }
+    });
+
+    return stats;
+}
+
+/**
+ * Enhanced Results Screen with Polling Data
  */
 function renderResultsScreen() {
-    const selectedAvatar = avatars.find(a => a.id === designerState.selections.avatar);
+    // Save response and get statistics
+    const stats = saveResponse();
+
+    const selectedAppearance = appearances.find(a => a.id === designerState.selections.appearance);
+    const selectedStyle = learningStyles.find(s => s.id === designerState.selections.learningStyle);
+
     const preferenceText = {
         'games': 'Interactive Games',
         'quizzes': 'Knowledge Quizzes',
@@ -633,15 +729,20 @@ function renderResultsScreen() {
 
     return `
         <h2 class="designer-title">Your Personalized Learning Profile</h2>
-        <p class="designer-subtitle">Here's what we learned about ${selectedAvatar.name}!</p>
+        <p class="designer-subtitle">Here's what we learned about you!</p>
 
         <div class="results-container">
-            <div class="results-avatar-large">${selectedAvatar.visual}</div>
+            <div class="results-avatar-large">${selectedAppearance.visual}</div>
 
             <div class="results-summary">
                 <div class="results-item">
-                    <span class="results-label">You Are:</span>
-                    <span class="results-value">${selectedAvatar.name} - ${selectedAvatar.style}</span>
+                    <span class="results-label">Your Appearance:</span>
+                    <span class="results-value">${selectedAppearance.description}</span>
+                </div>
+
+                <div class="results-item">
+                    <span class="results-label">Your Learning Style:</span>
+                    <span class="results-value">${selectedStyle.icon} ${selectedStyle.title}</span>
                 </div>
 
                 ${designerState.selections.favoritePoem ? `
@@ -677,6 +778,8 @@ function renderResultsScreen() {
                 </div>
             </div>
 
+            ${renderPollStatistics(stats)}
+
             <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); border-radius: var(--radius-lg);">
                 <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md); font-size: 1.5rem;">
                     🎉 Your Personalized Journey Awaits!
@@ -690,9 +793,6 @@ function renderResultsScreen() {
                     <li>🎯 Pacing that fits your preferred speed</li>
                     <li>🤖 AI prompting strategies aligned with your focus</li>
                 </ul>
-                <p style="margin-top: var(--spacing-md); font-style: italic; color: var(--text-secondary);">
-                    Coming soon: Your fully personalized learning dashboard!
-                </p>
             </div>
         </div>
 
@@ -708,10 +808,103 @@ function renderResultsScreen() {
 }
 
 /**
+ * Render polling statistics
+ */
+function renderPollStatistics(stats) {
+    const calcPercent = (count) => Math.round((count / stats.total) * 100);
+
+    // Get most popular choices
+    const topStyle = Object.entries(stats.learningStyle).sort((a, b) => b[1] - a[1])[0];
+    const topRhetoric = Object.entries(stats.rhetoricFocus).sort((a, b) => b[1] - a[1])[0];
+    const topPref = Object.entries(stats.preference).sort((a, b) => b[1] - a[1])[0];
+    const topPace = Object.entries(stats.learningPace).sort((a, b) => b[1] - a[1])[0];
+
+    const styleNames = {
+        'scholar': 'Thoughtful Scholar',
+        'artist': 'Creative Artist',
+        'explorer': 'Digital Explorer',
+        'activist': 'Social Activist',
+        'teacher': 'Collaborative Teacher',
+        'poet': 'Aspiring Poet',
+        'analyst': 'Systematic Analyst',
+        'performer': 'Spoken Word Performer'
+    };
+
+    const rhetoricNames = {
+        'setting': 'Historical Setting',
+        'author': 'Author\'s Life',
+        'devices': 'Poetic Devices',
+        'all': 'Comprehensive'
+    };
+
+    const prefNames = {
+        'games': 'Games',
+        'quizzes': 'Quizzes',
+        'both': 'Both'
+    };
+
+    const paceNames = {
+        'fast': 'Fast & Focused',
+        'steady': 'Steady & Balanced',
+        'deep': 'Deep & Thorough'
+    };
+
+    return `
+        <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: #f8f9fa; border-radius: var(--radius-lg); border: 3px solid var(--neon-cyan);">
+            <h3 style="color: var(--neon-cyan); margin-bottom: var(--spacing-md); font-size: 1.5rem; text-align: center;">
+                📊 Class Poll Results
+            </h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--spacing-lg);">
+                Based on ${stats.total} student${stats.total !== 1 ? 's' : ''} who completed the designer
+            </p>
+
+            <div class="poll-stats-grid">
+                ${topStyle ? `
+                <div class="poll-stat-card">
+                    <div class="poll-stat-label">Most Popular Learning Style</div>
+                    <div class="poll-stat-value">${styleNames[topStyle[0]]}</div>
+                    <div class="poll-stat-percent">${calcPercent(topStyle[1])}%</div>
+                </div>
+                ` : ''}
+
+                ${topRhetoric ? `
+                <div class="poll-stat-card">
+                    <div class="poll-stat-label">Top Rhetoric Focus</div>
+                    <div class="poll-stat-value">${rhetoricNames[topRhetoric[0]]}</div>
+                    <div class="poll-stat-percent">${calcPercent(topRhetoric[1])}%</div>
+                </div>
+                ` : ''}
+
+                ${topPref ? `
+                <div class="poll-stat-card">
+                    <div class="poll-stat-label">Preferred Learning Method</div>
+                    <div class="poll-stat-value">${prefNames[topPref[0]]}</div>
+                    <div class="poll-stat-percent">${calcPercent(topPref[1])}%</div>
+                </div>
+                ` : ''}
+
+                ${topPace ? `
+                <div class="poll-stat-card">
+                    <div class="poll-stat-label">Most Common Pace</div>
+                    <div class="poll-stat-value">${paceNames[topPace[0]]}</div>
+                    <div class="poll-stat-percent">${calcPercent(topPace[1])}%</div>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+/**
  * Selection Functions
  */
-function selectAvatar(avatarId) {
-    designerState.selections.avatar = avatarId;
+function selectAppearance(appearanceId) {
+    designerState.selections.appearance = appearanceId;
+    renderCurrentScreen();
+}
+
+function selectLearningStyle(styleId) {
+    designerState.selections.learningStyle = styleId;
     renderCurrentScreen();
 }
 
@@ -770,9 +963,10 @@ function previousScreen() {
 }
 
 function restartDesigner() {
-    designerState.currentScreen = 'avatar';
+    designerState.currentScreen = 'appearance';
     designerState.selections = {
-        avatar: null,
+        appearance: null,
+        learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
         preference: null,
