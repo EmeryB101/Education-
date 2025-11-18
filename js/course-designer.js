@@ -21,31 +21,107 @@ const designerState = {
 };
 
 // Visual Appearances - Pick one that looks like you
+// No labels - just diverse visual representations across all races, genders, ages, and styles
 const appearances = [
-    { id: 'appearance-1', visual: '👩🏽‍🎓' },
-    { id: 'appearance-2', visual: '👨🏾‍🎨' },
-    { id: 'appearance-3', visual: '👩🏻‍💻' },
-    { id: 'appearance-4', visual: '🧑🏿‍🏫' },
-    { id: 'appearance-5', visual: '👨🏼‍🏫' },
-    { id: 'appearance-6', visual: '👩🏻‍🦰' },
-    { id: 'appearance-7', visual: '🧑🏽‍🔬' },
-    { id: 'appearance-8', visual: '👨🏿‍🎤' },
-    { id: 'appearance-9', visual: '👩🏾‍💼' },
-    { id: 'appearance-10', visual: '👨🏽‍🎓' },
-    { id: 'appearance-11', visual: '🧑🏻‍🎨' },
-    { id: 'appearance-12', visual: '👩🏿‍🔬' },
-    { id: 'appearance-13', visual: '👨🏻‍💻' },
-    { id: 'appearance-14', visual: '🧑🏾‍💼' },
-    { id: 'appearance-15', visual: '👩🏼‍🏫' },
-    { id: 'appearance-16', visual: '👨🏿‍🏫' },
-    { id: 'appearance-17', visual: '🧑🏻‍🦰' },
-    { id: 'appearance-18', visual: '👩🏽‍🎤' },
-    { id: 'appearance-19', visual: '👨🏾‍🔬' },
-    { id: 'appearance-20', visual: '🧑🏼‍💻' },
-    { id: 'appearance-21', visual: '👩🏿‍🎨' },
-    { id: 'appearance-22', visual: '👨🏻‍🎤' },
-    { id: 'appearance-23', visual: '🧑🏿‍🎓' },
-    { id: 'appearance-24', visual: '👩🏼‍💼' }
+    // Students & Academics
+    { id: 'app-1', visual: '👩🏽‍🎓' },
+    { id: 'app-2', visual: '👨🏾‍🎓' },
+    { id: 'app-3', visual: '🧑🏻‍🎓' },
+    { id: 'app-4', visual: '👩🏿‍🎓' },
+    { id: 'app-5', visual: '👨🏼‍🎓' },
+    { id: 'app-6', visual: '🧑🏽‍🎓' },
+
+    // Teachers & Educators
+    { id: 'app-7', visual: '👩🏻‍🏫' },
+    { id: 'app-8', visual: '👨🏿‍🏫' },
+    { id: 'app-9', visual: '🧑🏾‍🏫' },
+    { id: 'app-10', visual: '👩🏼‍🏫' },
+    { id: 'app-11', visual: '👨🏽‍🏫' },
+
+    // Artists & Creatives
+    { id: 'app-12', visual: '👩🏾‍🎨' },
+    { id: 'app-13', visual: '👨🏻‍🎨' },
+    { id: 'app-14', visual: '🧑🏿‍🎨' },
+    { id: 'app-15', visual: '👩🏼‍🎨' },
+    { id: 'app-16', visual: '👨🏽‍🎨' },
+
+    // Tech & Digital
+    { id: 'app-17', visual: '👩🏻‍💻' },
+    { id: 'app-18', visual: '👨🏾‍💻' },
+    { id: 'app-19', visual: '🧑🏼‍💻' },
+    { id: 'app-20', visual: '👩🏿‍💻' },
+    { id: 'app-21', visual: '👨🏽‍💻' },
+
+    // Scientists & Researchers
+    { id: 'app-22', visual: '👩🏽‍🔬' },
+    { id: 'app-23', visual: '👨🏿‍🔬' },
+    { id: 'app-24', visual: '🧑🏻‍🔬' },
+    { id: 'app-25', visual: '👩🏾‍🔬' },
+    { id: 'app-26', visual: '👨🏼‍🔬' },
+
+    // Musicians & Performers
+    { id: 'app-27', visual: '👩🏿‍🎤' },
+    { id: 'app-28', visual: '👨🏻‍🎤' },
+    { id: 'app-29', visual: '🧑🏽‍🎤' },
+    { id: 'app-30', visual: '👩🏼‍🎤' },
+    { id: 'app-31', visual: '👨🏾‍🎤' },
+
+    // Office & Professional
+    { id: 'app-32', visual: '👩🏻‍💼' },
+    { id: 'app-33', visual: '👨🏽‍💼' },
+    { id: 'app-34', visual: '🧑🏿‍💼' },
+    { id: 'app-35', visual: '👩🏾‍💼' },
+    { id: 'app-36', visual: '👨🏼‍💼' },
+
+    // Healthcare & Medical
+    { id: 'app-37', visual: '👩🏾‍⚕️' },
+    { id: 'app-38', visual: '👨🏻‍⚕️' },
+    { id: 'app-39', visual: '🧑🏽‍⚕️' },
+    { id: 'app-40', visual: '👩🏿‍⚕️' },
+    { id: 'app-41', visual: '👨🏼‍⚕️' },
+
+    // Mechanics & Technicians
+    { id: 'app-42', visual: '👩🏽‍🔧' },
+    { id: 'app-43', visual: '👨🏿‍🔧' },
+    { id: 'app-44', visual: '🧑🏻‍🔧' },
+    { id: 'app-45', visual: '👨🏾‍🔧' },
+
+    // Chefs & Culinary
+    { id: 'app-46', visual: '👩🏻‍🍳' },
+    { id: 'app-47', visual: '👨🏽‍🍳' },
+    { id: 'app-48', visual: '🧑🏾‍🍳' },
+    { id: 'app-49', visual: '👩🏿‍🍳' },
+
+    // Farmers & Agriculture
+    { id: 'app-50', visual: '👩🏼‍🌾' },
+    { id: 'app-51', visual: '👨🏾‍🌾' },
+    { id: 'app-52', visual: '🧑🏿‍🌾' },
+    { id: 'app-53', visual: '👨🏻‍🌾' },
+
+    // Factory & Industrial Workers
+    { id: 'app-54', visual: '👩🏿‍🏭' },
+    { id: 'app-55', visual: '👨🏼‍🏭' },
+    { id: 'app-56', visual: '🧑🏽‍🏭' },
+
+    // Firefighters & Emergency
+    { id: 'app-57', visual: '👩🏽‍🚒' },
+    { id: 'app-58', visual: '👨🏻‍🚒' },
+    { id: 'app-59', visual: '🧑🏾‍🚒' },
+
+    // Astronauts & Explorers
+    { id: 'app-60', visual: '👩🏾‍🚀' },
+    { id: 'app-61', visual: '👨🏿‍🚀' },
+    { id: 'app-62', visual: '🧑🏻‍🚀' },
+
+    // Additional varied representations
+    { id: 'app-63', visual: '👨🏽‍⚖️' }, // Judge/Legal
+    { id: 'app-64', visual: '👩🏼‍✈️' }, // Pilot
+    { id: 'app-65', visual: '🧑🏿‍✈️' }, // Pilot
+    { id: 'app-66', visual: '👨🏾‍⚖️' }, // Judge/Legal
+    { id: 'app-67', visual: '👩🏻‍🎓' }, // Student
+    { id: 'app-68', visual: '🧑🏼‍🎓' }, // Student
+    { id: 'app-69', visual: '👨🏿‍💼' }, // Professional
+    { id: 'app-70', visual: '👩🏽‍🏫' }  // Teacher
 ];
 
 // Learning Styles - Separate from appearance
