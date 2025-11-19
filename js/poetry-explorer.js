@@ -2,12 +2,28 @@
  * Poetry Explorer - Academic Analysis of "Still I Rise"
  * Purely analytical exercise focused on rhetorical theory, feminist criticism, and AI literacy
  * NO personal reflections - only scholarly analysis
+ *
+ * IMPORTANT COPYRIGHT NOTICE FOR INSTRUCTORS:
+ * "Still I Rise" by Maya Angelou is protected by copyright.
+ * This tool does NOT include the full poem text to respect copyright.
+ *
+ * TO USE THIS TOOL:
+ * Replace the poemText variable below with the authorized full text of the poem.
+ * Authorized sources include:
+ *   - Poetry Foundation (with permission)
+ *   - Your course textbook/anthology (if licensed)
+ *   - Direct permission from the publisher
+ *   - Educational fair use under your institution's license
+ *
+ * This interactive erasure poem tool is for educational purposes only.
  */
 
-// Game State - All multiple choice, no text inputs
+// Game State - Includes erasure poem selections
 const explorerState = {
     currentScreen: 'intro',
     responses: {
+        erasureWords: [],  // Array of selected word indices
+        erasureExplanation: '',  // Why they chose those words
         rhetoricalDevice: null,
         rhetoricalEffect: null,
         feministStrategy: null,
@@ -15,8 +31,23 @@ const explorerState = {
         aiLimitation: null,
         scholarlyApplication: null
     },
-    screens: ['intro', 'poem', 'device', 'effect', 'feminist', 'intersectional', 'ai-limits', 'application', 'results']
+    screens: ['intro', 'erasure', 'device', 'effect', 'feminist', 'intersectional', 'ai-limits', 'application', 'results']
 };
+
+// Poem text - Instructor must replace with authorized text
+const poemText = `INSTRUCTOR NOTE: Replace this text with the authorized full text of "Still I Rise" by Maya Angelou.
+
+The poem is protected by copyright and cannot be distributed without permission.
+Obtain the text from:
+- Your course textbook/anthology
+- Poetry Foundation (poetryfoundation.org) with proper licensing
+- Publisher permission
+- Your institution's educational license
+
+This placeholder allows you to test the interactive erasure poem functionality.
+Select individual words by clicking them to create an erasure poem highlighting
+rhetorically powerful language.`;
+
 
 /**
  * Initialize the Poetry Explorer
@@ -110,8 +141,9 @@ function renderExplorerScreen() {
         case 'intro':
             content.innerHTML = renderIntroScreen();
             break;
-        case 'poem':
-            content.innerHTML = renderPoemScreen();
+        case 'erasure':
+            content.innerHTML = renderErasureScreen();
+            setTimeout(attachWordClickHandlers, 100);
             break;
         case 'device':
             content.innerHTML = renderDeviceScreen();
@@ -154,6 +186,7 @@ function renderIntroScreen() {
             <div class="intro-box">
                 <h3>Learning Objectives:</h3>
                 <ul>
+                    <li>🖍️ Create an erasure poem by highlighting words with rhetorical power</li>
                     <li>📖 Identify specific rhetorical devices in resistance poetry</li>
                     <li>🎯 Analyze the persuasive effects of Angelou's linguistic choices</li>
                     <li>💭 Apply feminist rhetorical theory to textual interpretation</li>
@@ -161,6 +194,17 @@ function renderIntroScreen() {
                     <li>🤖 Critique AI's limitations in cultural and rhetorical analysis</li>
                     <li>📊 Compare your scholarly analysis with class polling data</li>
                 </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(236, 72, 153, 0.15)); padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-lg); border-left: 4px solid var(--accent-color);">
+                <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-sm); font-size: var(--font-size-lg);">
+                    ✨ New: Interactive Erasure Poem Exercise
+                </h3>
+                <p style="margin: 0; font-size: var(--font-size-base); line-height: 1.6;">
+                    You'll select words from "Still I Rise" that carry rhetorical emphasis or persuasive power,
+                    then explain your analytical choices. This hands-on exercise helps you identify the language
+                    that makes Angelou's poetry so powerful.
+                </p>
             </div>
 
             <p class="intro-note">
@@ -177,43 +221,69 @@ function renderIntroScreen() {
 }
 
 /**
- * Poem Screen
+ * Erasure Poem Screen - Interactive word highlighting
  */
-function renderPoemScreen() {
+function renderErasureScreen() {
+    // Split poem into words for clickable interaction
+    const words = poemText.split(/(\s+|[\n\r])/g);
+
+    // Create HTML with clickable words
+    const wordsHTML = words.map((word, index) => {
+        // Preserve whitespace and line breaks
+        if (word.match(/^\s*$/)) {
+            return word.replace(/\n/g, '<br>');
+        }
+
+        // Make words clickable
+        const isSelected = explorerState.responses.erasureWords.includes(index);
+        const selectedClass = isSelected ? 'word-selected' : '';
+        return `<span class="clickable-word ${selectedClass}" data-index="${index}">${word}</span>`;
+    }).join('');
+
     return `
-        <h2 class="explorer-title">"Still I Rise" by Maya Angelou</h2>
-        <p class="explorer-subtitle">Read this excerpt for analysis</p>
+        <h2 class="explorer-title">🖍️ Create an Erasure Poem</h2>
+        <p class="explorer-subtitle">Highlight words with rhetorical power in "Still I Rise"</p>
 
-        <div class="poem-display">
-            <div class="poem-stanza">
-                <p>You may write me down in history</p>
-                <p>With your bitter, twisted lies,</p>
-                <p>You may trod me in the very dirt</p>
-                <p>But still, like dust, I'll rise.</p>
+        <div class="erasure-instructions" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-lg); border-radius: var(--radius-md); margin-bottom: var(--spacing-xl);">
+            <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-sm);">📖 Instructions</h3>
+            <p style="margin-bottom: var(--spacing-md); line-height: 1.7;">
+                <strong>Click on words</strong> that you believe carry <strong>rhetorical emphasis or persuasive power</strong>.
+                Your selected words will create an <em>erasure poem</em>—highlighting what YOU consider most powerful.
+            </p>
+            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin: 0;">
+                💡 Think about: repetition, imagery, defiance, resistance, metaphor, emotional impact
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); margin-bottom: var(--spacing-xl);">
+            <div>
+                <h3 style="color: var(--neon-cyan); margin-bottom: var(--spacing-md); display: flex; align-items: center; justify-content: space-between;">
+                    <span>📄 Full Poem (Click Words)</span>
+                    <button onclick="clearErasureSelection()" style="font-size: var(--font-size-sm); padding: var(--spacing-xs) var(--spacing-sm); background: var(--text-secondary); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">Clear All</button>
+                </h3>
+                <div class="poem-interactive" style="background: white; padding: var(--spacing-lg); border-radius: var(--radius-md); line-height: 2; font-size: var(--font-size-lg); min-height: 400px; max-height: 500px; overflow-y: auto; border: 2px solid var(--neon-cyan);">
+                    ${wordsHTML}
+                </div>
             </div>
 
-            <div class="poem-stanza">
-                <p>Does my sassiness upset you?</p>
-                <p>Why are you beset with gloom?</p>
-                <p>'Cause I walk like I've got oil wells</p>
-                <p>Pumping in my living room.</p>
-            </div>
+            <div>
+                <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md);">✨ Your Erasure Poem</h3>
+                <div id="erasure-preview" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-lg); border-radius: var(--radius-md); min-height: 200px; font-size: var(--font-size-xl); line-height: 2.2; font-weight: 600; color: var(--neon-purple); border: 3px solid var(--accent-color);">
+                    <em style="color: var(--text-secondary); font-weight: normal; font-size: var(--font-size-base);">Selected words will appear here...</em>
+                </div>
 
-            <div class="poem-stanza">
-                <p>Out of the huts of history's shame</p>
-                <p>I rise</p>
-                <p>Up from a past that's rooted in pain</p>
-                <p>I rise</p>
-                <p>I'm a black ocean, leaping and wide,</p>
-                <p>Welling and swelling I bear in the tide.</p>
-            </div>
-
-            <div class="poem-stanza">
-                <p>Bringing the gifts that my ancestors gave,</p>
-                <p>I am the dream and the hope of the slave.</p>
-                <p>I rise</p>
-                <p>I rise</p>
-                <p>I rise.</p>
+                <div style="margin-top: var(--spacing-xl);">
+                    <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md);">💭 Why These Words?</h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-sm);">
+                        Explain your rhetorical analysis: Why did you select these particular words? What persuasive power or rhetorical emphasis do they carry?
+                    </p>
+                    <textarea
+                        id="erasure-explanation"
+                        style="width: 100%; min-height: 150px; padding: var(--spacing-md); border: 2px solid var(--neon-purple); border-radius: var(--radius-md); font-family: inherit; font-size: var(--font-size-base); line-height: 1.6;"
+                        placeholder="Example: I selected 'rise' because of its repetition throughout the poem, creating anaphora that builds momentum and defiance. I chose 'sassiness' because it reclaims a dismissive term with pride..."
+                        onkeyup="updateErasureExplanation(this.value)"
+                    >${explorerState.responses.erasureExplanation}</textarea>
+                </div>
             </div>
         </div>
 
@@ -221,11 +291,114 @@ function renderPoemScreen() {
             <button class="explorer-btn btn-secondary-explorer" onclick="previousExplorerScreen()">
                 ← Back
             </button>
-            <button class="explorer-btn btn-primary-explorer" onclick="nextExplorerScreen()">
-                Continue → Identify Rhetorical Device
+            <button class="explorer-btn btn-primary-explorer"
+                    onclick="nextExplorerScreen()"
+                    ${explorerState.responses.erasureWords.length === 0 || !explorerState.responses.erasureExplanation ? 'disabled' : ''}>
+                Continue → Rhetorical Analysis
             </button>
         </div>
+
+        <style>
+            .clickable-word {
+                cursor: pointer;
+                padding: 2px 4px;
+                border-radius: 3px;
+                transition: all 0.2s ease;
+                display: inline-block;
+            }
+            .clickable-word:hover {
+                background: rgba(168, 85, 247, 0.2);
+                transform: translateY(-1px);
+            }
+            .word-selected {
+                background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+                color: white;
+                font-weight: 700;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .word-selected:hover {
+                background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            }
+        </style>
     `;
+}
+
+/**
+ * Attach click handlers to words in erasure poem
+ */
+function attachWordClickHandlers() {
+    const words = document.querySelectorAll('.clickable-word');
+    words.forEach(word => {
+        word.addEventListener('click', function() {
+            const index = parseInt(this.dataset.index);
+            toggleWordSelection(index);
+        });
+    });
+}
+
+/**
+ * Toggle word selection for erasure poem
+ */
+function toggleWordSelection(index) {
+    const selectedWords = explorerState.responses.erasureWords;
+    const indexPos = selectedWords.indexOf(index);
+
+    if (indexPos > -1) {
+        // Deselect word
+        selectedWords.splice(indexPos, 1);
+    } else {
+        // Select word
+        selectedWords.push(index);
+    }
+
+    // Re-render to update UI
+    renderExplorerScreen();
+    updateErasurePreview();
+}
+
+/**
+ * Clear all word selections
+ */
+function clearErasureSelection() {
+    explorerState.responses.erasureWords = [];
+    renderExplorerScreen();
+    updateErasurePreview();
+}
+
+/**
+ * Update erasure poem preview
+ */
+function updateErasurePreview() {
+    const preview = document.getElementById('erasure-preview');
+    if (!preview) return;
+
+    const words = poemText.split(/(\s+|[\n\r])/g);
+    const selectedWords = explorerState.responses.erasureWords
+        .sort((a, b) => a - b)  // Sort by original position
+        .map(index => words[index])
+        .filter(word => word && !word.match(/^\s*$/))  // Remove whitespace-only entries
+        .join(' ');
+
+    if (selectedWords.length > 0) {
+        preview.innerHTML = selectedWords;
+    } else {
+        preview.innerHTML = '<em style="color: var(--text-secondary); font-weight: normal; font-size: var(--font-size-base);">Selected words will appear here...</em>';
+    }
+}
+
+/**
+ * Update erasure explanation
+ */
+function updateErasureExplanation(value) {
+    explorerState.responses.erasureExplanation = value;
+
+    // Enable/disable continue button
+    const continueBtn = document.querySelector('.explorer-actions .btn-primary-explorer');
+    if (continueBtn) {
+        const hasWords = explorerState.responses.erasureWords.length > 0;
+        const hasExplanation = value.trim().length > 0;
+        continueBtn.disabled = !(hasWords && hasExplanation);
+    }
 }
 
 /**
