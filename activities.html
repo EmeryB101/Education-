@@ -108,9 +108,21 @@
                             <li><strong>Compare</strong> your poem with all other student creations</li>
                         </ul>
                     </div>
-                    <button onclick="openErasureGame()" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;">
+                    <button id="erasure-game-button" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;">
                         🎨 Start Erasure Poem Creator
                     </button>
+                    <script>
+                        // Direct button handler as backup
+                        document.getElementById('erasure-game-button')?.addEventListener('click', function() {
+                            console.log('Button clicked!');
+                            if (typeof openErasureGame === 'function') {
+                                openErasureGame();
+                            } else {
+                                alert('ERROR: openErasureGame function not found. Please refresh the page.');
+                                console.error('openErasureGame is not defined');
+                            }
+                        });
+                    </script>
                 </div>
 
                 <div class="game-info tech-card">
