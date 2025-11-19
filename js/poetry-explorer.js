@@ -1,21 +1,19 @@
 /**
- * Poetry Explorer - Academic Analysis of "Still I Rise"
+ * Poetry Explorer - Academic Analysis of Black Feminist Poetry
  * Purely analytical exercise focused on rhetorical theory, feminist criticism, and AI literacy
  * NO personal reflections - only scholarly analysis
  *
- * IMPORTANT COPYRIGHT NOTICE FOR INSTRUCTORS:
- * "Still I Rise" by Maya Angelou is protected by copyright.
- * This tool does NOT include the full poem text to respect copyright.
+ * POEM: "Bury Me in a Free Land" by Frances Ellen Watkins Harper (1864)
+ * This poem is in the PUBLIC DOMAIN (published 1864, author died 1911).
  *
- * TO USE THIS TOOL:
- * Replace the poemText variable below with the authorized full text of the poem.
- * Authorized sources include:
- *   - Poetry Foundation (with permission)
- *   - Your course textbook/anthology (if licensed)
- *   - Direct permission from the publisher
- *   - Educational fair use under your institution's license
+ * ABOUT FRANCES HARPER:
+ * Frances Ellen Watkins Harper (1825-1911) was a Black abolitionist, suffragist,
+ * poet, and activist. She was one of the first African American women to be published
+ * in the United States. Her poetry combines powerful rhetoric with social justice themes,
+ * making it ideal for studying intersectional feminist rhetoric and resistance poetry.
  *
- * This interactive erasure poem tool is for educational purposes only.
+ * "Bury Me in a Free Land" (1864) is one of her most famous abolitionist poems,
+ * using repetition, apostrophe, and emotional appeals to argue against slavery.
  */
 
 // Game State - Includes erasure poem selections
@@ -34,19 +32,46 @@ const explorerState = {
     screens: ['intro', 'erasure', 'device', 'effect', 'feminist', 'intersectional', 'ai-limits', 'application', 'results']
 };
 
-// Poem text - Instructor must replace with authorized text
-const poemText = `INSTRUCTOR NOTE: Replace this text with the authorized full text of "Still I Rise" by Maya Angelou.
+// Poem text - "Bury Me in a Free Land" by Frances Harper (Public Domain, 1864)
+const poemText = `Make me a grave where'er you will,
+In a lowly plain, or a lofty hill;
+Make it among earth's humblest graves,
+But not in a land where men are slaves.
 
-The poem is protected by copyright and cannot be distributed without permission.
-Obtain the text from:
-- Your course textbook/anthology
-- Poetry Foundation (poetryfoundation.org) with proper licensing
-- Publisher permission
-- Your institution's educational license
+I could not rest if around my grave
+I heard the steps of a trembling slave;
+His shadow above my silent tomb
+Would make it a place of fearful gloom.
 
-This placeholder allows you to test the interactive erasure poem functionality.
-Select individual words by clicking them to create an erasure poem highlighting
-rhetorically powerful language.`;
+I could not rest if I heard the tread
+Of a coffle gang to the shambles led,
+And the mother's shriek of wild despair
+Rise like a curse on the trembling air.
+
+I could not sleep if I saw the lash
+Drinking her blood at each fearful gash,
+And I saw her babes torn from her breast,
+Like trembling doves from their parent nest.
+
+I'd shudder and start if I heard the bay
+Of bloodhounds seizing their human prey,
+And I heard the captive plead in vain
+As they bound afresh his galling chain.
+
+If I saw young girls from their mother's arms
+Bartered and sold for their youthful charms,
+My eye would flash with a mournful flame,
+My death-paled cheek grow red with shame.
+
+I would sleep, dear friends, where bloated might
+Can rob no man of his dearest right;
+My rest shall be calm in any grave
+Where none can call his brother a slave.
+
+I ask no monument, proud and high,
+To arrest the gaze of the passers-by;
+All that my yearning spirit craves,
+Is bury me not in a land of slaves.`;
 
 
 /**
@@ -176,24 +201,36 @@ function renderExplorerScreen() {
  */
 function renderIntroScreen() {
     return `
-        <h2 class="explorer-title">📚 Analyzing "Still I Rise"</h2>
-        <p class="explorer-subtitle">A Rigorous Study of Maya Angelou's Feminist Rhetoric</p>
+        <h2 class="explorer-title">📚 Analyzing "Bury Me in a Free Land"</h2>
+        <p class="explorer-subtitle">A Rigorous Study of Frances Harper's Abolitionist Rhetoric</p>
 
         <div class="intro-content">
             <p class="intro-text">
-                This analytical exercise examines Maya Angelou's <strong>"Still I Rise"</strong> through
+                This analytical exercise examines Frances Ellen Watkins Harper's <strong>"Bury Me in a Free Land" (1864)</strong> through
                 the frameworks of rhetorical theory, feminist criticism, and AI literacy studies.
             </p>
+
+            <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-md); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); border-left: 4px solid var(--accent-color);">
+                <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-sm); font-size: var(--font-size-lg);">
+                    📜 About Frances Ellen Watkins Harper (1825-1911)
+                </h3>
+                <p style="margin: 0; font-size: var(--font-size-base); line-height: 1.6;">
+                    Frances Harper was a pioneering <strong>Black abolitionist, suffragist, poet, and activist</strong>.
+                    She was one of the first African American women published in the U.S. Her poetry combines powerful
+                    rhetoric with social justice themes—parallel to Maya Angelou's civil rights activism a century later.
+                    "Bury Me in a Free Land" is her most famous anti-slavery poem.
+                </p>
+            </div>
 
             <div class="intro-box">
                 <h3>Learning Objectives:</h3>
                 <ul>
                     <li>🖍️ Create an erasure poem by highlighting words with rhetorical power</li>
-                    <li>📖 Identify specific rhetorical devices in resistance poetry</li>
-                    <li>🎯 Analyze the persuasive effects of Angelou's linguistic choices</li>
-                    <li>💭 Apply feminist rhetorical theory to textual interpretation</li>
-                    <li>🔍 Examine intersectionality in Black feminist writing</li>
-                    <li>🤖 Critique AI's limitations in cultural and rhetorical analysis</li>
+                    <li>📖 Identify specific rhetorical devices in resistance poetry (anaphora, apostrophe, pathos)</li>
+                    <li>🎯 Analyze the persuasive effects of Harper's linguistic choices</li>
+                    <li>💭 Apply feminist rhetorical theory to 19th-century Black women's writing</li>
+                    <li>🔍 Examine intersectionality in abolitionist and feminist activism</li>
+                    <li>🤖 Critique AI's limitations in analyzing historical and cultural context</li>
                     <li>📊 Compare your scholarly analysis with class polling data</li>
                 </ul>
             </div>
