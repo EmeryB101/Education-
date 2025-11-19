@@ -265,6 +265,9 @@ function openCourseDesigner() {
  * Close the designer modal
  */
 function closeCourseDesigner() {
+    // Save student agency feedback if on results screen
+    updateResponseWithFeedback();
+
     const overlay = document.getElementById('designer-overlay');
     if (overlay) {
         overlay.classList.add('hidden');
@@ -721,16 +724,37 @@ function saveResponse() {
     // Get existing responses from localStorage
     let responses = JSON.parse(localStorage.getItem('courseDesignerResponses') || '[]');
 
-    // Add current response with timestamp
+    // Add current response with timestamp (feedback will be added later)
     responses.push({
         timestamp: new Date().toISOString(),
-        ...designerState.selections
+        ...designerState.selections,
+        agencyFeedback: ''
     });
 
     // Save back to localStorage
     localStorage.setItem('courseDesignerResponses', JSON.stringify(responses));
 
     return calculateStatistics(responses);
+}
+
+/**
+ * Update the most recent response with student agency feedback
+ */
+function updateResponseWithFeedback() {
+    const feedbackInput = document.getElementById('student-agency-feedback');
+    if (!feedbackInput) return;
+
+    const feedback = feedbackInput.value.trim();
+    if (!feedback) return; // Don't save empty feedback
+
+    // Get responses from localStorage
+    let responses = JSON.parse(localStorage.getItem('courseDesignerResponses') || '[]');
+
+    if (responses.length > 0) {
+        // Update the most recent response with feedback
+        responses[responses.length - 1].agencyFeedback = feedback;
+        localStorage.setItem('courseDesignerResponses', JSON.stringify(responses));
+    }
 }
 
 /**
@@ -859,6 +883,25 @@ function renderResultsScreen() {
                     <span class="results-label">Poetry Era:</span>
                     <span class="results-value">${eraText}</span>
                 </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(251, 191, 36, 0.1)); border-radius: var(--radius-lg); border: 3px solid var(--accent-color);">
+                <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.5rem; text-align: center;">
+                    💡 Your Voice Matters: Student Agency Feedback
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-primary); margin-bottom: var(--spacing-lg); text-align: center;">
+                    <strong>What content, choices, or options could we have included to give you even MORE control over your learning?</strong>
+                </p>
+                <textarea
+                    id="student-agency-feedback"
+                    class="designer-textarea"
+                    placeholder="Share your ideas here...&#10;&#10;Examples:&#10;• 'I wish I could choose how many activities per module'&#10;• 'Let me design my own assessment format'&#10;• 'Give me options for group vs. solo work'&#10;• 'Allow me to set my own deadlines'&#10;&#10;Your suggestions help us build a more student-centered course!"
+                    rows="6"
+                    style="width: 100%; margin-bottom: var(--spacing-md);"
+                ></textarea>
+                <p style="font-size: var(--font-size-sm); color: var(--text-secondary); text-align: center; font-style: italic;">
+                    ✨ This feedback is optional but incredibly valuable for course improvement
+                </p>
             </div>
 
             ${renderPollStatistics(stats)}
@@ -1046,6 +1089,9 @@ function previousScreen() {
 }
 
 function restartDesigner() {
+    // Save student agency feedback before restarting
+    updateResponseWithFeedback();
+
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
