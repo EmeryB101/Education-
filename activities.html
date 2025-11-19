@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/poetry-explorer.css">
+    <link rel="stylesheet" href="css/erasure-game.css">
 </head>
 <body>
     <nav class="navbar">
@@ -66,26 +67,12 @@
             </div>
         </section>
 
-        <!-- Activity 2: Personalized Quiz -->
-        <section class="content-section" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);">
+        <!-- Activity 2: Erasure Poem Creator -->
+        <section class="content-section" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
             <div class="container">
-                <h2 class="activity-title-solid">🎯 Activity 2: Discover Your AI Prompting Style</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-lg);">Take this personalized quiz to get custom prompt recommendations based on your poetry interests and AI experience. Discover the best strategies for analyzing Maya Angelou's work!</p>
-
-                <div id="quiz-container">
-                    <div id="quiz-content">
-                        <!-- Quiz loads here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Poetry Explorer: Academic Analysis -->
-        <section class="content-section" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
-            <div class="container">
-                <h2 class="activity-title-solid">📚 Play Your Way to Your Grade: Poetry Analysis 🎯</h2>
+                <h2 class="activity-title-solid">🖍️ Activity 2: Create Your Erasure Poem</h2>
                 <p style="text-align: center; max-width: 900px; margin: 0 auto var(--spacing-lg); font-size: var(--font-size-xl); line-height: 1.8; font-weight: 600;">
-                    <span style="color: var(--neon-purple);">✨ YOU analyze.</span> Apply rhetorical theory, feminist criticism, and AI literacy to Frances Harper's "Bury Me in a Free Land"—then see how the class analyzed it.
+                    <span style="color: var(--accent-color);">✨ Play Your Way to Your Grade:</span> Transform Frances Harper's abolitionist poetry into YOUR own creative work.
                 </p>
 
                 <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-lg) auto; max-width: 850px; text-align: center; border-left: 4px solid var(--accent-color);">
@@ -99,34 +86,96 @@
                     </p>
                 </div>
 
-                <div class="tech-card" style="max-width: 750px; margin: var(--spacing-xl) auto; text-align: center; padding: var(--spacing-2xl); background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));">
-                    <div style="font-size: 5rem; margin-bottom: var(--spacing-lg);">🖍️ 📖 🔍 ⚖️ 🎓</div>
-                    <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md); font-size: 2rem; font-weight: 900;">
-                        Erasure Poem + Scholarly Analysis
+                <div class="tech-card" style="max-width: 800px; margin: var(--spacing-xl) auto; text-align: center; padding: var(--spacing-2xl); background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(236, 72, 153, 0.15));">
+                    <div style="font-size: 5rem; margin-bottom: var(--spacing-lg);">🖍️ ✨ 📝 🎨</div>
+                    <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 2rem; font-weight: 900;">
+                        Interactive Erasure Poetry Game
                     </h3>
                     <p style="line-height: 1.9; margin-bottom: var(--spacing-lg); color: var(--text-primary); font-size: var(--font-size-lg);">
-                        <strong>Create an erasure poem</strong> by clicking powerful words in "Bury Me in a Free Land."
-                        <strong>Explain your rhetorical choices.</strong> Then identify devices, apply feminist theory,
-                        and critique AI's limitations. This is rigorous, hands-on academic work—YOUR interpretations matter.
+                        <strong>Erasure poetry</strong> lets you select specific words from an existing text to create something entirely new.
+                        Click words in Harper's poem that carry <strong>rhetorical power</strong>, explain your choices, and see how
+                        your interpretation compares with other students. This is creative, analytical, collaborative work!
                     </p>
-                    <div style="background: white; padding: var(--spacing-lg); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); border: 3px solid var(--neon-cyan);">
-                        <p style="font-size: var(--font-size-base); color: var(--text-secondary); margin-bottom: var(--spacing-sm);">
-                            <strong>🎯 Student Agency =</strong> YOU select the words • YOU explain the rhetoric • YOU apply the theory
-                        </p>
-                        <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
-                            Build your erasure poem • Compare with classmates • See patterns • Build scholarly community
-                        </p>
+                    <div style="background: white; padding: var(--spacing-lg); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); border: 3px solid var(--accent-color);">
+                        <h4 style="color: var(--bg-dark); margin-bottom: var(--spacing-sm); font-size: var(--font-size-lg);">
+                            🎯 What You'll Do
+                        </h4>
+                        <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                            <li><strong>Read</strong> Harper's full poem about slavery and freedom</li>
+                            <li><strong>Click</strong> words that stand out emotionally or rhetorically</li>
+                            <li><strong>Create</strong> your own erasure poem from your selections</li>
+                            <li><strong>Explain</strong> why you chose those specific words</li>
+                            <li><strong>Compare</strong> your poem with all other student creations</li>
+                        </ul>
                     </div>
-                    <button id="launch-poetry-explorer" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;">
-                        🚀 START: Analyze "Bury Me in a Free Land"
+                    <button onclick="openErasureGame()" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;">
+                        🎨 Start Erasure Poem Creator
                     </button>
                 </div>
 
                 <div class="game-info tech-card">
-                    <h3>📚 What You'll Do (9-Step Analysis)</h3>
+                    <h3>💡 Why Erasure Poetry?</h3>
                     <ul style="line-height: 2;">
-                        <li>🖍️ <strong>CREATE ERASURE POEM:</strong> Click words in "Bury Me in a Free Land" that carry rhetorical power—build your own poem from Harper's words</li>
-                        <li>💭 <strong>Explain Your Choices:</strong> Write why you selected those specific words (required fill-in-the-blank)</li>
+                        <li>🎭 <strong>Active Reading:</strong> Forces you to analyze EVERY word—which ones carry meaning?</li>
+                        <li>✨ <strong>Creative Analysis:</strong> You're not just answering questions—you're making art from rhetoric</li>
+                        <li>👁️ <strong>Reveal Hidden Meanings:</strong> Your selections might uncover themes you didn't notice before</li>
+                        <li>🤝 <strong>Compare Interpretations:</strong> See which words OTHER students found powerful—build community</li>
+                        <li>💪 <strong>Student Agency:</strong> YOUR choices create YOUR poem—no right/wrong answers, just reasoning</li>
+                    </ul>
+                    <p style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: rgba(251, 191, 36, 0.1); border-radius: var(--radius-md); font-weight: 600; text-align: center;">
+                        ✨ All student erasure poems are saved and displayed in a class gallery! ✨
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 3: Personalized Quiz -->
+        <section class="content-section" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);">
+            <div class="container">
+                <h2 class="activity-title-solid">🎯 Activity 3: Discover Your AI Prompting Style</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-lg);">Take this personalized quiz to get custom prompt recommendations based on your poetry interests and AI experience. Discover the best strategies for analyzing Maya Angelou's work!</p>
+
+                <div id="quiz-container">
+                    <div id="quiz-content">
+                        <!-- Quiz loads here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 4: Poetry Explorer - Scholarly Analysis -->
+        <section class="content-section" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
+            <div class="container">
+                <h2 class="activity-title-solid">📚 Activity 4: Scholarly Poetry Analysis</h2>
+                <p style="text-align: center; max-width: 900px; margin: 0 auto var(--spacing-lg); font-size: var(--font-size-xl); line-height: 1.8; font-weight: 600;">
+                    <span style="color: var(--neon-purple);">🎯 Play Your Way to Your Grade:</span> Apply rhetorical theory, feminist criticism, and AI literacy to Frances Harper's "Bury Me in a Free Land."
+                </p>
+
+                <div class="tech-card" style="max-width: 750px; margin: var(--spacing-xl) auto; text-align: center; padding: var(--spacing-2xl); background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));">
+                    <div style="font-size: 5rem; margin-bottom: var(--spacing-lg);">📖 🔍 ⚖️ 🎓</div>
+                    <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md); font-size: 2rem; font-weight: 900;">
+                        Rigorous Academic Analysis
+                    </h3>
+                    <p style="line-height: 1.9; margin-bottom: var(--spacing-lg); color: var(--text-primary); font-size: var(--font-size-lg);">
+                        Identify rhetorical devices, apply feminist theory, examine intersectionality, and critique AI's limitations.
+                        This is <strong>rigorous, hands-on academic work</strong>—YOUR interpretations lead the way.
+                    </p>
+                    <div style="background: white; padding: var(--spacing-lg); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); border: 3px solid var(--neon-cyan);">
+                        <p style="font-size: var(--font-size-base); color: var(--text-secondary); margin-bottom: var(--spacing-sm);">
+                            <strong>🎯 Student Agency =</strong> YOU identify the devices • YOU apply the theory • YOU critique AI
+                        </p>
+                        <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
+                            Multiple choice analysis • View class polling data • Compare scholarly interpretations
+                        </p>
+                    </div>
+                    <button id="launch-poetry-explorer" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;">
+                        🚀 Start Scholarly Analysis
+                    </button>
+                </div>
+
+                <div class="game-info tech-card">
+                    <h3>📚 What You'll Do (8-Step Analysis)</h3>
+                    <ul style="line-height: 2;">
                         <li>🔁 <strong>Identify Device:</strong> Choose the primary rhetorical device (anaphora, apostrophe, repetition, emotional appeal)</li>
                         <li>💪 <strong>Analyze Effect:</strong> Determine the persuasive effect (ethos, pathos, reversal, witness)</li>
                         <li>🗣️ <strong>Apply Feminist Theory:</strong> Select the feminist rhetorical strategy Harper embodies</li>
@@ -134,26 +183,19 @@
                         <li>🤖 <strong>Critique AI:</strong> Determine AI's primary limitation in analyzing this historical poem</li>
                         <li>🎓 <strong>Scholarly Application:</strong> Choose how you'd use this poem in academic work</li>
                         <li>📊 <strong>View Class Data:</strong> See polling results showing how classmates analyzed the poem</li>
+                        <li>💬 <strong>Build Community:</strong> Compare your academic interpretations with peer responses</li>
                     </ul>
-                    <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(236, 72, 153, 0.15)); border-radius: var(--radius-md); border-left: 4px solid var(--accent-color);">
-                        <h4 style="color: var(--accent-color); margin-bottom: var(--spacing-sm);">✨ NEW: Interactive Erasure Poem Exercise</h4>
-                        <p style="margin: 0; line-height: 1.7;">
-                            The first step is hands-on! <strong>Click individual words</strong> from "Bury Me in a Free Land" to highlight them.
-                            Your selected words create an <strong>erasure poem</strong> that shows which language YOU find most rhetorically powerful.
-                            Then explain your analytical reasoning. This active engagement helps you identify persuasive techniques.
-                        </p>
-                    </div>
                     <p style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: rgba(168, 85, 247, 0.1); border-radius: var(--radius-md); font-weight: 600;">
-                        ✨ Interactive erasure poem + multiple choice analysis • NO personal feelings required
+                        ✨ Multiple choice analysis + class polling • Perfect for rigorous academic training
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Activity 3: Maya Angelou Theme Matcher -->
+        <!-- Activity 5: Maya Angelou Theme Matcher -->
         <section class="content-section" style="background: #ffffff;">
             <div class="container">
-                <h2 class="activity-title-solid">🦜 Activity 3: Maya Angelou's Rhetorical Strategies</h2>
+                <h2 class="activity-title-solid">🦜 Activity 5: Maya Angelou's Rhetorical Strategies</h2>
                 <p class="game-intro">Match Maya Angelou's famous poems with their primary rhetorical strategies and themes. Learn to identify how she uses language to resist, empower, and transform. No two poets wield rhetoric like Maya Angelou!</p>
 
                 <div id="angelou-game-container" class="game-container">
@@ -185,6 +227,7 @@
     <script src="js/navigation.js"></script>
     <script src="js/poetry-analysis-game.js"></script>
     <script src="js/poetry-prompt-quiz.js"></script>
+    <script src="js/erasure-poem-game.js"></script>
     <script src="js/poetry-explorer.js"></script>
     <script src="js/angelou-game.js"></script>
     <script src="js/scroll-animations.js"></script>
