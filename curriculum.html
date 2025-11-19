@@ -31,7 +31,10 @@
     <main class="fade-in">
         <section class="hero">
             <div class="container">
-                <h2 class="hero-title animated-gradient-text">Syllabus & Course Overview</h2>
+                <h2 class="hero-title animated-gradient-text">🎮 Play Your Way to Your Grade 🎯</h2>
+                <p class="hero-subtitle" style="font-size: 1.5rem; margin-top: var(--spacing-lg); font-weight: 600;">
+                    <span style="color: var(--neon-purple);">Choose your path.</span> Track your progress. Master rhetoric and poetry on YOUR terms.
+                </p>
                 <p class="hero-subtitle">Poetry, Feminist Rhetoric & AI: A Journey Through Maya Angelou's Revolutionary Voice</p>
             </div>
         </section>
@@ -49,67 +52,231 @@
 
         <section class="content-section modules-section">
             <div class="container">
-                <h2 class="section-title">Course Modules</h2>
+                <h2 class="section-title">📚 Course Modules - Interactive Syllabus</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-xl); font-size: var(--font-size-lg); color: var(--text-secondary);">
+                    <strong>Click each module to expand details.</strong> Check off activities as you complete them. Track your journey through the course!
+                </p>
+
+                <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-bottom: var(--spacing-xl); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">📊</div>
+                    <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-sm);">Your Progress</h3>
+                    <div id="progress-bar" style="background: white; height: 30px; border-radius: 15px; overflow: hidden; margin: var(--spacing-md) auto; max-width: 500px; border: 3px solid var(--neon-cyan);">
+                        <div id="progress-fill" style="background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan)); height: 100%; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem;">
+                            <span id="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <p id="progress-status" style="color: var(--text-secondary); margin-top: var(--spacing-sm);">0 of 0 activities completed</p>
+                </div>
 
                 <div class="module-list">
-                    <div class="module-card tech-card">
-                        <h3>📚 Module 1: Maya Angelou & Rhetorical Foundations</h3>
-                        <ul>
-                            <li>✊ Classical rhetorical appeals in contemporary poetry</li>
-                            <li>🎭 Ethos, pathos, logos in "Still I Rise" and "Phenomenal Woman"</li>
-                            <li><strong>💬 Prompt Exercise:</strong> "Analyze the ethos Maya Angelou builds in 'Still I Rise.' How does she establish credibility and authority as a Black woman poet?"</li>
-                            <li><strong>🤖 AI Task:</strong> Compare your analysis with AI interpretation of Angelou's rhetorical strategies</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>📚 Module 1: Maya Angelou & Rhetorical Foundations</span>
+                            <span class="module-toggle">▼</span>
+                        </h3>
+                        <div class="module-content">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="1" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>✊ Classical rhetorical appeals in contemporary poetry</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="1" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>🎭 Ethos, pathos, logos in "Still I Rise" and "Phenomenal Woman"</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="1" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💬 Prompt Exercise:</strong> "Analyze the ethos Maya Angelou builds in 'Still I Rise.' How does she establish credibility and authority as a Black woman poet?"</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="1" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>🤖 AI Task:</strong> Compare your analysis with AI interpretation of Angelou's rhetorical strategies</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="module-card tech-card">
-                        <h3>🦜 Module 2: AI Prompting Through Poetry Analysis</h3>
-                        <ul>
-                            <li>✍️ Crafting effective prompts for poetic analysis</li>
-                            <li>🎨 How AI interprets figurative language and metaphor</li>
-                            <li><strong>💬 Prompt Exercise:</strong> "Ask AI to identify the pathos in Maya Angelou's 'Caged Bird.' Then refine your prompt to capture cultural context and racial metaphor."</li>
-                            <li><strong>🤖 AI Task:</strong> Iteratively improve prompts to get deeper analysis of symbolism</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>🦜 Module 2: AI Prompting Through Poetry Analysis</span>
+                            <span class="module-toggle">►</span>
+                        </h3>
+                        <div class="module-content" style="display: none;">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="2" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>✍️ Crafting effective prompts for poetic analysis</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="2" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>🎨 How AI interprets figurative language and metaphor</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="2" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💬 Prompt Exercise:</strong> "Ask AI to identify the pathos in Maya Angelou's 'Caged Bird.' Then refine your prompt to capture cultural context and racial metaphor."</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="2" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>🤖 AI Task:</strong> Iteratively improve prompts to get deeper analysis of symbolism</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="module-card tech-card">
-                        <h3>👤 vs 🤖 Module 3: Human vs AI Rhetorical Interpretation</h3>
-                        <ul>
-                            <li>💭 What humans catch that AI misses (cultural nuance, lived experience)</li>
-                            <li>📊 What AI catches that humans miss (patterns, frequency, structure)</li>
-                            <li><strong>💬 Prompt Exercise:</strong> "Analyze the logos in Angelou's 'On the Pulse of Morning.' Then ask AI to do the same. What did each approach reveal?"</li>
-                            <li><strong>🤖 AI Task:</strong> Compare human and AI interpretations to understand each approach's strengths</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>👤 vs 🤖 Module 3: Human vs AI Rhetorical Interpretation</span>
+                            <span class="module-toggle">►</span>
+                        </h3>
+                        <div class="module-content" style="display: none;">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="3" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>💭 What humans catch that AI misses (cultural nuance, lived experience)</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="3" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>📊 What AI catches that humans miss (patterns, frequency, structure)</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="3" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💬 Prompt Exercise:</strong> "Analyze the logos in Angelou's 'On the Pulse of Morning.' Then ask AI to do the same. What did each approach reveal?"</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="3" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>🤖 AI Task:</strong> Compare human and AI interpretations to understand each approach's strengths</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="module-card tech-card">
-                        <h3>♀️ Module 4: Feminist Rhetoric & AI Ethics</h3>
-                        <ul>
-                            <li>⚖️ How AI systems interpret (or misinterpret) feminist discourse</li>
-                            <li>🔍 Bias in training data and poetic analysis</li>
-                            <li><strong>💬 Prompt Exercise:</strong> "Ask AI about the feminist rhetoric in Maya Angelou's work. Does it recognize intersectionality? Revise your prompt to foreground race and gender."</li>
-                            <li><strong>🤖 AI Task:</strong> Test whether AI can identify specifically Black feminist rhetorical strategies</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>♀️ Module 4: Feminist Rhetoric & AI Ethics</span>
+                            <span class="module-toggle">►</span>
+                        </h3>
+                        <div class="module-content" style="display: none;">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="4" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>⚖️ How AI systems interpret (or misinterpret) feminist discourse</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="4" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>🔍 Bias in training data and poetic analysis</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="4" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💬 Prompt Exercise:</strong> "Ask AI about the feminist rhetoric in Maya Angelou's work. Does it recognize intersectionality? Revise your prompt to foreground race and gender."</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="4" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>🤖 AI Task:</strong> Test whether AI can identify specifically Black feminist rhetorical strategies</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="module-card tech-card">
-                        <h3>🌐 Module 5: Algorithmic Rhetoric & Digital Poetry</h3>
-                        <ul>
-                            <li>📱 How algorithms curate and recommend poetry</li>
-                            <li>💻 Digital circulation of Maya Angelou's work online</li>
-                            <li><strong>💬 Prompt Exercise:</strong> "Research how AI systems categorize Angelou's poetry. What tags, themes, and associations does AI make?"</li>
-                            <li><strong>🤖 AI Task:</strong> Examine metadata and algorithmic framing of Black women poets</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>🌐 Module 5: Algorithmic Rhetoric & Digital Poetry</span>
+                            <span class="module-toggle">►</span>
+                        </h3>
+                        <div class="module-content" style="display: none;">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="5" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>📱 How algorithms curate and recommend poetry</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="5" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>💻 Digital circulation of Maya Angelou's work online</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="5" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💬 Prompt Exercise:</strong> "Research how AI systems categorize Angelou's poetry. What tags, themes, and associations does AI make?"</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="5" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>🤖 AI Task:</strong> Examine metadata and algorithmic framing of Black women poets</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="module-card tech-card">
-                        <h3>✍️ Module 6: Agentic AI & Poetic Authorship</h3>
-                        <ul>
-                            <li>🎯 Maintaining human authorship in AI-assisted analysis</li>
-                            <li>🔧 AI as research assistant for poetry scholarship</li>
-                            <li><strong>📝 Final Project:</strong> Write a rhetorical analysis of 3 Maya Angelou poems using agentic AI workflow (you analyze first, AI assists second)</li>
-                            <li><strong>💡 Reflection:</strong> Document your process and what you learned about poetry, rhetoric, and AI</li>
-                        </ul>
+                    <div class="module-card tech-card interactive-module" onclick="toggleModule(this)">
+                        <h3 style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>✍️ Module 6: Agentic AI & Poetic Authorship</span>
+                            <span class="module-toggle">►</span>
+                        </h3>
+                        <div class="module-content" style="display: none;">
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="6" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>🎯 Maintaining human authorship in AI-assisted analysis</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="6" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span>🔧 AI as research assistant for poetry scholarship</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="6" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>📝 Final Project:</strong> Write a rhetorical analysis of 3 Maya Angelou poems using agentic AI workflow (you analyze first, AI assists second)</span>
+                                    </label>
+                                </li>
+                                <li style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background: rgba(168, 85, 247, 0.05); border-radius: var(--radius-sm);">
+                                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                        <input type="checkbox" class="activity-checkbox" data-module="6" style="margin-right: var(--spacing-sm); margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" onchange="updateProgress()">
+                                        <span><strong>💡 Reflection:</strong> Document your process and what you learned about poetry, rhetoric, and AI</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,5 +324,6 @@
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/scroll-animations.js"></script>
+    <script src="js/interactive-syllabus.js"></script>
 </body>
 </html>
