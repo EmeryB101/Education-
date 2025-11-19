@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Erasure Poem</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/course-designer.css">
+</head>
+<body style="padding: 40px;">
+    <h1>Erasure Poem Test</h1>
+    <p>Click the button below to test if the erasure poem screen loads:</p>
+
+    <button id="test-btn" style="padding: 20px; font-size: 18px; cursor: pointer; background: purple; color: white; border: none; border-radius: 8px;">
+        🚀 Test Erasure Poem
+    </button>
+
+    <div id="status" style="margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+        <p><strong>Status:</strong> <span id="status-text">Ready to test</span></p>
+        <p><strong>Current Screen:</strong> <span id="current-screen">N/A</span></p>
+        <p><strong>Screens Array:</strong> <span id="screens-array">N/A</span></p>
+    </div>
+
+    <script src="js/poetry-explorer.js"></script>
+    <script>
+        // Test the erasure poem functionality
+        document.getElementById('test-btn').addEventListener('click', function() {
+            document.getElementById('status-text').textContent = 'Testing...';
+
+            try {
+                // Check if explorerState exists
+                if (typeof explorerState === 'undefined') {
+                    document.getElementById('status-text').textContent = 'ERROR: explorerState not defined';
+                    return;
+                }
+
+                // Display current state
+                document.getElementById('current-screen').textContent = explorerState.currentScreen;
+                document.getElementById('screens-array').textContent = explorerState.screens.join(', ');
+
+                // Try to open the explorer
+                if (typeof openPoetryExplorer === 'function') {
+                    openPoetryExplorer();
+                    document.getElementById('status-text').textContent = 'SUCCESS: Poetry Explorer opened!';
+                } else {
+                    document.getElementById('status-text').textContent = 'ERROR: openPoetryExplorer function not found';
+                }
+            } catch (error) {
+                document.getElementById('status-text').textContent = 'ERROR: ' + error.message;
+            }
+        });
+
+        // Auto-display state info on load
+        window.addEventListener('load', function() {
+            if (typeof explorerState !== 'undefined') {
+                document.getElementById('current-screen').textContent = explorerState.currentScreen;
+                document.getElementById('screens-array').textContent = explorerState.screens.join(', ');
+                document.getElementById('status-text').textContent = 'JavaScript loaded successfully!';
+            } else {
+                document.getElementById('status-text').textContent = 'ERROR: JavaScript not loading properly';
+            }
+        });
+    </script>
+</body>
+</html>
