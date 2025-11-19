@@ -21,158 +21,150 @@ const designerState = {
 };
 
 // Visual Appearances - Pick one that looks like you
-// No labels - just diverse visual representations across all races, genders, ages, and styles
+// Diverse students - NO career outfits, just people representing all identities
 const appearances = [
-    // Students & Academics
-    { id: 'app-1', visual: '👩🏽‍🎓' },
-    { id: 'app-2', visual: '👨🏾‍🎓' },
-    { id: 'app-3', visual: '🧑🏻‍🎓' },
-    { id: 'app-4', visual: '👩🏿‍🎓' },
-    { id: 'app-5', visual: '👨🏼‍🎓' },
-    { id: 'app-6', visual: '🧑🏽‍🎓' },
+    // Various skin tones and genders - basic
+    { id: 'app-1', visual: '👩🏽' },
+    { id: 'app-2', visual: '👨🏾' },
+    { id: 'app-3', visual: '🧑🏻' },
+    { id: 'app-4', visual: '👩🏿' },
+    { id: 'app-5', visual: '👨🏼' },
+    { id: 'app-6', visual: '🧑🏽' },
+    { id: 'app-7', visual: '👩🏻' },
+    { id: 'app-8', visual: '👨🏿' },
+    { id: 'app-9', visual: '🧑🏾' },
+    { id: 'app-10', visual: '👩🏼' },
 
-    // Teachers & Educators
-    { id: 'app-7', visual: '👩🏻‍🏫' },
-    { id: 'app-8', visual: '👨🏿‍🏫' },
-    { id: 'app-9', visual: '🧑🏾‍🏫' },
-    { id: 'app-10', visual: '👩🏼‍🏫' },
-    { id: 'app-11', visual: '👨🏽‍🏫' },
+    // Curly hair variations
+    { id: 'app-11', visual: '👨🏽‍🦱' },
+    { id: 'app-12', visual: '👩🏿‍🦱' },
+    { id: 'app-13', visual: '🧑🏻‍🦱' },
+    { id: 'app-14', visual: '👩🏾‍🦱' },
+    { id: 'app-15', visual: '👨🏼‍🦱' },
+    { id: 'app-16', visual: '🧑🏽‍🦱' },
+    { id: 'app-17', visual: '👩🏻‍🦱' },
+    { id: 'app-18', visual: '👨🏿‍🦱' },
+    { id: 'app-19', visual: '🧑🏾‍🦱' },
+    { id: 'app-20', visual: '👩🏼‍🦱' },
 
-    // Artists & Creatives
-    { id: 'app-12', visual: '👩🏾‍🎨' },
-    { id: 'app-13', visual: '👨🏻‍🎨' },
-    { id: 'app-14', visual: '🧑🏿‍🎨' },
-    { id: 'app-15', visual: '👩🏼‍🎨' },
-    { id: 'app-16', visual: '👨🏽‍🎨' },
+    // Red/ginger hair variations
+    { id: 'app-21', visual: '👨🏻‍🦰' },
+    { id: 'app-22', visual: '👩🏽‍🦰' },
+    { id: 'app-23', visual: '🧑🏼‍🦰' },
+    { id: 'app-24', visual: '👩🏾‍🦰' },
+    { id: 'app-25', visual: '👨🏿‍🦰' },
+    { id: 'app-26', visual: '🧑🏻‍🦰' },
+    { id: 'app-27', visual: '👩🏿‍🦰' },
+    { id: 'app-28', visual: '👨🏽‍🦰' },
 
-    // Tech & Digital
-    { id: 'app-17', visual: '👩🏻‍💻' },
-    { id: 'app-18', visual: '👨🏾‍💻' },
-    { id: 'app-19', visual: '🧑🏼‍💻' },
-    { id: 'app-20', visual: '👩🏿‍💻' },
-    { id: 'app-21', visual: '👨🏽‍💻' },
+    // Bald variations
+    { id: 'app-29', visual: '👨🏾‍🦲' },
+    { id: 'app-30', visual: '👩🏽‍🦲' },
+    { id: 'app-31', visual: '🧑🏿‍🦲' },
+    { id: 'app-32', visual: '👩🏻‍🦲' },
+    { id: 'app-33', visual: '👨🏼‍🦲' },
+    { id: 'app-34', visual: '🧑🏾‍🦲' },
+    { id: 'app-35', visual: '👩🏿‍🦲' },
+    { id: 'app-36', visual: '👨🏻‍🦲' },
 
-    // Scientists & Researchers
-    { id: 'app-22', visual: '👩🏽‍🔬' },
-    { id: 'app-23', visual: '👨🏿‍🔬' },
-    { id: 'app-24', visual: '🧑🏻‍🔬' },
-    { id: 'app-25', visual: '👩🏾‍🔬' },
-    { id: 'app-26', visual: '👨🏼‍🔬' },
+    // White/gray hair variations
+    { id: 'app-37', visual: '👨🏻‍🦳' },
+    { id: 'app-38', visual: '👩🏾‍🦳' },
+    { id: 'app-39', visual: '🧑🏽‍🦳' },
+    { id: 'app-40', visual: '👩🏼‍🦳' },
+    { id: 'app-41', visual: '👨🏿‍🦳' },
+    { id: 'app-42', visual: '🧑🏻‍🦳' },
+    { id: 'app-43', visual: '👩🏽‍🦳' },
+    { id: 'app-44', visual: '👨🏾‍🦳' },
 
-    // Musicians & Performers
-    { id: 'app-27', visual: '👩🏿‍🎤' },
-    { id: 'app-28', visual: '👨🏻‍🎤' },
-    { id: 'app-29', visual: '🧑🏽‍🎤' },
-    { id: 'app-30', visual: '👩🏼‍🎤' },
-    { id: 'app-31', visual: '👨🏾‍🎤' },
+    // Additional diverse representations
+    { id: 'app-45', visual: '👨🏽' },
+    { id: 'app-46', visual: '👩🏾' },
+    { id: 'app-47', visual: '🧑🏼' },
+    { id: 'app-48', visual: '👩🏿' },
+    { id: 'app-49', visual: '👨🏻' },
+    { id: 'app-50', visual: '🧑🏿' },
+    { id: 'app-51', visual: '👩🏽' },
+    { id: 'app-52', visual: '👨🏼' },
+    { id: 'app-53', visual: '🧑🏾' },
+    { id: 'app-54', visual: '👩🏻' },
 
-    // Office & Professional
-    { id: 'app-32', visual: '👩🏻‍💼' },
-    { id: 'app-33', visual: '👨🏽‍💼' },
-    { id: 'app-34', visual: '🧑🏿‍💼' },
-    { id: 'app-35', visual: '👩🏾‍💼' },
-    { id: 'app-36', visual: '👨🏼‍💼' },
+    // More curly hair
+    { id: 'app-55', visual: '👨🏾‍🦱' },
+    { id: 'app-56', visual: '👩🏽‍🦱' },
+    { id: 'app-57', visual: '🧑🏿‍🦱' },
+    { id: 'app-58', visual: '👩🏼‍🦱' },
 
-    // Healthcare & Medical
-    { id: 'app-37', visual: '👩🏾‍⚕️' },
-    { id: 'app-38', visual: '👨🏻‍⚕️' },
-    { id: 'app-39', visual: '🧑🏽‍⚕️' },
-    { id: 'app-40', visual: '👩🏿‍⚕️' },
-    { id: 'app-41', visual: '👨🏼‍⚕️' },
+    // More red hair
+    { id: 'app-59', visual: '👨🏼‍🦰' },
+    { id: 'app-60', visual: '👩🏻‍🦰' },
+    { id: 'app-61', visual: '🧑🏾‍🦰' },
 
-    // Mechanics & Technicians
-    { id: 'app-42', visual: '👩🏽‍🔧' },
-    { id: 'app-43', visual: '👨🏿‍🔧' },
-    { id: 'app-44', visual: '🧑🏻‍🔧' },
-    { id: 'app-45', visual: '👨🏾‍🔧' },
+    // More bald
+    { id: 'app-62', visual: '👨🏽‍🦲' },
+    { id: 'app-63', visual: '👩🏾‍🦲' },
+    { id: 'app-64', visual: '🧑🏼‍🦲' },
 
-    // Chefs & Culinary
-    { id: 'app-46', visual: '👩🏻‍🍳' },
-    { id: 'app-47', visual: '👨🏽‍🍳' },
-    { id: 'app-48', visual: '🧑🏾‍🍳' },
-    { id: 'app-49', visual: '👩🏿‍🍳' },
+    // More white/gray hair
+    { id: 'app-65', visual: '👨🏼‍🦳' },
+    { id: 'app-66', visual: '👩🏿‍🦳' },
+    { id: 'app-67', visual: '🧑🏾‍🦳' },
 
-    // Farmers & Agriculture
-    { id: 'app-50', visual: '👩🏼‍🌾' },
-    { id: 'app-51', visual: '👨🏾‍🌾' },
-    { id: 'app-52', visual: '🧑🏿‍🌾' },
-    { id: 'app-53', visual: '👨🏻‍🌾' },
-
-    // Factory & Industrial Workers
-    { id: 'app-54', visual: '👩🏿‍🏭' },
-    { id: 'app-55', visual: '👨🏼‍🏭' },
-    { id: 'app-56', visual: '🧑🏽‍🏭' },
-
-    // Firefighters & Emergency
-    { id: 'app-57', visual: '👩🏽‍🚒' },
-    { id: 'app-58', visual: '👨🏻‍🚒' },
-    { id: 'app-59', visual: '🧑🏾‍🚒' },
-
-    // Astronauts & Explorers
-    { id: 'app-60', visual: '👩🏾‍🚀' },
-    { id: 'app-61', visual: '👨🏿‍🚀' },
-    { id: 'app-62', visual: '🧑🏻‍🚀' },
-
-    // Additional varied representations
-    { id: 'app-63', visual: '👨🏽‍⚖️' }, // Judge/Legal
-    { id: 'app-64', visual: '👩🏼‍✈️' }, // Pilot
-    { id: 'app-65', visual: '🧑🏿‍✈️' }, // Pilot
-    { id: 'app-66', visual: '👨🏾‍⚖️' }, // Judge/Legal
-    { id: 'app-67', visual: '👩🏻‍🎓' }, // Student
-    { id: 'app-68', visual: '🧑🏼‍🎓' }, // Student
-    { id: 'app-69', visual: '👨🏿‍💼' }, // Professional
-    { id: 'app-70', visual: '👩🏽‍🏫' }  // Teacher
+    // Final diverse additions
+    { id: 'app-68', visual: '👨🏿' },
+    { id: 'app-69', visual: '👩🏾' },
+    { id: 'app-70', visual: '🧑🏽' }
 ];
 
-// Learning Styles - Separate from appearance
+// Learning Styles - Student agency and empowerment focused
 const learningStyles = [
     {
-        id: 'scholar',
-        title: 'The Thoughtful Scholar',
-        icon: '📚',
-        description: 'Deep thinker who loves analyzing every word and cultural context'
+        id: 'deep-reader',
+        title: 'Deep Reader & Critical Thinker',
+        icon: '📖',
+        description: 'I master concepts through careful reading and thoughtful analysis—I take my time to truly understand'
     },
     {
-        id: 'artist',
-        title: 'The Creative Artist',
+        id: 'creative-connector',
+        title: 'Creative Connector',
         icon: '🎨',
-        description: 'Visual learner who connects poetry to art, music, and expression'
+        description: 'I learn by making connections—linking ideas to art, culture, and my own creative expression'
     },
     {
-        id: 'explorer',
-        title: 'The Digital Explorer',
-        icon: '💻',
-        description: 'Tech-savvy learner who experiments with AI tools hands-on'
+        id: 'hands-on-builder',
+        title: 'Hands-On Builder',
+        icon: '🛠️',
+        description: 'I learn by doing—experimenting with tools, testing ideas, and building my own understanding'
     },
     {
-        id: 'activist',
-        title: 'The Social Activist',
-        icon: '✊',
-        description: 'Passionate about justice, connects poetry to social change'
+        id: 'justice-seeker',
+        title: 'Justice-Oriented Scholar',
+        icon: '⚖️',
+        description: 'I connect everything to real-world justice—I learn best when I see the power and purpose'
     },
     {
-        id: 'teacher',
-        title: 'The Collaborative Teacher',
-        icon: '👥',
-        description: 'Learns best through discussion, teaching others, and group work'
+        id: 'collaborative-learner',
+        title: 'Collaborative Learner',
+        icon: '🤝',
+        description: 'I thrive in dialogue—discussing, debating, and co-creating knowledge with my peers'
     },
     {
-        id: 'poet',
-        title: 'The Aspiring Poet',
+        id: 'writer-creator',
+        title: 'Writer & Creator',
         icon: '✍️',
-        description: 'Writer who analyzes poetry to improve their own craft'
+        description: 'I learn by creating—writing, drafting, revising my way to deeper understanding'
     },
     {
-        id: 'analyst',
-        title: 'The Systematic Analyst',
-        icon: '📊',
-        description: 'Methodical learner who loves data, patterns, and structure'
+        id: 'pattern-finder',
+        title: 'Pattern Finder & Strategist',
+        icon: '🧩',
+        description: 'I see structures and systems—I learn by identifying patterns and strategizing approaches'
     },
     {
-        id: 'performer',
-        title: 'The Spoken Word Performer',
+        id: 'performer-speaker',
+        title: 'Performer & Speaker',
         icon: '🎤',
-        description: 'Learns poetry through performance, rhythm, and spoken word'
+        description: 'I embody knowledge—I learn through speaking, performing, and making ideas come alive'
     }
 ];
 
