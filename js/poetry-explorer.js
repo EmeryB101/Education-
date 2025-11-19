@@ -72,6 +72,8 @@ function openPoetryExplorer() {
     // Reset state
     explorerState.currentScreen = 'intro';
     explorerState.responses = {
+        erasureWords: [],
+        erasureExplanation: '',
         rhetoricalDevice: null,
         rhetoricalEffect: null,
         feministStrategy: null,
@@ -1090,6 +1092,8 @@ function previousExplorerScreen() {
 function restartExplorer() {
     explorerState.currentScreen = 'intro';
     explorerState.responses = {
+        erasureWords: [],
+        erasureExplanation: '',
         rhetoricalDevice: null,
         rhetoricalEffect: null,
         feministStrategy: null,
