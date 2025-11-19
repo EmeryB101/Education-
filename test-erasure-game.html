@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Erasure Game</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/erasure-game.css">
+</head>
+<body style="padding: 40px; background: #0a0a0a; color: white;">
+    <h1>Test Erasure Poem Game</h1>
+    <p>Click the button below to test if the erasure game opens:</p>
+
+    <button onclick="testGameFunction()" style="padding: 20px; font-size: 18px; margin: 20px 0; background: purple; color: white; border: none; border-radius: 8px; cursor: pointer;">
+        Test: Check if openErasureGame exists
+    </button>
+
+    <button onclick="openErasureGame()" style="padding: 20px; font-size: 18px; margin: 20px 0; background: blue; color: white; border: none; border-radius: 8px; cursor: pointer;">
+        🎨 Open Erasure Game
+    </button>
+
+    <div id="debug-output" style="margin-top: 20px; padding: 20px; background: #222; border-radius: 8px;"></div>
+
+    <script>
+        function testGameFunction() {
+            const output = document.getElementById('debug-output');
+            output.innerHTML = `
+                <h3>Debug Information:</h3>
+                <ul>
+                    <li>openErasureGame exists: ${typeof openErasureGame !== 'undefined'}</li>
+                    <li>openErasureGame type: ${typeof openErasureGame}</li>
+                    <li>erasureGameState exists: ${typeof erasureGameState !== 'undefined'}</li>
+                </ul>
+            `;
+        }
+    </script>
+
+    <script src="js/erasure-poem-game.js"></script>
+
+    <script>
+        // Auto-run test on load
+        setTimeout(() => {
+            testGameFunction();
+        }, 500);
+    </script>
+</body>
+</html>

@@ -57,6 +57,8 @@ let erasureGameState = {
  * Open the erasure poem game overlay
  */
 function openErasureGame() {
+    console.log('🎨 Opening Erasure Poem Game...'); // Debug log
+
     // Reset state
     erasureGameState = {
         currentScreen: 'intro',
@@ -79,6 +81,7 @@ function openErasureGame() {
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
+    console.log('✅ Overlay created, rendering game screen...'); // Debug log
     renderErasureGameScreen();
 }
 
@@ -527,3 +530,6 @@ function createAnotherPoem() {
     };
     renderErasureGameScreen();
 }
+
+// Log when script loads
+console.log('📚 Erasure Poem Game script loaded successfully');
