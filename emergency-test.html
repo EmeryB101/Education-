@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Erasure Game Test</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+        .test-btn {
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .test-btn:hover {
+            transform: scale(1.05);
+        }
+        #status {
+            margin-top: 20px;
+            padding: 20px;
+            background: #222;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .good { color: #10b981; }
+        .bad { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Emergency Diagnostic Test</h1>
+    <p>This will tell us exactly what's wrong</p>
+
+    <button type="button" class="test-btn" onclick="runDiagnostic()">
+        🔬 Run Full Diagnostic
+    </button>
+
+    <button type="button" class="test-btn" onclick="testGameDirect()">
+        🎨 Test Game (Inline Code)
+    </button>
+
+    <div id="status"></div>
+
+    <!-- Load the erasure game script -->
+    <script src="js/erasure-poem-game.js"></script>
+
+    <script>
+        function runDiagnostic() {
+            const status = document.getElementById('status');
+            let html = '<h3>Diagnostic Results:</h3><ul>';
+
+            // Test 1: Script loaded
+            const scriptLoaded = typeof openErasureGame !== 'undefined';
+            html += `<li class="${scriptLoaded ? 'good' : 'bad'}">
+                Script loaded: ${scriptLoaded ? '✅ YES' : '❌ NO'}
+            </li>`;
+
+            // Test 2: Function exists
+            const functionExists = typeof openErasureGame === 'function';
+            html += `<li class="${functionExists ? 'good' : 'bad'}">
+                openErasureGame is a function: ${functionExists ? '✅ YES' : '❌ NO'}
+            </li>`;
+
+            // Test 3: State exists
+            const stateExists = typeof erasureGameState !== 'undefined';
+            html += `<li class="${stateExists ? 'good' : 'bad'}">
+                erasureGameState exists: ${stateExists ? '✅ YES' : '❌ NO'}
+            </li>`;
+
+            // Test 4: Try to call it
+            if (functionExists) {
+                try {
+                    html += '<li class="good">✅ Attempting to open game...</li>';
+                    openErasureGame();
+                    html += '<li class="good">✅ Game opened successfully!</li>';
+                } catch (error) {
+                    html += `<li class="bad">❌ Error: ${error.message}</li>`;
+                }
+            }
+
+            html += '</ul>';
+            status.innerHTML = html;
+        }
+
+        function testGameDirect() {
+            // Inline simple test
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;';
+            overlay.innerHTML = `
+                <h1 style="color:#a855f7;font-size:3rem;">🎨 Inline Test Works!</h1>
+                <p style="color:white;font-size:1.5rem;">If you see this, JavaScript is working</p>
+                <button type="button" onclick="this.parentElement.remove()" style="background:#ef4444;color:white;border:none;padding:15px 30px;font-size:18px;border-radius:8px;cursor:pointer;margin-top:30px;">
+                    Close Test
+                </button>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        // Auto-run diagnostic on load
+        setTimeout(runDiagnostic, 500);
+    </script>
+</body>
+</html>
