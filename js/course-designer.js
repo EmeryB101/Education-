@@ -20,100 +20,100 @@ const designerState = {
     screens: ['appearance', 'style', 'poem', 'rhetoric', 'preference', 'types', 'pace', 'era', 'results']
 };
 
-// Visual Appearances - Pick one that looks like you
-// Diverse students - NO career outfits, just people representing all identities
+// Visual Appearances - Scholarly and Academic Community
+// Diverse people representing intellectual, professional, and artistic pursuits - NO career uniforms
 const appearances = [
-    // Various skin tones and genders - basic
-    { id: 'app-1', visual: '👩🏽' },
-    { id: 'app-2', visual: '👨🏾' },
-    { id: 'app-3', visual: '🧑🏻' },
-    { id: 'app-4', visual: '👩🏿' },
-    { id: 'app-5', visual: '👨🏼' },
-    { id: 'app-6', visual: '🧑🏽' },
-    { id: 'app-7', visual: '👩🏻' },
-    { id: 'app-8', visual: '👨🏿' },
-    { id: 'app-9', visual: '🧑🏾' },
-    { id: 'app-10', visual: '👩🏼' },
+    // Scholars & Thinkers - Various skin tones and identities
+    { id: 'app-1', visual: '🧑🏽' },  // Scholar
+    { id: 'app-2', visual: '👩🏾' },  // Thinker
+    { id: 'app-3', visual: '👨🏻' },  // Academic
+    { id: 'app-4', visual: '🧑🏿' },  // Intellectual
+    { id: 'app-5', visual: '👩🏼' },  // Researcher
+    { id: 'app-6', visual: '👨🏽' },  // Analyst
+    { id: 'app-7', visual: '🧑🏻' },  // Philosopher
+    { id: 'app-8', visual: '👩🏿' },  // Theorist
+    { id: 'app-9', visual: '👨🏾' },  // Writer
+    { id: 'app-10', visual: '🧑🏼' }, // Reader
 
-    // Curly hair variations
-    { id: 'app-11', visual: '👨🏽‍🦱' },
-    { id: 'app-12', visual: '👩🏿‍🦱' },
-    { id: 'app-13', visual: '🧑🏻‍🦱' },
-    { id: 'app-14', visual: '👩🏾‍🦱' },
-    { id: 'app-15', visual: '👨🏼‍🦱' },
-    { id: 'app-16', visual: '🧑🏽‍🦱' },
-    { id: 'app-17', visual: '👩🏻‍🦱' },
-    { id: 'app-18', visual: '👨🏿‍🦱' },
-    { id: 'app-19', visual: '🧑🏾‍🦱' },
-    { id: 'app-20', visual: '👩🏼‍🦱' },
+    // Curly-haired scholars and creatives
+    { id: 'app-11', visual: '👨🏽‍🦱' }, // Creative thinker
+    { id: 'app-12', visual: '👩🏿‍🦱' }, // Artist-scholar
+    { id: 'app-13', visual: '🧑🏻‍🦱' }, // Poet
+    { id: 'app-14', visual: '👩🏾‍🦱' }, // Rhetorician
+    { id: 'app-15', visual: '👨🏼‍🦱' }, // Composer
+    { id: 'app-16', visual: '🧑🏽‍🦱' }, // Critic
+    { id: 'app-17', visual: '👩🏻‍🦱' }, // Analyst
+    { id: 'app-18', visual: '👨🏿‍🦱' }, // Scholar
+    { id: 'app-19', visual: '🧑🏾‍🦱' }, // Intellectual
+    { id: 'app-20', visual: '👩🏼‍🦱' }, // Academic
 
-    // Red/ginger hair variations
-    { id: 'app-21', visual: '👨🏻‍🦰' },
-    { id: 'app-22', visual: '👩🏽‍🦰' },
-    { id: 'app-23', visual: '🧑🏼‍🦰' },
-    { id: 'app-24', visual: '👩🏾‍🦰' },
-    { id: 'app-25', visual: '👨🏿‍🦰' },
-    { id: 'app-26', visual: '🧑🏻‍🦰' },
-    { id: 'app-27', visual: '👩🏿‍🦰' },
-    { id: 'app-28', visual: '👨🏽‍🦰' },
+    // Red-haired intellectuals and artists
+    { id: 'app-21', visual: '👨🏻‍🦰' }, // Literary scholar
+    { id: 'app-22', visual: '👩🏽‍🦰' }, // Writer
+    { id: 'app-23', visual: '🧑🏼‍🦰' }, // Editor
+    { id: 'app-24', visual: '👩🏾‍🦰' }, // Essayist
+    { id: 'app-25', visual: '👨🏿‍🦰' }, // Thinker
+    { id: 'app-26', visual: '🧑🏻‍🦰' }, // Philosopher
+    { id: 'app-27', visual: '👩🏿‍🦰' }, // Researcher
+    { id: 'app-28', visual: '👨🏽‍🦰' }, // Academic
 
-    // Bald variations
-    { id: 'app-29', visual: '👨🏾‍🦲' },
-    { id: 'app-30', visual: '👩🏽‍🦲' },
-    { id: 'app-31', visual: '🧑🏿‍🦲' },
-    { id: 'app-32', visual: '👩🏻‍🦲' },
-    { id: 'app-33', visual: '👨🏼‍🦲' },
-    { id: 'app-34', visual: '🧑🏾‍🦲' },
-    { id: 'app-35', visual: '👩🏿‍🦲' },
-    { id: 'app-36', visual: '👨🏻‍🦲' },
+    // Wisdom & experience (bald/shaved)
+    { id: 'app-29', visual: '👨🏾‍🦲' }, // Senior scholar
+    { id: 'app-30', visual: '👩🏽‍🦲' }, // Experienced academic
+    { id: 'app-31', visual: '🧑🏿‍🦲' }, // Wise thinker
+    { id: 'app-32', visual: '👩🏻‍🦲' }, // Seasoned writer
+    { id: 'app-33', visual: '👨🏼‍🦲' }, // Veteran researcher
+    { id: 'app-34', visual: '🧑🏾‍🦲' }, // Expert
+    { id: 'app-35', visual: '👩🏿‍🦲' }, // Master scholar
+    { id: 'app-36', visual: '👨🏻‍🦲' }, // Distinguished thinker
 
-    // White/gray hair variations
-    { id: 'app-37', visual: '👨🏻‍🦳' },
-    { id: 'app-38', visual: '👩🏾‍🦳' },
-    { id: 'app-39', visual: '🧑🏽‍🦳' },
-    { id: 'app-40', visual: '👩🏼‍🦳' },
-    { id: 'app-41', visual: '👨🏿‍🦳' },
-    { id: 'app-42', visual: '🧑🏻‍🦳' },
-    { id: 'app-43', visual: '👩🏽‍🦳' },
-    { id: 'app-44', visual: '👨🏾‍🦳' },
+    // Elder scholars and mentors (white/gray hair)
+    { id: 'app-37', visual: '👨🏻‍🦳' }, // Mentor
+    { id: 'app-38', visual: '👩🏾‍🦳' }, // Distinguished professor
+    { id: 'app-39', visual: '🧑🏽‍🦳' }, // Elder thinker
+    { id: 'app-40', visual: '👩🏼‍🦳' }, // Sage
+    { id: 'app-41', visual: '👨🏿‍🦳' }, // Wisdom keeper
+    { id: 'app-42', visual: '🧑🏻‍🦳' }, // Veteran scholar
+    { id: 'app-43', visual: '👩🏽‍🦳' }, // Senior academic
+    { id: 'app-44', visual: '👨🏾‍🦳' }, // Experienced mentor
 
-    // Additional diverse representations
-    { id: 'app-45', visual: '👨🏽' },
-    { id: 'app-46', visual: '👩🏾' },
-    { id: 'app-47', visual: '🧑🏼' },
-    { id: 'app-48', visual: '👩🏿' },
-    { id: 'app-49', visual: '👨🏻' },
-    { id: 'app-50', visual: '🧑🏿' },
-    { id: 'app-51', visual: '👩🏽' },
-    { id: 'app-52', visual: '👨🏼' },
-    { id: 'app-53', visual: '🧑🏾' },
-    { id: 'app-54', visual: '👩🏻' },
+    // More diverse scholars and professionals
+    { id: 'app-45', visual: '👨🏽' }, // Professional
+    { id: 'app-46', visual: '👩🏾' }, // Scholar
+    { id: 'app-47', visual: '🧑🏼' }, // Academic
+    { id: 'app-48', visual: '👩🏿' }, // Intellectual
+    { id: 'app-49', visual: '👨🏻' }, // Thinker
+    { id: 'app-50', visual: '🧑🏿' }, // Writer
+    { id: 'app-51', visual: '👩🏽' }, // Artist
+    { id: 'app-52', visual: '👨🏼' }, // Researcher
+    { id: 'app-53', visual: '🧑🏾' }, // Analyst
+    { id: 'app-54', visual: '👩🏻' }, // Critic
 
-    // More curly hair
-    { id: 'app-55', visual: '👨🏾‍🦱' },
-    { id: 'app-56', visual: '👩🏽‍🦱' },
-    { id: 'app-57', visual: '🧑🏿‍🦱' },
-    { id: 'app-58', visual: '👩🏼‍🦱' },
+    // Additional curly-haired academics
+    { id: 'app-55', visual: '👨🏾‍🦱' }, // Creative scholar
+    { id: 'app-56', visual: '👩🏽‍🦱' }, // Artistic thinker
+    { id: 'app-57', visual: '🧑🏿‍🦱' }, // Poet-scholar
+    { id: 'app-58', visual: '👩🏼‍🦱' }, // Rhetorician
 
-    // More red hair
-    { id: 'app-59', visual: '👨🏼‍🦰' },
-    { id: 'app-60', visual: '👩🏻‍🦰' },
-    { id: 'app-61', visual: '🧑🏾‍🦰' },
+    // Additional red-haired professionals
+    { id: 'app-59', visual: '👨🏼‍🦰' }, // Literary critic
+    { id: 'app-60', visual: '👩🏻‍🦰' }, // Author
+    { id: 'app-61', visual: '🧑🏾‍🦰' }, // Academic writer
 
-    // More bald
-    { id: 'app-62', visual: '👨🏽‍🦲' },
-    { id: 'app-63', visual: '👩🏾‍🦲' },
-    { id: 'app-64', visual: '🧑🏼‍🦲' },
+    // Additional wisdom figures
+    { id: 'app-62', visual: '👨🏽‍🦲' }, // Expert thinker
+    { id: 'app-63', visual: '👩🏾‍🦲' }, // Master academic
+    { id: 'app-64', visual: '🧑🏼‍🦲' }, // Seasoned scholar
 
-    // More white/gray hair
-    { id: 'app-65', visual: '👨🏼‍🦳' },
-    { id: 'app-66', visual: '👩🏿‍🦳' },
-    { id: 'app-67', visual: '🧑🏾‍🦳' },
+    // Additional elders and mentors
+    { id: 'app-65', visual: '👨🏼‍🦳' }, // Elder mentor
+    { id: 'app-66', visual: '👩🏿‍🦳' }, // Distinguished scholar
+    { id: 'app-67', visual: '🧑🏾‍🦳' }, // Senior thinker
 
-    // Final diverse additions
-    { id: 'app-68', visual: '👨🏿' },
-    { id: 'app-69', visual: '👩🏾' },
-    { id: 'app-70', visual: '🧑🏽' }
+    // Final diverse academic community
+    { id: 'app-68', visual: '👨🏿' }, // Professional scholar
+    { id: 'app-69', visual: '👩🏾' }, // Academic researcher
+    { id: 'app-70', visual: '🧑🏽' }  // Intellectual thinker
 ];
 
 // Learning Styles - Student agency and empowerment focused
