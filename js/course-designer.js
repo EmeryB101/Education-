@@ -781,96 +781,136 @@ function renderEraScreen() {
 }
 
 /**
- * Generate emoji avatar from text description
+ * Generate emoji avatar from text description using complete emoji codes
  */
 function generateAvatarFromDescription(description) {
     const desc = description.toLowerCase();
 
-    // Detect gender
-    let baseEmoji = '🧑'; // default gender-neutral
+    // Detect gender first
+    let gender = 'neutral'; // default
     if (desc.includes('woman') || desc.includes('girl') || desc.includes('she') || desc.includes('female')) {
-        baseEmoji = '👩';
+        gender = 'woman';
     } else if (desc.includes('man') || desc.includes('boy') || desc.includes('he') || desc.includes('male')) {
-        baseEmoji = '👨';
+        gender = 'man';
     }
 
-    // Special cultural/accessibility emojis (these override base)
-    if (desc.includes('hijab')) {
-        return '🧕' + detectSkinTone(desc);
-    }
-    if (desc.includes('turban')) {
-        return '👳' + detectSkinTone(desc) + (baseEmoji === '👩' ? '‍♀️' : baseEmoji === '👨' ? '‍♂️' : '');
-    }
-    if (desc.includes('wheelchair')) {
-        return baseEmoji + detectSkinTone(desc) + '‍🦽';
-    }
-    if (desc.includes('cane') || desc.includes('blind')) {
-        return baseEmoji + detectSkinTone(desc) + '‍🦯';
-    }
-    if (desc.includes('prosthetic') || desc.includes('mechanical arm') || desc.includes('mechanical leg')) {
-        return baseEmoji + detectSkinTone(desc) + '‍🦾';
-    }
-
-    // Detect profession/role
-    let profession = '';
-    if (desc.includes('artist') || desc.includes('painter') || desc.includes('creative')) {
-        profession = '‍🎨';
-    } else if (desc.includes('student') || desc.includes('scholar') || desc.includes('graduate')) {
-        profession = '‍🎓';
-    } else if (desc.includes('singer') || desc.includes('performer') || desc.includes('musician') || desc.includes('spoken word')) {
-        profession = '‍🎤';
-    } else if (desc.includes('teacher') || desc.includes('professor') || desc.includes('instructor')) {
-        profession = '‍🏫';
-    } else if (desc.includes('scientist') || desc.includes('researcher')) {
-        profession = '‍🔬';
-    } else if (desc.includes('writer') || desc.includes('author') || desc.includes('poet')) {
-        profession = '‍💻'; // closest to writer
-    }
-
-    // Detect hair type
-    let hair = '';
-    if (desc.includes('curly hair') || desc.includes('curly')) {
-        hair = '‍🦱';
-    } else if (desc.includes('red hair') || desc.includes('ginger') || desc.includes('auburn')) {
-        hair = '‍🦰';
-    } else if (desc.includes('white hair') || desc.includes('gray hair') || desc.includes('grey hair') || desc.includes('silver hair')) {
-        hair = '‍🦳';
-    } else if (desc.includes('bald') || desc.includes('no hair')) {
-        hair = '‍🦲';
-    }
-
-    // Build the emoji
-    const skinTone = detectSkinTone(desc);
-
-    // Profession takes priority over hair
-    if (profession) {
-        return baseEmoji + skinTone + profession;
-    } else if (hair) {
-        return baseEmoji + skinTone + hair;
-    } else {
-        // Just base + skin tone
-        return baseEmoji + skinTone;
-    }
-}
-
-/**
- * Detect skin tone from description
- */
-function detectSkinTone(desc) {
-    if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair skin')) {
-        return '🏻';
+    // Detect skin tone
+    let tone = 'medium'; // default
+    if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair')) {
+        tone = 'light';
     } else if (desc.includes('medium-light') || desc.includes('tan')) {
-        return '🏼';
-    } else if (desc.includes('medium skin') || desc.includes('olive')) {
-        return '🏽';
-    } else if (desc.includes('medium-dark') || desc.includes('brown skin')) {
-        return '🏾';
-    } else if (desc.includes('dark skin') || desc.includes('black skin') || desc.includes('deep skin')) {
-        return '🏿';
+        tone = 'medium-light';
+    } else if (desc.includes('medium-dark') || desc.includes('brown')) {
+        tone = 'medium-dark';
+    } else if (desc.includes('dark skin') || desc.includes('black skin') || desc.includes('deep')) {
+        tone = 'dark';
     }
 
-    // Default to medium tone if not specified
-    return '🏽';
+    // Complete emoji mappings - using actual tested emojis
+    const emojiMap = {
+        // Hijab - special cultural
+        'hijab': {
+            light: '🧕🏻',
+            'medium-light': '🧕🏼',
+            medium: '🧕🏽',
+            'medium-dark': '🧕🏾',
+            dark: '🧕🏿'
+        },
+        // Wheelchair
+        'wheelchair': {
+            woman: { light: '👩🏻‍🦽', 'medium-light': '👩🏼‍🦽', medium: '👩🏽‍🦽', 'medium-dark': '👩🏾‍🦽', dark: '👩🏿‍🦽' },
+            man: { light: '👨🏻‍🦽', 'medium-light': '👨🏼‍🦽', medium: '👨🏽‍🦽', 'medium-dark': '👨🏾‍🦽', dark: '👨🏿‍🦽' },
+            neutral: { light: '🧑🏻‍🦽', 'medium-light': '🧑🏼‍🦽', medium: '🧑🏽‍🦽', 'medium-dark': '🧑🏾‍🦽', dark: '🧑🏿‍🦽' }
+        },
+        // Artist
+        'artist': {
+            woman: { light: '👩🏻‍🎨', 'medium-light': '👩🏼‍🎨', medium: '👩🏽‍🎨', 'medium-dark': '👩🏾‍🎨', dark: '👩🏿‍🎨' },
+            man: { light: '👨🏻‍🎨', 'medium-light': '👨🏼‍🎨', medium: '👨🏽‍🎨', 'medium-dark': '👨🏾‍🎨', dark: '👨🏿‍🎨' },
+            neutral: { light: '🧑🏻‍🎨', 'medium-light': '🧑🏼‍🎨', medium: '🧑🏽‍🎨', 'medium-dark': '🧑🏾‍🎨', dark: '🧑🏿‍🎨' }
+        },
+        // Student
+        'student': {
+            woman: { light: '👩🏻‍🎓', 'medium-light': '👩🏼‍🎓', medium: '👩🏽‍🎓', 'medium-dark': '👩🏾‍🎓', dark: '👩🏿‍🎓' },
+            man: { light: '👨🏻‍🎓', 'medium-light': '👨🏼‍🎓', medium: '👨🏽‍🎓', 'medium-dark': '👨🏾‍🎓', dark: '👨🏿‍🎓' },
+            neutral: { light: '🧑🏻‍🎓', 'medium-light': '🧑🏼‍🎓', medium: '🧑🏽‍🎓', 'medium-dark': '🧑🏾‍🎓', dark: '🧑🏿‍🎓' }
+        },
+        // Singer/Performer
+        'singer': {
+            woman: { light: '👩🏻‍🎤', 'medium-light': '👩🏼‍🎤', medium: '👩🏽‍🎤', 'medium-dark': '👩🏾‍🎤', dark: '👩🏿‍🎤' },
+            man: { light: '👨🏻‍🎤', 'medium-light': '👨🏼‍🎤', medium: '👨🏽‍🎤', 'medium-dark': '👨🏾‍🎤', dark: '👨🏿‍🎤' },
+            neutral: { light: '🧑🏻‍🎤', 'medium-light': '🧑🏼‍🎤', medium: '🧑🏽‍🎤', 'medium-dark': '🧑🏾‍🎤', dark: '🧑🏿‍🎤' }
+        },
+        // Curly hair
+        'curly': {
+            woman: { light: '👩🏻‍🦱', 'medium-light': '👩🏼‍🦱', medium: '👩🏽‍🦱', 'medium-dark': '👩🏾‍🦱', dark: '👩🏿‍🦱' },
+            man: { light: '👨🏻‍🦱', 'medium-light': '👨🏼‍🦱', medium: '👨🏽‍🦱', 'medium-dark': '👨🏾‍🦱', dark: '👨🏿‍🦱' },
+            neutral: { light: '🧑🏻‍🦱', 'medium-light': '🧑🏼‍🦱', medium: '🧑🏽‍🦱', 'medium-dark': '🧑🏾‍🦱', dark: '🧑🏿‍🦱' }
+        },
+        // Red hair
+        'red': {
+            woman: { light: '👩🏻‍🦰', 'medium-light': '👩🏼‍🦰', medium: '👩🏽‍🦰', 'medium-dark': '👩🏾‍🦰', dark: '👩🏿‍🦰' },
+            man: { light: '👨🏻‍🦰', 'medium-light': '👨🏼‍🦰', medium: '👨🏽‍🦰', 'medium-dark': '👨🏾‍🦰', dark: '👨🏿‍🦰' },
+            neutral: { light: '🧑🏻‍🦰', 'medium-light': '🧑🏼‍🦰', medium: '🧑🏽‍🦰', 'medium-dark': '🧑🏾‍🦰', dark: '🧑🏿‍🦰' }
+        },
+        // White/gray hair
+        'white': {
+            woman: { light: '👩🏻‍🦳', 'medium-light': '👩🏼‍🦳', medium: '👩🏽‍🦳', 'medium-dark': '👩🏾‍🦳', dark: '👩🏿‍🦳' },
+            man: { light: '👨🏻‍🦳', 'medium-light': '👨🏼‍🦳', medium: '👨🏽‍🦳', 'medium-dark': '👨🏾‍🦳', dark: '👨🏿‍🦳' },
+            neutral: { light: '🧑🏻‍🦳', 'medium-light': '🧑🏼‍🦳', medium: '🧑🏽‍🦳', 'medium-dark': '🧑🏾‍🦳', dark: '🧑🏿‍🦳' }
+        },
+        // Bald
+        'bald': {
+            woman: { light: '👩🏻‍🦲', 'medium-light': '👩🏼‍🦲', medium: '👩🏽‍🦲', 'medium-dark': '👩🏾‍🦲', dark: '👩🏿‍🦲' },
+            man: { light: '👨🏻‍🦲', 'medium-light': '👨🏼‍🦲', medium: '👨🏽‍🦲', 'medium-dark': '👨🏾‍🦲', dark: '👨🏿‍🦲' },
+            neutral: { light: '🧑🏻‍🦲', 'medium-light': '🧑🏼‍🦲', medium: '🧑🏽‍🦲', 'medium-dark': '🧑🏾‍🦲', dark: '🧑🏿‍🦲' }
+        },
+        // Default person
+        'default': {
+            woman: { light: '👩🏻', 'medium-light': '👩🏼', medium: '👩🏽', 'medium-dark': '👩🏾', dark: '👩🏿' },
+            man: { light: '👨🏻', 'medium-light': '👨🏼', medium: '👨🏽', 'medium-dark': '👨🏾', dark: '👨🏿' },
+            neutral: { light: '🧑🏻', 'medium-light': '🧑🏼', medium: '🧑🏽', 'medium-dark': '🧑🏾', dark: '🧑🏿' }
+        }
+    };
+
+    // Priority order: special cases first, then professions, then hair, then default
+
+    // Check for hijab (overrides gender)
+    if (desc.includes('hijab')) {
+        return emojiMap.hijab[tone];
+    }
+
+    // Check for wheelchair
+    if (desc.includes('wheelchair')) {
+        return emojiMap.wheelchair[gender][tone];
+    }
+
+    // Check for professions
+    if (desc.includes('artist') || desc.includes('painter') || desc.includes('creative')) {
+        return emojiMap.artist[gender][tone];
+    }
+    if (desc.includes('student') || desc.includes('scholar') || desc.includes('graduate')) {
+        return emojiMap.student[gender][tone];
+    }
+    if (desc.includes('singer') || desc.includes('performer') || desc.includes('musician') || desc.includes('spoken word')) {
+        return emojiMap.singer[gender][tone];
+    }
+
+    // Check for hair types
+    if (desc.includes('curly')) {
+        return emojiMap.curly[gender][tone];
+    }
+    if (desc.includes('red hair') || desc.includes('ginger') || desc.includes('auburn')) {
+        return emojiMap.red[gender][tone];
+    }
+    if (desc.includes('white hair') || desc.includes('gray') || desc.includes('grey') || desc.includes('silver')) {
+        return emojiMap.white[gender][tone];
+    }
+    if (desc.includes('bald') || desc.includes('no hair')) {
+        return emojiMap.bald[gender][tone];
+    }
+
+    // Default: just person with skin tone
+    return emojiMap.default[gender][tone];
 }
 
 /**

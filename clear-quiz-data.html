@@ -64,6 +64,10 @@
             🗑️ Clear All Quiz Data
         </button>
 
+        <button class="btn" onclick="clearCustomAvatarsOnly()" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            🎭 Clear Custom Avatars Only
+        </button>
+
         <div id="status"></div>
     </div>
 
@@ -118,6 +122,32 @@
                         <li>✅ Erasure poems (if any)</li>
                     </ul>
                     <p style="margin-top: 15px; color: #10b981;">You can now start fresh!</p>
+                `;
+            } catch (error) {
+                status.innerHTML = `
+                    <h3 class="bad">❌ Error</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+
+        function clearCustomAvatarsOnly() {
+            if (!confirm('Clear all custom avatars? This will remove them from the selection grid.')) {
+                return;
+            }
+
+            const status = document.getElementById('status');
+
+            try {
+                const before = localStorage.getItem('customAvatars');
+                const count = before ? JSON.parse(before).length : 0;
+
+                localStorage.removeItem('customAvatars');
+
+                status.innerHTML = `
+                    <h3 class="good">✅ Custom Avatars Cleared!</h3>
+                    <p>Removed ${count} custom avatar(s)</p>
+                    <p style="margin-top: 15px; color: #10b981;">Refresh your page to see the updated avatar grid!</p>
                 `;
             } catch (error) {
                 status.innerHTML = `
