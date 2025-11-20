@@ -1095,3 +1095,136 @@ footer p {
 .section-title::after {
     animation: pulseGlow 2s ease-in-out infinite;
 }
+}
+
+/* ========================================
+   Flip Cards - Interactive Debate Cards
+   ======================================== */
+
+.debate-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+}
+
+.flip-card {
+    perspective: 1000px;
+    height: 350px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.flip-card:hover {
+    transform: translateY(-5px);
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid;
+}
+
+.flip-card-front {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+    border-color: var(--neon-purple);
+    color: white;
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+    background-color: white;
+    border-color: var(--neon-cyan);
+    color: var(--text-primary);
+    transform: rotateY(180deg);
+    overflow-y: auto;
+}
+
+.flip-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.flip-card-front h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: white;
+}
+
+.flip-card-back h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    color: var(--neon-purple);
+}
+
+.flip-card-back p {
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: var(--spacing-md);
+}
+
+.flip-hint {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+    font-weight: 600;
+    margin-top: auto;
+}
+
+.flip-card-front .flip-hint {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.flip-card-back .flip-hint {
+    color: var(--neon-cyan);
+    text-align: center;
+}
+
+/* Mobile responsiveness for flip cards */
+@media (max-width: 768px) {
+    .debate-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .flip-card {
+        height: 400px;
+    }
+    
+    .flip-card-back {
+        font-size: var(--font-size-sm);
+    }
+}
