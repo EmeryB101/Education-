@@ -822,10 +822,7 @@ function saveResponse() {
     // Save back to localStorage
     localStorage.setItem('courseDesignerResponses', JSON.stringify(responses));
 
-    // If there's a custom avatar request, save it to the custom avatars list
-    if (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim()) {
-        saveCustomAvatar(designerState.selections.customAvatarRequest.trim());
-    }
+    // Note: Custom avatar is already saved when leaving appearance screen in nextScreen()
 
     return calculateStatistics(responses);
 }
@@ -1204,6 +1201,14 @@ function selectEra(era) {
  */
 function nextScreen() {
     const currentIndex = designerState.screens.indexOf(designerState.currentScreen);
+
+    // If leaving appearance screen with a custom avatar request, save it immediately
+    if (designerState.currentScreen === 'appearance' &&
+        designerState.selections.customAvatarRequest &&
+        designerState.selections.customAvatarRequest.trim()) {
+        saveCustomAvatar(designerState.selections.customAvatarRequest.trim());
+    }
+
     if (currentIndex < designerState.screens.length - 1) {
         designerState.currentScreen = designerState.screens[currentIndex + 1];
         renderCurrentScreen();
