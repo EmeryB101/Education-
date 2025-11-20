@@ -9,7 +9,6 @@ const designerState = {
     currentScreen: 'appearance',
     selections: {
         appearance: null,      // visual representation
-        customAvatarRequest: '', // custom avatar description if they don't see themselves
         learningStyle: null,   // separated characteristic/aspiration
         favoritePoem: '',
         rhetoricFocus: null, // 'setting', 'author', 'devices'
@@ -223,40 +222,9 @@ const quizTypes = [
 ];
 
 /**
- * Load custom avatars from localStorage and add to appearances array
- */
-function loadCustomAvatars() {
-    const customAvatars = JSON.parse(localStorage.getItem('customAvatars') || '[]');
-
-    customAvatars.forEach((avatar, index) => {
-        const customId = `custom-avatar-${index}`;
-        // Check if already exists (avoid duplicates)
-        if (!appearances.find(a => a.id === customId)) {
-            // Generate avatar SVG from the stored description
-            const avatarUrl = generateAvatarFromDescription(avatar.description);
-
-            appearances.push({
-                id: customId,
-                visual: avatarUrl,
-                description: avatar.description,
-                isCustom: true,
-                isImage: true // Flag to indicate this is an image URL
-            });
-        }
-    });
-
-    if (customAvatars.length > 0) {
-        console.log(`✅ Loaded ${customAvatars.length} custom avatar(s) from localStorage`);
-    }
-}
-
-/**
  * Initialize the Course Designer
  */
 function initCourseDesigner() {
-    // Load any saved custom avatars
-    loadCustomAvatars();
-
     const launchButton = document.getElementById('launch-course-designer');
     if (launchButton) {
         launchButton.addEventListener('click', openCourseDesigner);
@@ -277,7 +245,6 @@ function openCourseDesigner() {
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
-        customAvatarRequest: '',
         learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
@@ -351,15 +318,6 @@ function renderCurrentScreen() {
     switch (designerState.currentScreen) {
         case 'appearance':
             content.innerHTML = renderAppearanceScreen();
-            // Attach event listener to custom avatar textarea AFTER rendering
-            setTimeout(() => {
-                const textarea = document.getElementById('custom-avatar-request');
-                if (textarea) {
-                    textarea.addEventListener('input', function(e) {
-                        updateCustomAvatarRequest(e.target.value);
-                    });
-                }
-            }, 100);
             break;
         case 'style':
             content.innerHTML = renderStyleScreen();
@@ -396,9 +354,6 @@ function renderCurrentScreen() {
  * Appearance Selection Screen - Pick someone who looks like you
  */
 function renderAppearanceScreen() {
-    const hasSelection = designerState.selections.appearance ||
-                        (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim().length > 0);
-
     return `
         <h2 class="designer-title">Choose Your Appearance</h2>
         <p class="designer-subtitle">Pick the avatar that looks most like you</p>
@@ -406,42 +361,16 @@ function renderAppearanceScreen() {
         <div class="appearance-grid">
             ${appearances.map(appearance => `
                 <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
-                     onclick="selectAppearance('${appearance.id}')"
-                     ${appearance.isCustom ? `title="Custom: ${appearance.description}"` : ''}>
-                    <div class="avatar-visual">
-                        ${appearance.isImage
-                            ? `<img src="${appearance.visual}" alt="Custom avatar" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';" />`
-                            : appearance.visual
-                        }
-                    </div>
-                    ${appearance.isCustom ? `<div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 5px; font-weight: bold;">✨ CUSTOM</div>` : ''}
+                     onclick="selectAppearance('${appearance.id}')">
+                    <div class="avatar-visual">${appearance.visual}</div>
                 </div>
             `).join('')}
-        </div>
-
-        <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(236, 72, 153, 0.15)); border-radius: var(--radius-lg); border: 3px solid var(--accent-color);">
-            <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.3rem; text-align: center;">
-                💡 Don't See an Avatar That Represents You?
-            </h3>
-            <p style="color: var(--text-primary); margin-bottom: var(--spacing-lg); text-align: center; line-height: 1.8;">
-                <strong>Leave a description here, and I will add one just for you!</strong>
-            </p>
-            <textarea
-                id="custom-avatar-request"
-                class="designer-textarea"
-                placeholder="Example: Person with glasses and bun hairstyle, someone with long blonde hair, person with dark skin and short curly hair, someone wearing a hijab, person with beard and hat..."
-                rows="4"
-                style="width: 100%; margin-bottom: var(--spacing-sm);"
-            >${designerState.selections.customAvatarRequest || ''}</textarea>
-            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); text-align: center; margin: 0;">
-                Your custom avatar will be automatically generated and added to the selection grid! ✨
-            </p>
         </div>
 
         <div class="designer-actions">
             <button class="designer-btn btn-primary-designer"
                     onclick="nextScreen()"
-                    ${!hasSelection ? 'disabled' : ''}>
+                    ${!designerState.selections.appearance ? 'disabled' : ''}>
                 Continue → Choose your learning style
             </button>
         </div>
@@ -784,174 +713,6 @@ function renderEraScreen() {
             </button>
         </div>
     `;
-}
-
-/**
- * Generate comprehensive SVG avatar with actual face features based on description
- * Creates faces with glasses, hairstyles, skin tones - all as inline SVG
- */
-function generateAvatarFromDescription(description) {
-    const desc = description.toLowerCase();
-
-    // Determine skin tone color
-    let skinColor = '#f0c5a0'; // default medium
-    if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair')) {
-        skinColor = '#fde4d0';
-    } else if (desc.includes('dark skin') || desc.includes('black skin')) {
-        skinColor = '#8d5524';
-    } else if (desc.includes('brown') || desc.includes('tan')) {
-        skinColor = '#c68642';
-    }
-
-    // Determine hair style and color
-    let hairColor = '#4a3728'; // default dark brown
-    if (desc.includes('blonde') || desc.includes('blond')) {
-        hairColor = '#f4d03f';
-    } else if (desc.includes('red') || desc.includes('ginger')) {
-        hairColor = '#d4541f';
-    } else if (desc.includes('black hair')) {
-        hairColor = '#1a1a1a';
-    } else if (desc.includes('gray') || desc.includes('grey') || desc.includes('white')) {
-        hairColor = '#c0c0c0';
-    }
-
-    // Hair style SVG paths
-    let hairSVG = '';
-
-    if (desc.includes('bun') || desc.includes('updo')) {
-        // Bun/updo hairstyle
-        hairSVG = `
-            <ellipse cx="50" cy="25" rx="18" ry="15" fill="${hairColor}"/>
-            <circle cx="50" cy="15" r="8" fill="${hairColor}"/>
-        `;
-    } else if (desc.includes('long')) {
-        // Long hair
-        hairSVG = `
-            <ellipse cx="50" cy="35" rx="25" ry="30" fill="${hairColor}"/>
-            <rect x="25" y="50" width="50" height="40" fill="${hairColor}" rx="10"/>
-        `;
-    } else if (desc.includes('short')) {
-        // Short hair
-        hairSVG = `
-            <ellipse cx="50" cy="30" rx="23" ry="18" fill="${hairColor}"/>
-        `;
-    } else if (desc.includes('curly')) {
-        // Curly hair (multiple circles)
-        hairSVG = `
-            <circle cx="35" cy="25" r="8" fill="${hairColor}"/>
-            <circle cx="50" cy="22" r="9" fill="${hairColor}"/>
-            <circle cx="65" cy="25" r="8" fill="${hairColor}"/>
-            <circle cx="40" cy="32" r="7" fill="${hairColor}"/>
-            <circle cx="60" cy="32" r="7" fill="${hairColor}"/>
-        `;
-    } else if (desc.includes('afro')) {
-        // Afro (large circular mass)
-        hairSVG = `
-            <circle cx="50" cy="28" r="28" fill="${hairColor}"/>
-        `;
-    } else if (desc.includes('ponytail')) {
-        // Ponytail
-        hairSVG = `
-            <ellipse cx="50" cy="30" rx="23" ry="18" fill="${hairColor}"/>
-            <ellipse cx="72" cy="50" rx="6" ry="20" fill="${hairColor}"/>
-        `;
-    } else if (!desc.includes('bald')) {
-        // Default short hair
-        hairSVG = `
-            <ellipse cx="50" cy="30" rx="23" ry="18" fill="${hairColor}"/>
-        `;
-    }
-
-    // Glasses SVG (if mentioned)
-    let glassesSVG = '';
-    if (desc.includes('glass')) {
-        glassesSVG = `
-            <circle cx="38" cy="55" r="8" fill="none" stroke="#333" stroke-width="2"/>
-            <circle cx="62" cy="55" r="8" fill="none" stroke="#333" stroke-width="2"/>
-            <line x1="46" y1="55" x2="54" y2="55" stroke="#333" stroke-width="2"/>
-            <line x1="30" y1="55" x2="25" y2="58" stroke="#333" stroke-width="2"/>
-            <line x1="70" y1="55" x2="75" y2="58" stroke="#333" stroke-width="2"/>
-        `;
-    }
-
-    // Hijab (if mentioned)
-    let hijabSVG = '';
-    if (desc.includes('hijab')) {
-        hairSVG = ''; // Remove hair
-        hijabSVG = `
-            <path d="M 25 30 Q 25 15, 50 15 Q 75 15, 75 30 L 75 70 Q 75 85, 65 90 L 35 90 Q 25 85, 25 70 Z" fill="#4a90e2"/>
-            <ellipse cx="50" cy="45" rx="20" ry="25" fill="${skinColor}"/>
-        `;
-    }
-
-    // Build complete SVG
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-        <!-- Background -->
-        <rect width="100" height="100" fill="#e0e7ff" rx="50"/>
-
-        <!-- Hijab (if present) -->
-        ${hijabSVG}
-
-        <!-- Hair (if not hijab) -->
-        ${!desc.includes('hijab') ? hairSVG : ''}
-
-        <!-- Face -->
-        <ellipse cx="50" cy="55" rx="20" ry="25" fill="${skinColor}"/>
-
-        <!-- Eyes -->
-        <circle cx="42" cy="52" r="3" fill="#2c1810"/>
-        <circle cx="58" cy="52" r="3" fill="#2c1810"/>
-
-        <!-- Nose -->
-        <line x1="50" y1="58" x2="50" y2="64" stroke="${skinColor}" stroke-width="2" stroke-linecap="round" filter="brightness(0.8)"/>
-
-        <!-- Mouth -->
-        <path d="M 43 70 Q 50 73, 57 70" stroke="#8b4513" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-        <!-- Glasses (if present) -->
-        ${glassesSVG}
-
-        <!-- Beard (if mentioned) -->
-        ${desc.includes('beard') ? `<ellipse cx="50" cy="75" rx="12" ry="8" fill="${hairColor}"/>` : ''}
-    </svg>`;
-
-    // Convert to data URI
-    const dataUri = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
-
-    console.log('✅ Generated detailed avatar SVG for:', description);
-    return dataUri;
-}
-
-/**
- * Save custom avatar request to persistent storage and add to appearances
- */
-function saveCustomAvatar(description) {
-    const customAvatars = JSON.parse(localStorage.getItem('customAvatars') || '[]');
-
-    // Check if this description already exists (avoid duplicates)
-    const exists = customAvatars.some(a => a.description.toLowerCase().trim() === description.toLowerCase().trim());
-    if (!exists) {
-        customAvatars.push({
-            description: description.trim(),
-            timestamp: new Date().toISOString()
-        });
-        localStorage.setItem('customAvatars', JSON.stringify(customAvatars));
-
-        // Generate avatar URL from description using DiceBear
-        const avatarUrl = generateAvatarFromDescription(description.trim());
-
-        // Add to appearances array immediately with generated avatar URL
-        const newId = `custom-avatar-${customAvatars.length - 1}`;
-        appearances.push({
-            id: newId,
-            visual: avatarUrl,
-            description: description.trim(),
-            isCustom: true,
-            isImage: true // Flag to indicate this is an image URL, not emoji
-        });
-
-        console.log('✅ Custom avatar saved and added to selection grid:', description.trim());
-    }
 }
 
 /**
