@@ -223,9 +223,36 @@ const quizTypes = [
 ];
 
 /**
+ * Load custom avatars from localStorage and add to appearances array
+ */
+function loadCustomAvatars() {
+    const customAvatars = JSON.parse(localStorage.getItem('customAvatars') || '[]');
+
+    customAvatars.forEach((avatar, index) => {
+        const customId = `custom-avatar-${index}`;
+        // Check if already exists (avoid duplicates)
+        if (!appearances.find(a => a.id === customId)) {
+            appearances.push({
+                id: customId,
+                visual: '⭐',
+                description: avatar.description,
+                isCustom: true
+            });
+        }
+    });
+
+    if (customAvatars.length > 0) {
+        console.log(`✅ Loaded ${customAvatars.length} custom avatar(s) from localStorage`);
+    }
+}
+
+/**
  * Initialize the Course Designer
  */
 function initCourseDesigner() {
+    // Load any saved custom avatars
+    loadCustomAvatars();
+
     const launchButton = document.getElementById('launch-course-designer');
     if (launchButton) {
         launchButton.addEventListener('click', openCourseDesigner);
@@ -375,8 +402,10 @@ function renderAppearanceScreen() {
         <div class="appearance-grid">
             ${appearances.map(appearance => `
                 <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
-                     onclick="selectAppearance('${appearance.id}')">
+                     onclick="selectAppearance('${appearance.id}')"
+                     ${appearance.isCustom ? `title="Custom avatar: ${appearance.description}"` : ''}>
                     <div class="avatar-visual">${appearance.visual}</div>
+                    ${appearance.isCustom ? `<div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 5px; font-weight: bold;">CUSTOM</div>` : ''}
                 </div>
             `).join('')}
         </div>
@@ -749,6 +778,34 @@ function renderEraScreen() {
 }
 
 /**
+ * Save custom avatar request to persistent storage and add to appearances
+ */
+function saveCustomAvatar(description) {
+    const customAvatars = JSON.parse(localStorage.getItem('customAvatars') || '[]');
+
+    // Check if this description already exists (avoid duplicates)
+    const exists = customAvatars.some(a => a.description.toLowerCase().trim() === description.toLowerCase().trim());
+    if (!exists) {
+        customAvatars.push({
+            description: description.trim(),
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('customAvatars', JSON.stringify(customAvatars));
+
+        // Add to appearances array immediately
+        const newId = `custom-avatar-${customAvatars.length - 1}`;
+        appearances.push({
+            id: newId,
+            visual: '⭐',
+            description: description.trim(),
+            isCustom: true
+        });
+
+        console.log('✅ Custom avatar saved and added to selection grid:', description.trim());
+    }
+}
+
+/**
  * Save response data and retrieve aggregate statistics
  */
 function saveResponse() {
@@ -764,6 +821,11 @@ function saveResponse() {
 
     // Save back to localStorage
     localStorage.setItem('courseDesignerResponses', JSON.stringify(responses));
+
+    // If there's a custom avatar request, save it to the custom avatars list
+    if (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim()) {
+        saveCustomAvatar(designerState.selections.customAvatarRequest.trim());
+    }
 
     return calculateStatistics(responses);
 }
