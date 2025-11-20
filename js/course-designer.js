@@ -234,7 +234,6 @@ function loadCustomAvatars() {
         if (!appearances.find(a => a.id === customId)) {
             appearances.push({
                 id: customId,
-                visual: '⭐',
                 description: avatar.description,
                 isCustom: true
             });
@@ -403,9 +402,15 @@ function renderAppearanceScreen() {
             ${appearances.map(appearance => `
                 <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
                      onclick="selectAppearance('${appearance.id}')"
-                     ${appearance.isCustom ? `title="Custom avatar: ${appearance.description}"` : ''}>
-                    <div class="avatar-visual">${appearance.visual}</div>
-                    ${appearance.isCustom ? `<div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 5px; font-weight: bold;">CUSTOM</div>` : ''}
+                     ${appearance.isCustom ? `title="${appearance.description}"` : ''}>
+                    ${appearance.isCustom ? `
+                        <div class="avatar-visual" style="font-size: 0.85rem; padding: 10px; line-height: 1.3; height: auto; display: flex; align-items: center; justify-content: center; text-align: center;">
+                            ${appearance.description}
+                        </div>
+                        <div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 5px; font-weight: bold;">✨ CUSTOM</div>
+                    ` : `
+                        <div class="avatar-visual">${appearance.visual}</div>
+                    `}
                 </div>
             `).join('')}
         </div>
@@ -792,11 +797,10 @@ function saveCustomAvatar(description) {
         });
         localStorage.setItem('customAvatars', JSON.stringify(customAvatars));
 
-        // Add to appearances array immediately
+        // Add to appearances array immediately with the description as the visual
         const newId = `custom-avatar-${customAvatars.length - 1}`;
         appearances.push({
             id: newId,
-            visual: '⭐',
             description: description.trim(),
             isCustom: true
         });
@@ -902,7 +906,6 @@ function renderResultsScreen() {
     if (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim()) {
         // User requested a custom avatar
         selectedAppearance = {
-            visual: '⭐',
             description: designerState.selections.customAvatarRequest.trim()
         };
         isCustomAvatar = true;
@@ -944,19 +947,25 @@ function renderResultsScreen() {
         <p class="designer-subtitle">Here's what we learned about you!</p>
 
         <div class="results-container">
-            <div class="results-avatar-large">${selectedAppearance.visual}</div>
+            ${isCustomAvatar ? `
+                <div class="results-avatar-large" style="font-size: 1rem; padding: 20px; line-height: 1.5; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(236, 72, 153, 0.2)); border: 3px solid var(--accent-color);">
+                    ${selectedAppearance.description}
+                </div>
+            ` : `
+                <div class="results-avatar-large">${selectedAppearance.visual}</div>
+            `}
 
             <div class="results-summary">
                 <div class="results-item">
                     <span class="results-label">Your Avatar:</span>
-                    <span class="results-value">${selectedAppearance.visual}${isCustomAvatar ? ' (Custom Request)' : ''}</span>
+                    <span class="results-value">${isCustomAvatar ? '✨ Custom Avatar' : selectedAppearance.visual}</span>
                 </div>
 
                 ${isCustomAvatar ? `
                 <div class="results-item" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-md); border-radius: var(--radius-md); border-left: 4px solid var(--accent-color);">
-                    <span class="results-label">Your Custom Avatar Request:</span>
+                    <span class="results-label">Your Custom Avatar:</span>
                     <span class="results-value">"${selectedAppearance.description}"</span>
-                    <p style="margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--text-secondary);">✨ Your instructor will add this avatar soon!</p>
+                    <p style="margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--text-secondary);">✨ This avatar is now available for other students to select!</p>
                 </div>
                 ` : ''}
 
@@ -1016,8 +1025,6 @@ function renderResultsScreen() {
                     ✨ This feedback is optional but incredibly valuable for course improvement
                 </p>
             </div>
-
-            ${renderPollStatistics(stats)}
 
             <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); border-radius: var(--radius-lg);">
                 <h3 style="color: var(--neon-purple); margin-bottom: var(--spacing-md); font-size: 1.5rem;">
