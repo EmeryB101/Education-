@@ -9,6 +9,7 @@ const designerState = {
     currentScreen: 'appearance',
     selections: {
         appearance: null,      // visual representation
+        customAvatarRequest: '', // custom avatar description if they don't see themselves
         learningStyle: null,   // separated characteristic/aspiration
         favoritePoem: '',
         rhetoricFocus: null, // 'setting', 'author', 'devices'
@@ -245,6 +246,7 @@ function openCourseDesigner() {
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
+        customAvatarRequest: '',
         learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
@@ -354,6 +356,9 @@ function renderCurrentScreen() {
  * Appearance Selection Screen - Pick someone who looks like you
  */
 function renderAppearanceScreen() {
+    const hasSelection = designerState.selections.appearance ||
+                        (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim().length > 0);
+
     return `
         <h2 class="designer-title">Choose Your Appearance</h2>
         <p class="designer-subtitle">Pick the avatar that looks most like you</p>
@@ -367,10 +372,30 @@ function renderAppearanceScreen() {
             `).join('')}
         </div>
 
+        <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-xl); background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(236, 72, 153, 0.15)); border-radius: var(--radius-lg); border: 3px solid var(--accent-color);">
+            <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.3rem; text-align: center;">
+                💡 Don't See an Avatar That Represents You?
+            </h3>
+            <p style="color: var(--text-primary); margin-bottom: var(--spacing-lg); text-align: center; line-height: 1.8;">
+                <strong>Leave a description here, and I will add one just for you!</strong>
+            </p>
+            <textarea
+                id="custom-avatar-request"
+                class="designer-textarea"
+                placeholder="Example: A person with curly red hair and glasses, or someone in a wheelchair, or a person wearing a hijab..."
+                rows="4"
+                style="width: 100%; margin-bottom: var(--spacing-sm);"
+                onkeyup="updateCustomAvatarRequest(this.value)"
+            >${designerState.selections.customAvatarRequest || ''}</textarea>
+            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); text-align: center; margin: 0;">
+                Your request will be saved and the instructor will add your custom avatar! ✨
+            </p>
+        </div>
+
         <div class="designer-actions">
             <button class="designer-btn btn-primary-designer"
                     onclick="nextScreen()"
-                    ${!designerState.selections.appearance ? 'disabled' : ''}>
+                    ${!hasSelection ? 'disabled' : ''}>
                 Continue → Choose your learning style
             </button>
         </div>
@@ -1027,6 +1052,11 @@ function selectAppearance(appearanceId) {
     renderCurrentScreen();
 }
 
+function updateCustomAvatarRequest(value) {
+    designerState.selections.customAvatarRequest = value;
+    renderCurrentScreen();
+}
+
 function selectLearningStyle(styleId) {
     designerState.selections.learningStyle = styleId;
     renderCurrentScreen();
@@ -1093,6 +1123,7 @@ function restartDesigner() {
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
+        customAvatarRequest: '',
         learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
