@@ -320,6 +320,15 @@ function renderCurrentScreen() {
     switch (designerState.currentScreen) {
         case 'appearance':
             content.innerHTML = renderAppearanceScreen();
+            // Attach event listener to custom avatar textarea AFTER rendering
+            setTimeout(() => {
+                const textarea = document.getElementById('custom-avatar-request');
+                if (textarea) {
+                    textarea.addEventListener('input', function(e) {
+                        updateCustomAvatarRequest(e.target.value);
+                    });
+                }
+            }, 100);
             break;
         case 'style':
             content.innerHTML = renderStyleScreen();
@@ -385,7 +394,6 @@ function renderAppearanceScreen() {
                 placeholder="Example: A person with curly red hair and glasses, or someone in a wheelchair, or a person wearing a hijab..."
                 rows="4"
                 style="width: 100%; margin-bottom: var(--spacing-sm);"
-                onkeyup="updateCustomAvatarRequest(this.value)"
             >${designerState.selections.customAvatarRequest || ''}</textarea>
             <p style="font-size: var(--font-size-sm); color: var(--text-secondary); text-align: center; margin: 0;">
                 Your request will be saved and the instructor will add your custom avatar! ✨
