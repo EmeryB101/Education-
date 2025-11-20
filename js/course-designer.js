@@ -836,7 +836,22 @@ function renderResultsScreen() {
     // Save response and get statistics
     const stats = saveResponse();
 
-    const selectedAppearance = appearances.find(a => a.id === designerState.selections.appearance);
+    // Handle custom avatar request or selected avatar
+    let selectedAppearance;
+    let isCustomAvatar = false;
+
+    if (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim()) {
+        // User requested a custom avatar
+        selectedAppearance = {
+            visual: '⭐',
+            description: designerState.selections.customAvatarRequest.trim()
+        };
+        isCustomAvatar = true;
+    } else {
+        // User selected from existing avatars
+        selectedAppearance = appearances.find(a => a.id === designerState.selections.appearance);
+    }
+
     const selectedStyle = learningStyles.find(s => s.id === designerState.selections.learningStyle);
 
     const preferenceText = {
@@ -875,8 +890,16 @@ function renderResultsScreen() {
             <div class="results-summary">
                 <div class="results-item">
                     <span class="results-label">Your Avatar:</span>
-                    <span class="results-value">${selectedAppearance.visual}</span>
+                    <span class="results-value">${selectedAppearance.visual}${isCustomAvatar ? ' (Custom Request)' : ''}</span>
                 </div>
+
+                ${isCustomAvatar ? `
+                <div class="results-item" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); padding: var(--spacing-md); border-radius: var(--radius-md); border-left: 4px solid var(--accent-color);">
+                    <span class="results-label">Your Custom Avatar Request:</span>
+                    <span class="results-value">"${selectedAppearance.description}"</span>
+                    <p style="margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--text-secondary);">✨ Your instructor will add this avatar soon!</p>
+                </div>
+                ` : ''}
 
                 <div class="results-item">
                     <span class="results-label">Your Learning Style:</span>
