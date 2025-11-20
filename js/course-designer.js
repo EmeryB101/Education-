@@ -226,28 +226,11 @@ const quizTypes = [
  * Load custom avatars from localStorage and add to appearances array
  */
 function loadCustomAvatars() {
-    const customAvatars = JSON.parse(localStorage.getItem('customAvatars') || '[]');
+    // TEMPORARILY DISABLED - clear out any broken custom avatars
+    // This prevents the 4 blank custom avatars from appearing
+    localStorage.removeItem('customAvatars');
 
-    customAvatars.forEach((avatar, index) => {
-        const customId = `custom-avatar-${index}`;
-        // Check if already exists (avoid duplicates)
-        if (!appearances.find(a => a.id === customId)) {
-            // Generate avatar URL from the stored description
-            const avatarUrl = generateAvatarFromDescription(avatar.description);
-
-            appearances.push({
-                id: customId,
-                visual: avatarUrl,
-                description: avatar.description,
-                isCustom: true,
-                isImage: true // Flag to indicate this is an image URL
-            });
-        }
-    });
-
-    if (customAvatars.length > 0) {
-        console.log(`✅ Loaded ${customAvatars.length} custom avatar(s) from localStorage`);
-    }
+    console.log('✅ Custom avatars cleared - starting fresh');
 }
 
 /**
