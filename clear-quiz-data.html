@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Quiz Data</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #a855f7;
+        }
+        h1 {
+            color: #a855f7;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .btn-view {
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+        }
+        #status {
+            margin-top: 30px;
+            padding: 20px;
+            background: #222;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .good { color: #10b981; }
+        .bad { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Clear Course Designer Data</h1>
+        <p>Use this to reset all test quiz data</p>
+
+        <button class="btn btn-view" onclick="viewData()">
+            👁️ View Current Data
+        </button>
+
+        <button class="btn" onclick="clearAllData()">
+            🗑️ Clear All Quiz Data
+        </button>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        function viewData() {
+            const responses = localStorage.getItem('courseDesignerResponses');
+            const customAvatars = localStorage.getItem('customAvatars');
+            const status = document.getElementById('status');
+
+            if (!responses && !customAvatars) {
+                status.innerHTML = '<p class="good">✅ No data found - already clean!</p>';
+                return;
+            }
+
+            const parsedResponses = JSON.parse(responses || '[]');
+
+            status.innerHTML = `
+                <h3>Current Data:</h3>
+                <p><strong>Total Responses:</strong> ${parsedResponses.length}</p>
+                ${parsedResponses.length > 0 ? `
+                    <details style="margin-top: 10px;">
+                        <summary style="cursor: pointer; color: #a855f7;">View All Responses</summary>
+                        <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto; margin-top: 10px; font-size: 12px;">${JSON.stringify(parsedResponses, null, 2)}</pre>
+                    </details>
+                ` : ''}
+                ${customAvatars ? `
+                    <p style="margin-top: 15px;"><strong>Custom Avatars:</strong></p>
+                    <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 12px;">${customAvatars}</pre>
+                ` : ''}
+            `;
+        }
+
+        function clearAllData() {
+            if (!confirm('Are you sure you want to delete ALL quiz data? This cannot be undone!')) {
+                return;
+            }
+
+            const status = document.getElementById('status');
+
+            try {
+                // Clear all Course Designer data
+                localStorage.removeItem('courseDesignerResponses');
+                localStorage.removeItem('customAvatars');
+                localStorage.removeItem('erasurePoems'); // Also clear erasure poems if testing those
+
+                status.innerHTML = `
+                    <h3 class="good">✅ Success!</h3>
+                    <p>All quiz data has been cleared:</p>
+                    <ul style="text-align: left;">
+                        <li>✅ Course Designer responses</li>
+                        <li>✅ Custom avatar requests</li>
+                        <li>✅ Erasure poems (if any)</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #10b981;">You can now start fresh!</p>
+                `;
+            } catch (error) {
+                status.innerHTML = `
+                    <h3 class="bad">❌ Error</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+
+        // Auto-show current data on load
+        window.addEventListener('load', viewData);
+    </script>
+</body>
+</html>
