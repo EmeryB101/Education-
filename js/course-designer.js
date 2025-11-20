@@ -410,7 +410,7 @@ function renderAppearanceScreen() {
                      ${appearance.isCustom ? `title="Custom: ${appearance.description}"` : ''}>
                     <div class="avatar-visual">
                         ${appearance.isImage
-                            ? `<img src="${appearance.visual}" alt="Custom avatar" style="width: 100%; height: 100%; object-fit: contain;" />`
+                            ? `<img src="${appearance.visual}" alt="Custom avatar" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';" />`
                             : appearance.visual
                         }
                     </div>
@@ -787,103 +787,64 @@ function renderEraScreen() {
 }
 
 /**
- * Generate custom avatar URL using DiceBear API based on description
- * DiceBear creates SVG avatars with glasses, hairstyles, and more
+ * Generate simple SVG avatar as data URI based on description
+ * Creates a local SVG with initials and color coding
  */
 function generateAvatarFromDescription(description) {
     const desc = description.toLowerCase();
 
-    // Base URL for DiceBear avataaars style (cartoon avatars with lots of options)
-    const baseUrl = 'https://api.dicebear.com/7.x/avataaars/svg';
-    const params = new URLSearchParams();
+    // Extract initials from description (first letters of first two words)
+    const words = description.trim().split(/\s+/);
+    let initials = words.slice(0, 2).map(w => w[0].toUpperCase()).join('');
+    if (initials.length === 0) initials = '?';
+    if (initials.length === 1) initials += initials; // Double it if only one letter
 
-    // Use description as seed for consistency
-    params.append('seed', description);
+    // Determine background color based on keywords
+    let bgColor = '#8b5cf6'; // default purple
+    let textColor = '#ffffff';
 
-    // Detect and set glasses
     if (desc.includes('glass')) {
-        if (desc.includes('round')) {
-            params.append('glasses', 'round');
-        } else if (desc.includes('sunglasses')) {
-            params.append('glasses', 'kurt');
-        } else {
-            params.append('glasses', 'prescription02'); // default glasses
+        bgColor = '#3b82f6'; // blue for glasses
+    } else if (desc.includes('hair')) {
+        if (desc.includes('red') || desc.includes('ginger')) {
+            bgColor = '#ef4444'; // red
+        } else if (desc.includes('blonde') || desc.includes('blond')) {
+            bgColor = '#f59e0b'; // yellow/amber
+        } else if (desc.includes('black')) {
+            bgColor = '#1f2937'; // very dark gray
+        } else if (desc.includes('brown')) {
+            bgColor = '#78350f'; // brown
+        } else if (desc.includes('white') || desc.includes('gray') || desc.includes('grey')) {
+            bgColor = '#9ca3af'; // gray
+            textColor = '#000000';
+        } else if (desc.includes('curly')) {
+            bgColor = '#a855f7'; // purple
         }
-        params.append('glassesProbability', '100');
+    } else if (desc.includes('dark skin') || desc.includes('black skin')) {
+        bgColor = '#78350f'; // dark brown
+    } else if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair')) {
+        bgColor = '#fde68a'; // light yellow
+        textColor = '#000000';
+    } else if (desc.includes('hijab') || desc.includes('headscarf')) {
+        bgColor = '#06b6d4'; // cyan
     }
 
-    // Detect and set hair style
-    if (desc.includes('bun') || desc.includes('updo') || desc.includes('up do')) {
-        params.append('hair', 'bun');
-    } else if (desc.includes('long')) {
-        params.append('hair', 'longHairStraight');
-    } else if (desc.includes('short')) {
-        params.append('hair', 'shortHairShortFlat');
-    } else if (desc.includes('curly') || desc.includes('curls')) {
-        params.append('hair', 'shortHairShortCurly');
-    } else if (desc.includes('dreads') || desc.includes('dreadlocks')) {
-        params.append('hair', 'shortHairDreads');
-    } else if (desc.includes('afro')) {
-        params.append('hair', 'shortHairAfro');
-    } else if (desc.includes('bald') || desc.includes('no hair')) {
-        params.append('hair', 'noHair');
-    } else if (desc.includes('bob')) {
-        params.append('hair', 'longHairBob');
-    } else if (desc.includes('straight')) {
-        params.append('hair', 'longHairStraight');
-    } else if (desc.includes('ponytail') || desc.includes('pony tail')) {
-        params.append('hair', 'longHairNotTooLong');
-    }
+    // Add visual indicator for glasses
+    const hasGlasses = desc.includes('glass');
+    const glassesIcon = hasGlasses ? '<circle cx="35" cy="45" r="12" fill="none" stroke="white" stroke-width="2"/><circle cx="65" cy="45" r="12" fill="none" stroke="white" stroke-width="2"/><line x1="47" y1="45" x2="53" y2="45" stroke="white" stroke-width="2"/>' : '';
 
-    // Detect hair color
-    if (desc.includes('red hair') || desc.includes('ginger') || desc.includes('auburn')) {
-        params.append('hairColor', 'Red');
-    } else if (desc.includes('blonde') || desc.includes('blond') || desc.includes('yellow hair')) {
-        params.append('hairColor', 'Blonde');
-    } else if (desc.includes('brown hair')) {
-        params.append('hairColor', 'Brown');
-    } else if (desc.includes('black hair')) {
-        params.append('hairColor', 'Black');
-    } else if (desc.includes('gray hair') || desc.includes('grey hair') || desc.includes('white hair')) {
-        params.append('hairColor', 'SilverGray');
-    }
+    // Generate SVG
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+        <rect width="100" height="100" fill="${bgColor}" rx="50"/>
+        <text x="50" y="60" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="${textColor}" text-anchor="middle">${initials}</text>
+        ${glassesIcon}
+    </svg>`;
 
-    // Detect skin tone
-    if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair')) {
-        params.append('skinColor', 'Light');
-    } else if (desc.includes('dark skin') || desc.includes('black skin') || desc.includes('deep')) {
-        params.append('skinColor', 'Black');
-    } else if (desc.includes('brown skin') || desc.includes('medium-dark')) {
-        params.append('skinColor', 'Brown');
-    } else if (desc.includes('tan') || desc.includes('medium')) {
-        params.append('skinColor', 'Tanned');
-    }
+    // Convert to data URI
+    const dataUri = 'data:image/svg+xml;base64,' + btoa(svg);
 
-    // Detect accessories
-    if (desc.includes('hijab') || desc.includes('headscarf')) {
-        params.append('accessoriesColor', 'Blue03');
-        params.append('clothing', 'Hijab');
-    }
-
-    if (desc.includes('hat') || desc.includes('cap')) {
-        params.append('hat', 'winter02');
-        params.append('hatProbability', '100');
-    }
-
-    // Facial hair
-    if (desc.includes('beard')) {
-        params.append('facialHair', 'BeardMedium');
-        params.append('facialHairProbability', '100');
-    } else if (desc.includes('mustache') || desc.includes('moustache')) {
-        params.append('facialHair', 'MoustacheFancy');
-        params.append('facialHairProbability', '100');
-    }
-
-    // Build final URL
-    const avatarUrl = `${baseUrl}?${params.toString()}`;
-
-    console.log('✅ Generated custom avatar URL:', description, '→', avatarUrl);
-    return avatarUrl;
+    console.log('✅ Generated custom avatar SVG:', description, '→ initials:', initials);
+    return dataUri;
 }
 
 /**

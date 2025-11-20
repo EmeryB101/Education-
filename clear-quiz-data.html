@@ -132,10 +132,6 @@
         }
 
         function clearCustomAvatarsOnly() {
-            if (!confirm('Clear all custom avatars? This will remove them from the selection grid.')) {
-                return;
-            }
-
             const status = document.getElementById('status');
 
             try {
@@ -147,8 +143,13 @@
                 status.innerHTML = `
                     <h3 class="good">✅ Custom Avatars Cleared!</h3>
                     <p>Removed ${count} custom avatar(s)</p>
-                    <p style="margin-top: 15px; color: #10b981;">Refresh your page to see the updated avatar grid!</p>
+                    <p style="margin-top: 15px; color: #10b981;">Refreshing page in 2 seconds...</p>
                 `;
+
+                // Auto-refresh after 2 seconds
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             } catch (error) {
                 status.innerHTML = `
                     <h3 class="bad">❌ Error</h3>
