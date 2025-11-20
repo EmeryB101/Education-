@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple Erasure Game</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+        .test-btn {
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            color: white;
+            border: none;
+            padding: 30px 60px;
+            font-size: 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .test-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Simple Erasure Game</h1>
+    <p>This is a minimal test - if this works, the game works!</p>
+
+    <button type="button" class="test-btn" onclick="startErasureGame()">
+        🎨 Launch Game
+    </button>
+
+    <div id="status" style="margin-top: 30px; padding: 20px; background: #222; border-radius: 8px;">
+        <p>Waiting for button click...</p>
+    </div>
+
+    <script src="js/erasure-game-simple.js"></script>
+
+    <script>
+        // Check if loaded
+        if (typeof startErasureGame === 'function') {
+            document.getElementById('status').innerHTML = '<p style="color: #10b981;">✅ Game loaded successfully! Click the button above.</p>';
+        } else {
+            document.getElementById('status').innerHTML = '<p style="color: #ef4444;">❌ ERROR: Game not loaded</p>';
+        }
+    </script>
+</body>
+</html>

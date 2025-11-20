@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/poetry-explorer.css">
-    <link rel="stylesheet" href="css/erasure-game.css">
 </head>
 <body>
     <nav class="navbar">
@@ -108,7 +107,7 @@
                             <li><strong>Compare</strong> your poem with all other student creations</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;" onclick="event.preventDefault(); event.stopPropagation(); if(typeof openErasureGame === 'function') { openErasureGame(); } else { alert('Game not loaded. Please refresh.'); }">
+                    <button type="button" class="btn-primary" style="font-size: 1.3rem; padding: var(--spacing-lg) var(--spacing-2xl); font-weight: 800;" onclick="startErasureGame()">
                         🎨 Start Erasure Poem Creator
                     </button>
                 </div>
@@ -227,7 +226,7 @@
     <script src="js/navigation.js"></script>
     <script src="js/poetry-analysis-game.js"></script>
     <script src="js/poetry-prompt-quiz.js"></script>
-    <script src="js/erasure-poem-game.js"></script>
+    <script src="js/erasure-game-simple.js"></script>
     <script src="js/poetry-explorer.js"></script>
     <script src="js/angelou-game.js"></script>
     <script src="js/scroll-animations.js"></script>
