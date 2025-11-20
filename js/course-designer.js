@@ -232,14 +232,15 @@ function loadCustomAvatars() {
         const customId = `custom-avatar-${index}`;
         // Check if already exists (avoid duplicates)
         if (!appearances.find(a => a.id === customId)) {
-            // Generate emoji from the stored description
-            const generatedEmoji = generateAvatarFromDescription(avatar.description);
+            // Generate avatar URL from the stored description
+            const avatarUrl = generateAvatarFromDescription(avatar.description);
 
             appearances.push({
                 id: customId,
-                visual: generatedEmoji,
+                visual: avatarUrl,
                 description: avatar.description,
-                isCustom: true
+                isCustom: true,
+                isImage: true // Flag to indicate this is an image URL
             });
         }
     });
@@ -407,7 +408,12 @@ function renderAppearanceScreen() {
                 <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
                      onclick="selectAppearance('${appearance.id}')"
                      ${appearance.isCustom ? `title="Custom: ${appearance.description}"` : ''}>
-                    <div class="avatar-visual">${appearance.visual}</div>
+                    <div class="avatar-visual">
+                        ${appearance.isImage
+                            ? `<img src="${appearance.visual}" alt="Custom avatar" style="width: 100%; height: 100%; object-fit: contain;" />`
+                            : appearance.visual
+                        }
+                    </div>
                     ${appearance.isCustom ? `<div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 5px; font-weight: bold;">✨ CUSTOM</div>` : ''}
                 </div>
             `).join('')}
@@ -423,12 +429,12 @@ function renderAppearanceScreen() {
             <textarea
                 id="custom-avatar-request"
                 class="designer-textarea"
-                placeholder="Example: A person with curly red hair and glasses, or someone in a wheelchair, or a person wearing a hijab..."
+                placeholder="Example: Person with glasses and bun hairstyle, someone with long blonde hair, person with dark skin and short curly hair, someone wearing a hijab, person with beard and hat..."
                 rows="4"
                 style="width: 100%; margin-bottom: var(--spacing-sm);"
             >${designerState.selections.customAvatarRequest || ''}</textarea>
             <p style="font-size: var(--font-size-sm); color: var(--text-secondary); text-align: center; margin: 0;">
-                Your request will be saved and the instructor will add your custom avatar! ✨
+                Your custom avatar will be automatically generated and added to the selection grid! ✨
             </p>
         </div>
 
@@ -781,192 +787,103 @@ function renderEraScreen() {
 }
 
 /**
- * Comprehensive emoji library - pre-built tested emojis with keywords
- */
-const customAvatarLibrary = [
-    // Wheelchair users - all variations
-    { emoji: '👩🏻‍🦽', keywords: ['wheelchair', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🦽', keywords: ['wheelchair', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🦽', keywords: ['wheelchair', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🦽', keywords: ['wheelchair', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🦽', keywords: ['wheelchair', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🦽', keywords: ['wheelchair', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🦽', keywords: ['wheelchair', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🦽', keywords: ['wheelchair', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🦽', keywords: ['wheelchair', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🦽', keywords: ['wheelchair', 'man', 'dark', 'black'] },
-    { emoji: '🧑🏻‍🦽', keywords: ['wheelchair', 'person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼‍🦽', keywords: ['wheelchair', 'person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽‍🦽', keywords: ['wheelchair', 'person', 'medium', 'olive'] },
-    { emoji: '🧑🏾‍🦽', keywords: ['wheelchair', 'person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿‍🦽', keywords: ['wheelchair', 'person', 'dark', 'black'] },
-
-    // Hijab - cultural
-    { emoji: '🧕🏻', keywords: ['hijab', 'headscarf', 'light', 'pale', 'fair'] },
-    { emoji: '🧕🏼', keywords: ['hijab', 'headscarf', 'medium-light', 'tan'] },
-    { emoji: '🧕🏽', keywords: ['hijab', 'headscarf', 'medium', 'olive'] },
-    { emoji: '🧕🏾', keywords: ['hijab', 'headscarf', 'medium-dark', 'brown'] },
-    { emoji: '🧕🏿', keywords: ['hijab', 'headscarf', 'dark', 'black'] },
-
-    // Curly hair
-    { emoji: '👩🏻‍🦱', keywords: ['curly', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🦱', keywords: ['curly', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🦱', keywords: ['curly', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🦱', keywords: ['curly', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🦱', keywords: ['curly', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🦱', keywords: ['curly', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🦱', keywords: ['curly', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🦱', keywords: ['curly', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🦱', keywords: ['curly', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🦱', keywords: ['curly', 'man', 'dark', 'black'] },
-    { emoji: '🧑🏻‍🦱', keywords: ['curly', 'person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼‍🦱', keywords: ['curly', 'person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽‍🦱', keywords: ['curly', 'person', 'medium', 'olive'] },
-    { emoji: '🧑🏾‍🦱', keywords: ['curly', 'person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿‍🦱', keywords: ['curly', 'person', 'dark', 'black'] },
-
-    // Red/Ginger hair
-    { emoji: '👩🏻‍🦰', keywords: ['red', 'ginger', 'auburn', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🦰', keywords: ['red', 'ginger', 'auburn', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🦰', keywords: ['red', 'ginger', 'auburn', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🦰', keywords: ['red', 'ginger', 'auburn', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🦰', keywords: ['red', 'ginger', 'auburn', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🦰', keywords: ['red', 'ginger', 'auburn', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🦰', keywords: ['red', 'ginger', 'auburn', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🦰', keywords: ['red', 'ginger', 'auburn', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🦰', keywords: ['red', 'ginger', 'auburn', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🦰', keywords: ['red', 'ginger', 'auburn', 'man', 'dark', 'black'] },
-    { emoji: '🧑🏻‍🦰', keywords: ['red', 'ginger', 'auburn', 'person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼‍🦰', keywords: ['red', 'ginger', 'auburn', 'person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽‍🦰', keywords: ['red', 'ginger', 'auburn', 'person', 'medium', 'olive'] },
-    { emoji: '🧑🏾‍🦰', keywords: ['red', 'ginger', 'auburn', 'person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿‍🦰', keywords: ['red', 'ginger', 'auburn', 'person', 'dark', 'black'] },
-
-    // White/Gray hair
-    { emoji: '👩🏻‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'man', 'dark', 'black'] },
-    { emoji: '🧑🏻‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'person', 'medium', 'olive'] },
-    { emoji: '🧑🏾‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿‍🦳', keywords: ['white', 'gray', 'grey', 'silver', 'person', 'dark', 'black'] },
-
-    // Bald
-    { emoji: '👩🏻‍🦲', keywords: ['bald', 'no hair', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🦲', keywords: ['bald', 'no hair', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🦲', keywords: ['bald', 'no hair', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🦲', keywords: ['bald', 'no hair', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🦲', keywords: ['bald', 'no hair', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🦲', keywords: ['bald', 'no hair', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🦲', keywords: ['bald', 'no hair', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🦲', keywords: ['bald', 'no hair', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🦲', keywords: ['bald', 'no hair', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🦲', keywords: ['bald', 'no hair', 'man', 'dark', 'black'] },
-    { emoji: '🧑🏻‍🦲', keywords: ['bald', 'no hair', 'person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼‍🦲', keywords: ['bald', 'no hair', 'person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽‍🦲', keywords: ['bald', 'no hair', 'person', 'medium', 'olive'] },
-    { emoji: '🧑🏾‍🦲', keywords: ['bald', 'no hair', 'person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿‍🦲', keywords: ['bald', 'no hair', 'person', 'dark', 'black'] },
-
-    // Artists
-    { emoji: '👩🏻‍🎨', keywords: ['artist', 'painter', 'creative', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🎨', keywords: ['artist', 'painter', 'creative', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🎨', keywords: ['artist', 'painter', 'creative', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🎨', keywords: ['artist', 'painter', 'creative', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🎨', keywords: ['artist', 'painter', 'creative', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🎨', keywords: ['artist', 'painter', 'creative', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🎨', keywords: ['artist', 'painter', 'creative', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🎨', keywords: ['artist', 'painter', 'creative', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🎨', keywords: ['artist', 'painter', 'creative', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🎨', keywords: ['artist', 'painter', 'creative', 'man', 'dark', 'black'] },
-
-    // Students
-    { emoji: '👩🏻‍🎓', keywords: ['student', 'scholar', 'graduate', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🎓', keywords: ['student', 'scholar', 'graduate', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🎓', keywords: ['student', 'scholar', 'graduate', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🎓', keywords: ['student', 'scholar', 'graduate', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🎓', keywords: ['student', 'scholar', 'graduate', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🎓', keywords: ['student', 'scholar', 'graduate', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🎓', keywords: ['student', 'scholar', 'graduate', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🎓', keywords: ['student', 'scholar', 'graduate', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🎓', keywords: ['student', 'scholar', 'graduate', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🎓', keywords: ['student', 'scholar', 'graduate', 'man', 'dark', 'black'] },
-
-    // Singers/Performers
-    { emoji: '👩🏻‍🎤', keywords: ['singer', 'performer', 'musician', 'woman', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼‍🎤', keywords: ['singer', 'performer', 'musician', 'woman', 'medium-light', 'tan'] },
-    { emoji: '👩🏽‍🎤', keywords: ['singer', 'performer', 'musician', 'woman', 'medium', 'olive'] },
-    { emoji: '👩🏾‍🎤', keywords: ['singer', 'performer', 'musician', 'woman', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿‍🎤', keywords: ['singer', 'performer', 'musician', 'woman', 'dark', 'black'] },
-    { emoji: '👨🏻‍🎤', keywords: ['singer', 'performer', 'musician', 'man', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼‍🎤', keywords: ['singer', 'performer', 'musician', 'man', 'medium-light', 'tan'] },
-    { emoji: '👨🏽‍🎤', keywords: ['singer', 'performer', 'musician', 'man', 'medium', 'olive'] },
-    { emoji: '👨🏾‍🎤', keywords: ['singer', 'performer', 'musician', 'man', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿‍🎤', keywords: ['singer', 'performer', 'musician', 'man', 'dark', 'black'] },
-
-    // Default people (no profession/hair specified)
-    { emoji: '👩🏻', keywords: ['woman', 'girl', 'female', 'she', 'light', 'pale', 'fair'] },
-    { emoji: '👩🏼', keywords: ['woman', 'girl', 'female', 'she', 'medium-light', 'tan'] },
-    { emoji: '👩🏽', keywords: ['woman', 'girl', 'female', 'she', 'medium', 'olive'] },
-    { emoji: '👩🏾', keywords: ['woman', 'girl', 'female', 'she', 'medium-dark', 'brown'] },
-    { emoji: '👩🏿', keywords: ['woman', 'girl', 'female', 'she', 'dark', 'black'] },
-    { emoji: '👨🏻', keywords: ['man', 'boy', 'male', 'he', 'light', 'pale', 'fair'] },
-    { emoji: '👨🏼', keywords: ['man', 'boy', 'male', 'he', 'medium-light', 'tan'] },
-    { emoji: '👨🏽', keywords: ['man', 'boy', 'male', 'he', 'medium', 'olive'] },
-    { emoji: '👨🏾', keywords: ['man', 'boy', 'male', 'he', 'medium-dark', 'brown'] },
-    { emoji: '👨🏿', keywords: ['man', 'boy', 'male', 'he', 'dark', 'black'] },
-    { emoji: '🧑🏻', keywords: ['person', 'light', 'pale', 'fair'] },
-    { emoji: '🧑🏼', keywords: ['person', 'medium-light', 'tan'] },
-    { emoji: '🧑🏽', keywords: ['person', 'medium', 'olive'] },
-    { emoji: '🧑🏾', keywords: ['person', 'medium-dark', 'brown'] },
-    { emoji: '🧑🏿', keywords: ['person', 'dark', 'black'] }
-];
-
-/**
- * Find best matching emoji from library based on description
+ * Generate custom avatar URL using DiceBear API based on description
+ * DiceBear creates SVG avatars with glasses, hairstyles, and more
  */
 function generateAvatarFromDescription(description) {
     const desc = description.toLowerCase();
-    const words = desc.split(/\s+/); // Split into words
 
-    let bestMatch = null;
-    let highestScore = 0;
+    // Base URL for DiceBear avataaars style (cartoon avatars with lots of options)
+    const baseUrl = 'https://api.dicebear.com/7.x/avataaars/svg';
+    const params = new URLSearchParams();
 
-    // Score each emoji in library
-    customAvatarLibrary.forEach(entry => {
-        let score = 0;
+    // Use description as seed for consistency
+    params.append('seed', description);
 
-        // Count how many keywords match
-        entry.keywords.forEach(keyword => {
-            if (desc.includes(keyword)) {
-                score += 1;
-            }
-        });
-
-        // If this emoji has more matching keywords, it's a better match
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = entry.emoji;
+    // Detect and set glasses
+    if (desc.includes('glass')) {
+        if (desc.includes('round')) {
+            params.append('glasses', 'round');
+        } else if (desc.includes('sunglasses')) {
+            params.append('glasses', 'kurt');
+        } else {
+            params.append('glasses', 'prescription02'); // default glasses
         }
-    });
-
-    // If we found a match, return it
-    if (bestMatch) {
-        console.log('✅ Matched description to emoji:', description, '→', bestMatch, `(score: ${highestScore})`);
-        return bestMatch;
+        params.append('glassesProbability', '100');
     }
 
-    // Default fallback: medium-tone person
-    console.log('⚠️ No match found, using default:', description, '→ 🧑🏽');
-    return '🧑🏽';
+    // Detect and set hair style
+    if (desc.includes('bun') || desc.includes('updo') || desc.includes('up do')) {
+        params.append('hair', 'bun');
+    } else if (desc.includes('long')) {
+        params.append('hair', 'longHairStraight');
+    } else if (desc.includes('short')) {
+        params.append('hair', 'shortHairShortFlat');
+    } else if (desc.includes('curly') || desc.includes('curls')) {
+        params.append('hair', 'shortHairShortCurly');
+    } else if (desc.includes('dreads') || desc.includes('dreadlocks')) {
+        params.append('hair', 'shortHairDreads');
+    } else if (desc.includes('afro')) {
+        params.append('hair', 'shortHairAfro');
+    } else if (desc.includes('bald') || desc.includes('no hair')) {
+        params.append('hair', 'noHair');
+    } else if (desc.includes('bob')) {
+        params.append('hair', 'longHairBob');
+    } else if (desc.includes('straight')) {
+        params.append('hair', 'longHairStraight');
+    } else if (desc.includes('ponytail') || desc.includes('pony tail')) {
+        params.append('hair', 'longHairNotTooLong');
+    }
+
+    // Detect hair color
+    if (desc.includes('red hair') || desc.includes('ginger') || desc.includes('auburn')) {
+        params.append('hairColor', 'Red');
+    } else if (desc.includes('blonde') || desc.includes('blond') || desc.includes('yellow hair')) {
+        params.append('hairColor', 'Blonde');
+    } else if (desc.includes('brown hair')) {
+        params.append('hairColor', 'Brown');
+    } else if (desc.includes('black hair')) {
+        params.append('hairColor', 'Black');
+    } else if (desc.includes('gray hair') || desc.includes('grey hair') || desc.includes('white hair')) {
+        params.append('hairColor', 'SilverGray');
+    }
+
+    // Detect skin tone
+    if (desc.includes('light skin') || desc.includes('pale') || desc.includes('fair')) {
+        params.append('skinColor', 'Light');
+    } else if (desc.includes('dark skin') || desc.includes('black skin') || desc.includes('deep')) {
+        params.append('skinColor', 'Black');
+    } else if (desc.includes('brown skin') || desc.includes('medium-dark')) {
+        params.append('skinColor', 'Brown');
+    } else if (desc.includes('tan') || desc.includes('medium')) {
+        params.append('skinColor', 'Tanned');
+    }
+
+    // Detect accessories
+    if (desc.includes('hijab') || desc.includes('headscarf')) {
+        params.append('accessoriesColor', 'Blue03');
+        params.append('clothing', 'Hijab');
+    }
+
+    if (desc.includes('hat') || desc.includes('cap')) {
+        params.append('hat', 'winter02');
+        params.append('hatProbability', '100');
+    }
+
+    // Facial hair
+    if (desc.includes('beard')) {
+        params.append('facialHair', 'BeardMedium');
+        params.append('facialHairProbability', '100');
+    } else if (desc.includes('mustache') || desc.includes('moustache')) {
+        params.append('facialHair', 'MoustacheFancy');
+        params.append('facialHairProbability', '100');
+    }
+
+    // Build final URL
+    const avatarUrl = `${baseUrl}?${params.toString()}`;
+
+    console.log('✅ Generated custom avatar URL:', description, '→', avatarUrl);
+    return avatarUrl;
 }
 
 /**
@@ -984,19 +901,20 @@ function saveCustomAvatar(description) {
         });
         localStorage.setItem('customAvatars', JSON.stringify(customAvatars));
 
-        // Generate emoji avatar from description
-        const generatedEmoji = generateAvatarFromDescription(description.trim());
+        // Generate avatar URL from description using DiceBear
+        const avatarUrl = generateAvatarFromDescription(description.trim());
 
-        // Add to appearances array immediately with generated emoji
+        // Add to appearances array immediately with generated avatar URL
         const newId = `custom-avatar-${customAvatars.length - 1}`;
         appearances.push({
             id: newId,
-            visual: generatedEmoji,
+            visual: avatarUrl,
             description: description.trim(),
-            isCustom: true
+            isCustom: true,
+            isImage: true // Flag to indicate this is an image URL, not emoji
         });
 
-        console.log('✅ Custom avatar saved and added to selection grid:', description.trim(), '→', generatedEmoji);
+        console.log('✅ Custom avatar saved and added to selection grid:', description.trim());
     }
 }
 
@@ -1095,11 +1013,12 @@ function renderResultsScreen() {
     let isCustomAvatar = false;
 
     if (designerState.selections.customAvatarRequest && designerState.selections.customAvatarRequest.trim()) {
-        // User requested a custom avatar - generate emoji from description
+        // User requested a custom avatar - generate image URL from description
         const description = designerState.selections.customAvatarRequest.trim();
         selectedAppearance = {
             visual: generateAvatarFromDescription(description),
-            description: description
+            description: description,
+            isImage: true
         };
         isCustomAvatar = true;
     } else {
@@ -1140,12 +1059,17 @@ function renderResultsScreen() {
         <p class="designer-subtitle">Here's what we learned about you!</p>
 
         <div class="results-container">
-            <div class="results-avatar-large">${selectedAppearance.visual}</div>
+            <div class="results-avatar-large">
+                ${selectedAppearance.isImage
+                    ? `<img src="${selectedAppearance.visual}" alt="Your avatar" style="width: 100%; height: 100%; object-fit: contain;" />`
+                    : selectedAppearance.visual
+                }
+            </div>
 
             <div class="results-summary">
                 <div class="results-item">
                     <span class="results-label">Your Avatar:</span>
-                    <span class="results-value">${selectedAppearance.visual}${isCustomAvatar ? ' ✨ (Custom Generated)' : ''}</span>
+                    <span class="results-value">${isCustomAvatar ? '✨ Custom Generated Avatar' : selectedAppearance.visual}</span>
                 </div>
 
                 ${isCustomAvatar ? `
