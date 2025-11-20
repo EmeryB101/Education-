@@ -1054,7 +1054,16 @@ function selectAppearance(appearanceId) {
 
 function updateCustomAvatarRequest(value) {
     designerState.selections.customAvatarRequest = value;
-    renderCurrentScreen();
+    // Don't re-render - just update button state
+    // Re-rendering causes textarea to lose focus after each keystroke
+
+    // Update continue button enabled/disabled state
+    const hasSelection = designerState.selections.appearance ||
+                        (value && value.trim().length > 0);
+    const continueBtn = document.querySelector('.designer-actions .btn-primary-designer');
+    if (continueBtn) {
+        continueBtn.disabled = !hasSelection;
+    }
 }
 
 function selectLearningStyle(styleId) {
