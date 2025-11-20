@@ -161,7 +161,7 @@ They are weeping bitterly!
                 </p>
 
                 <div class="debate-cards">
-                    <div class="flip-card">
+                    <button type="button" class="flip-card" id="card-1">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <div class="flip-icon">✍️</div>
@@ -174,9 +174,9 @@ They are weeping bitterly!
                                 <p class="flip-hint">Click to flip back ←</p>
                             </div>
                         </div>
-                    </div>
+                    </button>
 
-                    <div class="flip-card">
+                    <button type="button" class="flip-card" id="card-2">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <div class="flip-icon">🤖</div>
@@ -189,9 +189,9 @@ They are weeping bitterly!
                                 <p class="flip-hint">Click to flip back ←</p>
                             </div>
                         </div>
-                    </div>
+                    </button>
 
-                    <div class="flip-card">
+                    <button type="button" class="flip-card" id="card-3">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <div class="flip-icon">🤝</div>
@@ -204,9 +204,9 @@ They are weeping bitterly!
                                 <p class="flip-hint">Click to flip back ←</p>
                             </div>
                         </div>
-                    </div>
+                    </button>
 
-                    <div class="flip-card">
+                    <button type="button" class="flip-card" id="card-4">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <div class="flip-icon">⚖️</div>
@@ -219,8 +219,25 @@ They are weeping bitterly!
                                 <p class="flip-hint">Click to flip back ←</p>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
+
+                <script>
+                    // Ultra-simple inline flip card handler
+                    document.addEventListener('DOMContentLoaded', function() {
+                        ['card-1', 'card-2', 'card-3', 'card-4'].forEach(function(id) {
+                            const card = document.getElementById(id);
+                            if (card) {
+                                card.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    this.classList.toggle('flipped');
+                                    console.log('Card flipped:', id);
+                                });
+                            }
+                        });
+                        console.log('✅ Flip cards initialized inline');
+                    });
+                </script>
             </div>
         </section>
     </main>
@@ -235,7 +252,6 @@ They are weeping bitterly!
     <script src="js/navigation.js"></script>
     <script src="js/interactions.js"></script>
     <script src="js/course-designer.js"></script>
-    <script src="js/flip-cards.js"></script>
     <script src="js/scroll-animations.js"></script>
 </body>
 </html>
