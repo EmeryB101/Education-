@@ -82,6 +82,7 @@ body {
     color: var(--text-primary);
     background-color: var(--background);
     position: relative;
+    padding-top: 70px;
 }
 
 body::before {
@@ -140,8 +141,10 @@ li {
     background: linear-gradient(135deg, rgba(249, 250, 251, 0.98) 0%, rgba(243, 244, 246, 0.98) 100%);
     border-bottom: 2px solid transparent;
     border-image: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan)) 1;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
     transition: all var(--transition-base);

@@ -950,6 +950,9 @@ function renderResultsScreen() {
             </div>
         </div>
 
+            ${renderPollStatistics(stats)}
+        </div>
+
         <div class="designer-actions">
             <button class="designer-btn btn-secondary-designer" onclick="restartDesigner()">
                 ↺ Start Over
@@ -974,14 +977,14 @@ function renderPollStatistics(stats) {
     const topPace = Object.entries(stats.learningPace).sort((a, b) => b[1] - a[1])[0];
 
     const styleNames = {
-        'scholar': 'Thoughtful Scholar',
-        'artist': 'Creative Artist',
-        'explorer': 'Digital Explorer',
-        'activist': 'Social Activist',
-        'teacher': 'Collaborative Teacher',
-        'poet': 'Aspiring Poet',
-        'analyst': 'Systematic Analyst',
-        'performer': 'Spoken Word Performer'
+        'deep-reader': 'Deep Reader & Critical Thinker',
+        'creative-connector': 'Creative Connector',
+        'hands-on-builder': 'Hands-On Builder',
+        'justice-seeker': 'Justice-Oriented Scholar',
+        'collaborative-learner': 'Collaborative Learner',
+        'writer-creator': 'Writer & Creator',
+        'pattern-finder': 'Pattern Finder & Strategist',
+        'performer-speaker': 'Performer & Speaker'
     };
 
     const rhetoricNames = {
