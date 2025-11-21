@@ -9,6 +9,7 @@ const designerState = {
     currentScreen: 'appearance',
     selections: {
         appearance: null,      // visual representation
+        representationFeedback: '', // feedback if avatar options don't represent them
         learningStyle: null,   // separated characteristic/aspiration
         favoritePoem: '',
         rhetoricFocus: null, // 'setting', 'author', 'devices'
@@ -217,7 +218,65 @@ const appearances = [
     { id: 'app-147', visual: '🧒🏻' },
     { id: 'app-148', visual: '🧒🏽' },
     { id: 'app-149', visual: '🧒🏾' },
-    { id: 'app-150', visual: '🧒🏿' }
+    { id: 'app-150', visual: '🧒🏿' },
+
+    // ===== ALTERNATIVE AVATARS (non-human) =====
+
+    // Animals - Creative & Wise
+    { id: 'alt-1', visual: '🦉', category: 'animal' },  // Wise owl
+    { id: 'alt-2', visual: '🦊', category: 'animal' },  // Clever fox
+    { id: 'alt-3', visual: '🐺', category: 'animal' },  // Wolf
+    { id: 'alt-4', visual: '🦁', category: 'animal' },  // Lion
+    { id: 'alt-5', visual: '🐻', category: 'animal' },  // Bear
+    { id: 'alt-6', visual: '🐼', category: 'animal' },  // Panda
+    { id: 'alt-7', visual: '🐨', category: 'animal' },  // Koala
+    { id: 'alt-8', visual: '🐯', category: 'animal' },  // Tiger
+    { id: 'alt-9', visual: '🦋', category: 'animal' },  // Butterfly
+    { id: 'alt-10', visual: '🦅', category: 'animal' }, // Eagle
+    { id: 'alt-11', visual: '🐉', category: 'animal' }, // Dragon
+    { id: 'alt-12', visual: '🦄', category: 'animal' }, // Unicorn
+    { id: 'alt-13', visual: '🐬', category: 'animal' }, // Dolphin
+    { id: 'alt-14', visual: '🐢', category: 'animal' }, // Turtle
+    { id: 'alt-15', visual: '🦜', category: 'animal' }, // Parrot
+    { id: 'alt-16', visual: '🐱', category: 'animal' }, // Cat
+    { id: 'alt-17', visual: '🐶', category: 'animal' }, // Dog
+    { id: 'alt-18', visual: '🐰', category: 'animal' }, // Rabbit
+
+    // Nature & Elements
+    { id: 'alt-19', visual: '🌸', category: 'nature' }, // Cherry blossom
+    { id: 'alt-20', visual: '🌻', category: 'nature' }, // Sunflower
+    { id: 'alt-21', visual: '🌙', category: 'nature' }, // Moon
+    { id: 'alt-22', visual: '⭐', category: 'nature' }, // Star
+    { id: 'alt-23', visual: '🌈', category: 'nature' }, // Rainbow
+    { id: 'alt-24', visual: '🔥', category: 'nature' }, // Fire
+    { id: 'alt-25', visual: '💧', category: 'nature' }, // Water
+    { id: 'alt-26', visual: '🌊', category: 'nature' }, // Wave
+    { id: 'alt-27', visual: '🍀', category: 'nature' }, // Clover
+    { id: 'alt-28', visual: '🌺', category: 'nature' }, // Hibiscus
+    { id: 'alt-29', visual: '🌴', category: 'nature' }, // Palm tree
+    { id: 'alt-30', visual: '🌵', category: 'nature' }, // Cactus
+
+    // Symbols & Abstract
+    { id: 'alt-31', visual: '💜', category: 'symbol' }, // Purple heart
+    { id: 'alt-32', visual: '💙', category: 'symbol' }, // Blue heart
+    { id: 'alt-33', visual: '💚', category: 'symbol' }, // Green heart
+    { id: 'alt-34', visual: '🧡', category: 'symbol' }, // Orange heart
+    { id: 'alt-35', visual: '💛', category: 'symbol' }, // Yellow heart
+    { id: 'alt-36', visual: '🖤', category: 'symbol' }, // Black heart
+    { id: 'alt-37', visual: '🤍', category: 'symbol' }, // White heart
+    { id: 'alt-38', visual: '💎', category: 'symbol' }, // Diamond
+    { id: 'alt-39', visual: '🔮', category: 'symbol' }, // Crystal ball
+    { id: 'alt-40', visual: '✨', category: 'symbol' }, // Sparkles
+
+    // Creative & Academic
+    { id: 'alt-41', visual: '📚', category: 'academic' }, // Books
+    { id: 'alt-42', visual: '🎭', category: 'academic' }, // Theater masks
+    { id: 'alt-43', visual: '🎨', category: 'academic' }, // Art palette
+    { id: 'alt-44', visual: '🎵', category: 'academic' }, // Music
+    { id: 'alt-45', visual: '✍️', category: 'academic' }, // Writing
+    { id: 'alt-46', visual: '💡', category: 'academic' }, // Idea
+    { id: 'alt-47', visual: '🎯', category: 'academic' }, // Target
+    { id: 'alt-48', visual: '🚀', category: 'academic' }  // Rocket
 ];
 
 // Learning Styles - Student agency and empowerment focused
@@ -351,6 +410,7 @@ function openCourseDesigner() {
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
+        representationFeedback: '',
         learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
@@ -460,17 +520,54 @@ function renderCurrentScreen() {
  * Appearance Selection Screen - Pick someone who looks like you
  */
 function renderAppearanceScreen() {
+    // Separate human and alternative avatars
+    const humanAvatars = appearances.filter(a => a.id.startsWith('app-'));
+    const alternativeAvatars = appearances.filter(a => a.id.startsWith('alt-'));
+
     return `
         <h2 class="designer-title">Choose Your Appearance</h2>
-        <p class="designer-subtitle">Pick the avatar that looks most like you</p>
+        <p class="designer-subtitle">Pick the avatar that represents you best</p>
 
+        <h3 style="color: var(--neon-purple); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm);">👤 People</h3>
         <div class="appearance-grid">
-            ${appearances.map(appearance => `
+            ${humanAvatars.map(appearance => `
                 <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
                      onclick="selectAppearance('${appearance.id}')">
                     <div class="avatar-visual">${appearance.visual}</div>
                 </div>
             `).join('')}
+        </div>
+
+        <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-xl); border-top: 2px dashed var(--neon-cyan);">
+            <h3 style="color: var(--neon-cyan); margin-bottom: var(--spacing-sm);">🎨 Prefer something different?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Animals, nature, symbols & more</p>
+
+            <div class="appearance-grid">
+                ${alternativeAvatars.map(appearance => `
+                    <div class="appearance-card ${designerState.selections.appearance === appearance.id ? 'selected' : ''}"
+                         onclick="selectAppearance('${appearance.id}')">
+                        <div class="avatar-visual">${appearance.visual}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-lg); background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(236, 72, 153, 0.1)); border-radius: var(--radius-lg); border-left: 4px solid var(--accent-color);">
+            <h4 style="color: var(--accent-color); margin-bottom: var(--spacing-sm);">💭 Still can't find one that represents you?</h4>
+            <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md); font-size: var(--font-size-sm);">
+                Help us improve! Tell us what you're looking for and we'll work to add more options.
+            </p>
+            <textarea
+                id="representation-feedback"
+                class="designer-textarea"
+                placeholder="Describe what kind of avatar would represent you better...&#10;(e.g., 'person with short blue hair', 'someone wearing glasses and a beanie', etc.)"
+                rows="3"
+                style="width: 100%; font-size: var(--font-size-sm);"
+                onkeyup="updateRepresentationFeedback(this.value)"
+            >${designerState.selections.representationFeedback || ''}</textarea>
+            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: var(--spacing-xs); font-style: italic;">
+                This feedback is saved anonymously to help us add more diverse options.
+            </p>
         </div>
 
         <div class="designer-actions">
@@ -1189,6 +1286,10 @@ function updatePoemInput(value) {
     designerState.selections.favoritePoem = value;
 }
 
+function updateRepresentationFeedback(value) {
+    designerState.selections.representationFeedback = value;
+}
+
 function selectRhetoricFocus(focus) {
     designerState.selections.rhetoricFocus = focus;
     renderCurrentScreen();
@@ -1254,7 +1355,7 @@ function restartDesigner() {
     designerState.currentScreen = 'appearance';
     designerState.selections = {
         appearance: null,
-        customAvatarRequest: '',
+        representationFeedback: '',
         learningStyle: null,
         favoritePoem: '',
         rhetoricFocus: null,
