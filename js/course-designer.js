@@ -111,7 +111,113 @@ const appearances = [
     { id: 'app-67', visual: '👩🏾‍🦳' }, // Distinguished Scholar
     { id: 'app-68', visual: '🧑🏿‍🦳' }, // Wisdom Keeper
     { id: 'app-69', visual: '👩🏻‍🦳' }, // Sage
-    { id: 'app-70', visual: '👨🏿‍🦳' }  // Veteran Poet
+    { id: 'app-70', visual: '👨🏿‍🦳' }, // Veteran Poet
+
+    // Teachers & Professors (🧑‍🏫)
+    { id: 'app-71', visual: '👨🏻‍🏫' },
+    { id: 'app-72', visual: '👩🏽‍🏫' },
+    { id: 'app-73', visual: '🧑🏾‍🏫' },
+    { id: 'app-74', visual: '👩🏿‍🏫' },
+    { id: 'app-75', visual: '👨🏼‍🏫' },
+    { id: 'app-76', visual: '👩🏻‍🏫' },
+    { id: 'app-77', visual: '🧑🏽‍🏫' },
+    { id: 'app-78', visual: '👨🏿‍🏫' },
+
+    // Tech & Digital Creators (🧑‍💻)
+    { id: 'app-79', visual: '👨🏽‍💻' },
+    { id: 'app-80', visual: '👩🏾‍💻' },
+    { id: 'app-81', visual: '🧑🏻‍💻' },
+    { id: 'app-82', visual: '👩🏿‍💻' },
+    { id: 'app-83', visual: '👨🏼‍💻' },
+    { id: 'app-84', visual: '👩🏻‍💻' },
+    { id: 'app-85', visual: '🧑🏽‍💻' },
+    { id: 'app-86', visual: '👨🏿‍💻' },
+
+    // Scientists & Researchers (🧑‍🔬)
+    { id: 'app-87', visual: '👨🏻‍🔬' },
+    { id: 'app-88', visual: '👩🏽‍🔬' },
+    { id: 'app-89', visual: '🧑🏾‍🔬' },
+    { id: 'app-90', visual: '👩🏿‍🔬' },
+    { id: 'app-91', visual: '👨🏼‍🔬' },
+    { id: 'app-92', visual: '👩🏻‍🔬' },
+
+    // Professionals (🧑‍💼)
+    { id: 'app-93', visual: '👨🏽‍💼' },
+    { id: 'app-94', visual: '👩🏾‍💼' },
+    { id: 'app-95', visual: '🧑🏻‍💼' },
+    { id: 'app-96', visual: '👩🏿‍💼' },
+    { id: 'app-97', visual: '👨🏼‍💼' },
+    { id: 'app-98', visual: '👩🏻‍💼' },
+
+    // Bald representation (🦲)
+    { id: 'app-99', visual: '👨🏻‍🦲' },
+    { id: 'app-100', visual: '👩🏽‍🦲' },
+    { id: 'app-101', visual: '🧑🏾‍🦲' },
+    { id: 'app-102', visual: '👩🏿‍🦲' },
+    { id: 'app-103', visual: '👨🏼‍🦲' },
+    { id: 'app-104', visual: '👨🏿‍🦲' },
+
+    // Blonde hair representation (🦱 light)
+    { id: 'app-105', visual: '👱🏻‍♂️' },
+    { id: 'app-106', visual: '👱🏼‍♀️' },
+    { id: 'app-107', visual: '👱🏽‍♂️' },
+    { id: 'app-108', visual: '👱🏾‍♀️' },
+    { id: 'app-109', visual: '👱🏻‍♀️' },
+    { id: 'app-110', visual: '👱🏼‍♂️' },
+
+    // People with hijab/headscarf (🧕)
+    { id: 'app-111', visual: '🧕🏻' },
+    { id: 'app-112', visual: '🧕🏼' },
+    { id: 'app-113', visual: '🧕🏽' },
+    { id: 'app-114', visual: '🧕🏾' },
+    { id: 'app-115', visual: '🧕🏿' },
+
+    // People with turbans (🧔)
+    { id: 'app-116', visual: '👳🏻‍♂️' },
+    { id: 'app-117', visual: '👳🏽‍♂️' },
+    { id: 'app-118', visual: '👳🏾‍♂️' },
+    { id: 'app-119', visual: '👳🏿‍♂️' },
+    { id: 'app-120', visual: '👳🏻‍♀️' },
+    { id: 'app-121', visual: '👳🏽‍♀️' },
+
+    // Wheelchair users (♿)
+    { id: 'app-122', visual: '👨🏻‍🦽' },
+    { id: 'app-123', visual: '👩🏽‍🦽' },
+    { id: 'app-124', visual: '🧑🏾‍🦽' },
+    { id: 'app-125', visual: '👩🏿‍🦽' },
+    { id: 'app-126', visual: '👨🏼‍🦽' },
+    { id: 'app-127', visual: '👩🏻‍🦽' },
+
+    // People with canes (🦯)
+    { id: 'app-128', visual: '👨🏽‍🦯' },
+    { id: 'app-129', visual: '👩🏾‍🦯' },
+    { id: 'app-130', visual: '🧑🏻‍🦯' },
+    { id: 'app-131', visual: '👩🏿‍🦯' },
+
+    // Bearded individuals (🧔)
+    { id: 'app-132', visual: '🧔🏻' },
+    { id: 'app-133', visual: '🧔🏼' },
+    { id: 'app-134', visual: '🧔🏽' },
+    { id: 'app-135', visual: '🧔🏾' },
+    { id: 'app-136', visual: '🧔🏿' },
+    { id: 'app-137', visual: '🧔🏻‍♀️' },
+    { id: 'app-138', visual: '🧔🏽‍♀️' },
+
+    // Older adults (👴👵)
+    { id: 'app-139', visual: '👴🏻' },
+    { id: 'app-140', visual: '👵🏽' },
+    { id: 'app-141', visual: '👴🏾' },
+    { id: 'app-142', visual: '👵🏿' },
+    { id: 'app-143', visual: '👴🏼' },
+    { id: 'app-144', visual: '👵🏻' },
+    { id: 'app-145', visual: '🧓🏽' },
+    { id: 'app-146', visual: '🧓🏾' },
+
+    // Young adults & teens
+    { id: 'app-147', visual: '🧒🏻' },
+    { id: 'app-148', visual: '🧒🏽' },
+    { id: 'app-149', visual: '🧒🏾' },
+    { id: 'app-150', visual: '🧒🏿' }
 ];
 
 // Learning Styles - Student agency and empowerment focused
